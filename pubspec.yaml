@@ -1,0 +1,39 @@
+name: bellboy
+version: 1.0.0+1
+publish_to: none
+description: A new Flutter project.
+environment:
+  sdk: ">=2.19.0 <3.0.0"
+
+dependencies:
+  # CACHED IMAGE
+  cached_network_image: ^3.2.3
+
+  # FONT SIZE, WIDGETS HEIGHT AND WIDTH
+  sizer: ^2.0.15
+
+  cupertino_icons: ^1.0.2
+  get: 4.6.5
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_lints: 2.0.2
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+  fonts:
+#jost
+    - family: Jost
+      fonts:
+        - asset: assets/fonts/jost/Jost-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/jost/Jost-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/jost/Jost-Regular.ttf
+          weight: 400
+
