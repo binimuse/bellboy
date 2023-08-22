@@ -19,6 +19,15 @@ dependencies:
 
   # shared_preferences (local storage)
   shared_preferences: ^2.2.0
+ # for app icon
+  flutter_launcher_icons: ^0.13.1
+ # for notification 
+  flutter_local_notifications: ^15.1.0+1
+  # for permission
+  permission_handler: ^10.4.3
+  # for location 
+  geolocator: ^7.0.0
+
   cupertino_icons: ^1.0.2
 
 
@@ -32,10 +41,28 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/fevicon.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+  adaptive_icon_background: "#ffffff"
+  remove_alpha_ios: true
+  background_color_ios: "#ffffff"
+
+
+
+
+
+
 flutter:
   uses-material-design: true
   assets:
     - assets/images/
+    - assets/icons/Fill icon/
+    - assets/icons/Two-tone icon/
   fonts:
 #jost
     - family: Jost

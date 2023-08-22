@@ -1,6 +1,8 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'package:bellboy/app/config/theme/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
@@ -10,6 +12,12 @@ import 'app/routes/app_pages.dart';
 
 GraphQLConfiguration graphQLConfiguration = GraphQLConfiguration();
 void main() async {
+  //for status  bar color
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: AppColors.whiteoff,
+    ),
+  );
   runApp(App());
 }
 
