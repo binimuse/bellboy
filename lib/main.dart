@@ -8,16 +8,13 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'app/Services/graphql_conf.dart';
+import 'app/config/theme/app_theme.dart';
 import 'app/routes/app_pages.dart';
 
 GraphQLConfiguration graphQLConfiguration = GraphQLConfiguration();
 void main() async {
   //for status  bar color
-  SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle(
-      statusBarColor: AppColors.whiteOff,
-    ),
-  );
+
   runApp(App());
 }
 
@@ -29,7 +26,9 @@ Sizer App() {
         client: graphQLConfiguration.client,
         child: CacheProvider(
           child: GetMaterialApp(
-            ///to take system theme
+            theme: ThemeData(
+              primaryColor: Colors.white,
+            ),
             themeMode: ThemeMode.light,
             title: "BellBoy Rider",
             initialRoute: AppPages.INITIAL,

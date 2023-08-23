@@ -27,15 +27,18 @@ dependencies:
   permission_handler: ^10.4.3
   # for location 
   geolocator: ^7.0.0
-    #FOR UTIL
+  #FOR UTIL
   logger:
   flutter_svg: ^1.1.6
+  #FOR On bording
+  smooth_page_indicator: ^1.1.0
 
   cupertino_icons: ^1.0.2
 
 
   flutter:
     sdk: flutter
+
 
 
 

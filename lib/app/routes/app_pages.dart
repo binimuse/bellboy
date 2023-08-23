@@ -34,7 +34,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.ON_BORDING,
-      page: () => const OnBordingView(),
+      page: () => OnBordingView(),
       binding: OnBordingBinding(),
     ),
   ];

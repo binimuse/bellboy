@@ -88,41 +88,41 @@ class CustomTextStyles {
     fontSize: AppSizes.font_10,
     color: AppColors.black,
     fontWeight: FontWeight.w400,
-    fontFamily: 'Nunito',
+    fontFamily: 'Jost',
   );
 
   static final bodyMedium = TextStyle(
     fontSize: AppSizes.font_12,
     color: AppColors.black,
     fontWeight: FontWeight.w400,
-    fontFamily: 'Nunito',
+    fontFamily: 'Jost',
   );
 
   static final bodyLarge = TextStyle(
     fontSize: AppSizes.font_14,
     color: AppColors.black,
     fontWeight: FontWeight.w400,
-    fontFamily: 'Nunito',
+    fontFamily: 'Jost',
   );
 
   static final headlineSmall = TextStyle(
     fontSize: AppSizes.font_16,
     color: AppColors.black,
     fontWeight: FontWeight.w400,
-    fontFamily: 'Nunito',
+    fontFamily: 'Jost',
   );
 
   static final headlineMedium = TextStyle(
     fontSize: AppSizes.font_18,
     color: AppColors.black,
     fontWeight: FontWeight.w400,
-    fontFamily: 'Nunito',
+    fontFamily: 'Jost',
   );
 
   static final headlineLarge = TextStyle(
     fontSize: AppSizes.font_20,
     color: AppColors.black,
     fontWeight: FontWeight.w400,
-    fontFamily: 'Nunito',
+    fontFamily: 'Jost',
   );
 }

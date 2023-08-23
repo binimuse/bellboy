@@ -24,7 +24,7 @@ class SplashView extends GetView<SplashController> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
-                  controller.image,
+                  controller.splasehimage,
                   fit: BoxFit.contain,
                 ),
                 SizedBox(height: 1.h),

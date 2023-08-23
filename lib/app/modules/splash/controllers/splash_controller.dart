@@ -1,10 +1,11 @@
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import '../../../config/theme/app_assets.dart';
 import '../../../routes/app_pages.dart';
 
 class SplashController extends GetxController {
-  final String image = "assets/logos/splash.png";
+  final String splasehimage = AppAssets.splasehimage;
 
   @override
   void onInit() {
@@ -18,7 +19,7 @@ class SplashController extends GetxController {
       await requestNotificationPermission();
       await requestLocationPermission();
 
-      Get.offAllNamed(Routes.LOGIN);
+      Get.offAllNamed(Routes.ON_BORDING);
     });
   }
 
