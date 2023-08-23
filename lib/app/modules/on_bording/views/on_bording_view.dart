@@ -8,7 +8,8 @@ import 'package:sizer/sizer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../common/widgets/custom_normal_button.dart';
 import '../../../config/theme/app_assets.dart';
-import '../../../config/theme/app_theme.dart';
+import '../../../config/theme/app_text_styles.dart';
+
 import '../controllers/on_bording_controller.dart';
 
 class OnBordingView extends GetView<OnBordingController> {
@@ -138,11 +139,8 @@ class OnBordingView extends GetView<OnBordingController> {
                 child: Text(
                   controller.titles[controller.currentSlide.value],
                   textAlign: TextAlign.start,
-                  style: CustomTextStyles.bodyLarge.copyWith(
-                    color: AppColors.black,
-                    letterSpacing: 0.1,
-                    fontSize: AppSizes.font_28,
-                    fontWeight: FontWeight.w800,
+                  style: AppTextStyles.displayTwoBold.copyWith(
+                    fontSize: AppSizes.font_22,
                   ),
                 ),
               ),
@@ -158,6 +156,9 @@ class OnBordingView extends GetView<OnBordingController> {
         children: [
           CustomNormalButton(
             text: 'Log in',
+            textStyle: AppTextStyles.bodyLargeBold.copyWith(
+              color: AppColors.whiteOff,
+            ),
             textcolor: AppColors.whiteOff,
             buttoncolor: AppColors.primary,
             borderRadius: AppSizes.radius_8,
@@ -166,7 +167,7 @@ class OnBordingView extends GetView<OnBordingController> {
               horizontal: AppSizes.mp_w_6,
             ),
             onPressed: () {
-              Get.toNamed(Routes.LOGIN);
+              Get.toNamed(Routes.QUIZ);
             },
           ),
           SizedBox(
@@ -177,11 +178,8 @@ class OnBordingView extends GetView<OnBordingController> {
             child: Text(
               "New to Bellboy? Sign up!",
               textAlign: TextAlign.start,
-              style: CustomTextStyles.bodyMedium.copyWith(
+              style: AppTextStyles.bodyLargeBold.copyWith(
                 color: AppColors.grayDefault,
-                letterSpacing: 0.1,
-                fontSize: AppSizes.font_16,
-                fontWeight: FontWeight.w600,
               ),
             ),
           ),

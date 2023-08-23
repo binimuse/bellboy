@@ -1,14 +1,12 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'package:bellboy/app/config/theme/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'app/Services/graphql_conf.dart';
-import 'app/config/theme/app_theme.dart';
+
 import 'app/routes/app_pages.dart';
 
 GraphQLConfiguration graphQLConfiguration = GraphQLConfiguration();

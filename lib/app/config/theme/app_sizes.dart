@@ -35,6 +35,7 @@ class AppSizes {
   static final double font_16 = ScreenUtil().isPhone() ? 16.sp : 8.sp;
   static final double font_18 = ScreenUtil().isPhone() ? 18.sp : 9.sp;
   static final double font_20 = ScreenUtil().isPhone() ? 20.sp : 10.sp;
+  static final double font_22 = ScreenUtil().isPhone() ? 22.sp : 22.sp;
   static final double font_24 = ScreenUtil().isPhone() ? 24.sp : 12.sp;
   static final double font_28 = ScreenUtil().isPhone() ? 28.sp : 14.sp;
   static final double font_32 = ScreenUtil().isPhone() ? 32.sp : 16.sp;

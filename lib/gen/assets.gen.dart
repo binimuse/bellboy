@@ -12,6 +12,9 @@ import 'package:flutter/widgets.dart';
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/arrowleft.svg
+  String get arrowleft => 'assets/icons/arrowleft.svg';
+
   /// File path: assets/icons/battery_low.svg
   String get batteryLow => 'assets/icons/battery_low.svg';
 
@@ -590,6 +593,7 @@ class $AssetsIconsGen {
 
   /// List of all assets
   List<String> get values => [
+        arrowleft,
         batteryLow,
         bicycle,
         bookmark,
@@ -785,6 +789,21 @@ class $AssetsIconsGen {
       ];
 }
 
+class $AssetsImagesGen {
+  const $AssetsImagesGen();
+
+  /// File path: assets/images/onbording1.png
+  AssetGenImage get onbording1 =>
+      const AssetGenImage('assets/images/onbording1.png');
+
+  /// File path: assets/images/onbording2.png
+  AssetGenImage get onbording2 =>
+      const AssetGenImage('assets/images/onbording2.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [onbording1, onbording2];
+}
+
 class $AssetsLogosGen {
   const $AssetsLogosGen();
 
@@ -800,15 +819,19 @@ class $AssetsLogosGen {
   AssetGenImage get bellboyLogoWhite =>
       const AssetGenImage('assets/logos/bellboy_logo_white.png');
 
+  /// File path: assets/logos/splash.png
+  AssetGenImage get splash => const AssetGenImage('assets/logos/splash.png');
+
   /// List of all assets
   List<AssetGenImage> get values =>
-      [bellboyLogoDefault, bellboyLogoGrayscale, bellboyLogoWhite];
+      [bellboyLogoDefault, bellboyLogoGrayscale, bellboyLogoWhite, splash];
 }
 
 class Assets {
   Assets._();
 
   static const $AssetsIconsGen icons = $AssetsIconsGen();
+  static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsLogosGen logos = $AssetsLogosGen();
 }
 

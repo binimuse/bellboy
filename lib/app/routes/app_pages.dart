@@ -6,6 +6,8 @@ import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/on_bording/bindings/on_bording_binding.dart';
 import '../modules/on_bording/views/on_bording_view.dart';
+import '../modules/quiz/bindings/quiz_binding.dart';
+import '../modules/quiz/views/quiz_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
 
@@ -36,6 +38,11 @@ class AppPages {
       name: _Paths.ON_BORDING,
       page: () => OnBordingView(),
       binding: OnBordingBinding(),
+    ),
+    GetPage(
+      name: _Paths.QUIZ,
+      page: () => const QuizView(),
+      binding: QuizBinding(),
     ),
   ];
 }
