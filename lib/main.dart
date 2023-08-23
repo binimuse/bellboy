@@ -14,8 +14,8 @@ GraphQLConfiguration graphQLConfiguration = GraphQLConfiguration();
 void main() async {
   //for status  bar color
   SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(
-      statusBarColor: AppColors.whiteoff,
+    SystemUiOverlayStyle(
+      statusBarColor: AppColors.whiteOff,
     ),
   );
   runApp(App());
@@ -31,7 +31,7 @@ Sizer App() {
           child: GetMaterialApp(
             ///to take system theme
             themeMode: ThemeMode.light,
-            title: "BellBoy",
+            title: "BellBoy Rider",
             initialRoute: AppPages.INITIAL,
             debugShowCheckedModeBanner: false,
             getPages: AppPages.routes,

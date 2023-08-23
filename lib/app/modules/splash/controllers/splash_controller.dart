@@ -4,7 +4,7 @@ import 'package:permission_handler/permission_handler.dart';
 import '../../../routes/app_pages.dart';
 
 class SplashController extends GetxController {
-  final String image = "assets/images/splash.png";
+  final String image = "assets/logos/splash.png";
 
   @override
   void onInit() {

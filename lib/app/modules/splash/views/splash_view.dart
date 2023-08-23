@@ -16,7 +16,7 @@ class SplashView extends GetView<SplashController> {
         fit: StackFit.expand,
         children: [
           Container(
-            color: AppColors.whiteoff,
+            color: AppColors.whiteOff,
           ),
           Align(
             alignment: Alignment.center,

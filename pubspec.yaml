@@ -27,6 +27,9 @@ dependencies:
   permission_handler: ^10.4.3
   # for location 
   geolocator: ^7.0.0
+    #FOR UTIL
+  logger:
+  flutter_svg: ^1.1.6
 
   cupertino_icons: ^1.0.2
 
@@ -46,7 +49,7 @@ dev_dependencies:
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/images/fevicon.png"
+  image_path: "assets/logos/bellboy_logo_default.png"
   min_sdk_android: 21 # android min sdk min:16, default 21
   adaptive_icon_background: "#ffffff"
   remove_alpha_ios: true
@@ -61,8 +64,8 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
-    - assets/icons/Fill icon/
-    - assets/icons/Two-tone icon/
+    - assets/logos/
+    - assets/images/
   fonts:
 #jost
     - family: Jost
