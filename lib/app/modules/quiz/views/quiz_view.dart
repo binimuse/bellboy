@@ -1,7 +1,6 @@
 // ignore_for_file: invalid_use_of_protected_member
 
 import 'package:bellboy/app/config/theme/app_colors.dart';
-import 'package:bellboy/app/config/theme/app_sizes.dart';
 import 'package:bellboy/app/config/theme/app_text_styles.dart';
 import 'package:bellboy/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
@@ -61,7 +60,7 @@ class QuizView extends GetView<QuizController> {
       leading: IconButton(
         icon: SvgPicture.asset(Assets.icons.arrowleft),
         onPressed: () {
-          // Handle back button press
+          Get.back();
         },
       ),
       title: Text(
@@ -123,83 +122,85 @@ class QuizView extends GetView<QuizController> {
   }
 
   Widget getAnswerOptions() {
-    return GetBuilder<QuizController>(
-      builder: (controller) {
-        return ListView.builder(
-          shrinkWrap: true,
-          itemCount: controller
-              .questions.value[controller.currentIndex.value].answers.length,
-          itemBuilder: (context, index) {
-            final answer = controller
-                .questions.value[controller.currentIndex.value].answers[index];
+    return Obx(() {
+      final selectedIndex = controller.selectedAnswerIndex.value;
 
-            return InkWell(
-              onTap: () {
-                controller.answerQuestion(index);
-              },
-              child: Container(
-                margin: const EdgeInsets.symmetric(vertical: 8.0),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: controller.selectedAnswerIndex.value == index
-                        ? AppColors.primary.withOpacity(1.0)
-                        : Colors.black
-                            .withOpacity(0.1), // Adjust opacity and color
-                    width: controller.selectedAnswerIndex.value == index
-                        ? 1.0
-                        : 1.0, // Bold border for selected, normal border for unselected
-                  ),
-                  borderRadius: BorderRadius.circular(8.0),
-                  color: controller.selectedAnswerIndex.value == index
-                      ? AppColors.primary.withOpacity(0.2)
-                      : Colors.transparent, // Adjust opacity and color
+      return ListView.builder(
+        shrinkWrap: true,
+        itemCount: controller
+            .questions.value[controller.currentIndex.value].answers.length,
+        itemBuilder: (context, index) {
+          final answer = controller
+              .questions.value[controller.currentIndex.value].answers[index];
+
+          return InkWell(
+            onTap: () async {
+              controller.selectedAnswerIndex.value = index;
+              await Future.delayed(const Duration(milliseconds: 400));
+
+              controller.answerQuestion(index);
+            },
+            child: Container(
+              margin: const EdgeInsets.symmetric(vertical: 8.0),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: selectedIndex == index
+                      ? AppColors.primary.withOpacity(1.0)
+                      : Colors.black.withOpacity(0.1),
+                  width: 1.0,
                 ),
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 16.0, vertical: 12.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        answer,
-                        style: TextStyle(
-                          fontWeight:
-                              controller.selectedAnswerIndex.value == index
-                                  ? FontWeight.bold
-                                  : FontWeight.normal,
-                          // Use bold font weight for the selected answer
-                        ),
-                      ),
-                    ),
-                    Container(
-                      width: 24,
-                      height: 24,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: controller.selectedAnswerIndex.value == index
-                            ? AppColors.primary
-                            : Colors.transparent,
-                      ),
-                      child: controller.selectedAnswerIndex.value == index
-                          ? Center(
-                              child: Container(
-                                width: 10,
-                                height: 10,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            )
-                          : null,
-                    ),
-                  ],
-                ),
+                borderRadius: BorderRadius.circular(8.0),
+                color: selectedIndex == index
+                    ? AppColors.primary.withOpacity(0.2)
+                    : Colors.transparent,
               ),
-            );
-          },
-        );
-      },
-    );
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 12.0,
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      answer,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: 24,
+                    height: 24,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: AppColors.grayDefault,
+                        width: selectedIndex == index ? 1.0 : 0.0,
+                      ),
+                      color: selectedIndex == index
+                          ? AppColors.primary
+                          : Colors.transparent,
+                    ),
+                    child: selectedIndex == index
+                        ? Center(
+                            child: Container(
+                              width: 10,
+                              height: 10,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.white,
+                              ),
+                            ),
+                          )
+                        : null,
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      );
+    });
   }
 
   getNumber() {

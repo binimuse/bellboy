@@ -21,12 +21,12 @@ class QuizController extends GetxController {
   }
 
   void answerQuestion(int index) {
-    update();
-    selectedAnswerIndex.value = index;
     if (currentIndex < questions.length - 1) {
       // Proceed to the next question
+
       currentIndex++;
       questionNumber++; // Increment the question number
+      selectedAnswerIndex.value = -1;
     } else {
       // Reached the end of the quiz
       // Handle end of quiz logic here
@@ -51,6 +51,13 @@ class QuizController extends GetxController {
         "image":
             "https://cdn.pixabay.com/photo/2013/01/29/00/47/magnifying-glass-76520_1280.png",
         "answers": ["New York", "Los Angeles", "Washington D.C.", "Chicago"],
+        "correctAnswerIndex": 2
+      },
+      {
+        "question": "Choose the correct one from the following?",
+        "image":
+            "https://cdn.pixabay.com/photo/2013/01/29/00/47/magnifying-glass-76520_1280.png",
+        "answers": ["New ", "Los ", "Washington .", "Chio"],
         "correctAnswerIndex": 2
       },
       // Add more questions here
