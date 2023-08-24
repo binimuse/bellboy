@@ -1,5 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -23,16 +24,20 @@ Sizer App() {
       return GraphQLProvider(
         client: graphQLConfiguration.client,
         child: CacheProvider(
-          child: GetMaterialApp(
-            theme: ThemeData(
-              primaryColor: Colors.white,
+          child: MaterialApp(
+            builder: BotToastInit(),
+            navigatorObservers: [BotToastNavigatorObserver()],
+            home: GetMaterialApp(
+              theme: ThemeData(
+                primaryColor: Colors.white,
+              ),
+              themeMode: ThemeMode.light,
+              title: "BellBoy Rider",
+              initialRoute: AppPages.INITIAL,
+              debugShowCheckedModeBanner: false,
+              getPages: AppPages.routes,
+              defaultTransition: Transition.native,
             ),
-            themeMode: ThemeMode.light,
-            title: "BellBoy Rider",
-            initialRoute: AppPages.INITIAL,
-            debugShowCheckedModeBanner: false,
-            getPages: AppPages.routes,
-            defaultTransition: Transition.native,
           ),
         ),
       );

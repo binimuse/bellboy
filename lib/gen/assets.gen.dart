@@ -800,8 +800,12 @@ class $AssetsImagesGen {
   AssetGenImage get onbording2 =>
       const AssetGenImage('assets/images/onbording2.png');
 
+  /// File path: assets/images/quizimage.png
+  AssetGenImage get quizimage =>
+      const AssetGenImage('assets/images/quizimage.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [onbording1, onbording2];
+  List<AssetGenImage> get values => [onbording1, onbording2, quizimage];
 }
 
 class $AssetsLogosGen {

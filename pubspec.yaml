@@ -38,6 +38,7 @@ dependencies:
 
   flutter:
     sdk: flutter
+  bot_toast: ^4.0.4
 
 
 

@@ -1,3 +1,4 @@
+import 'package:bellboy/app/common/widgets/app_toasts.dart';
 import 'package:bellboy/app/config/theme/app_colors.dart';
 import 'package:bellboy/app/config/theme/app_sizes.dart';
 import 'package:bellboy/app/routes/app_pages.dart';
@@ -167,7 +168,8 @@ class OnBordingView extends GetView<OnBordingController> {
               horizontal: AppSizes.mp_w_6,
             ),
             onPressed: () {
-              Get.toNamed(Routes.QUIZ);
+              AppToasts.showSuccess("Success toast message");
+              //  Get.toNamed(Routes.QUIZ);
             },
           ),
           SizedBox(
