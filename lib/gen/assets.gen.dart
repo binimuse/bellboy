@@ -18,6 +18,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/battery_low.svg
   String get batteryLow => 'assets/icons/battery_low.svg';
 
+  /// File path: assets/icons/bell.svg
+  String get bell => 'assets/icons/bell.svg';
+
   /// File path: assets/icons/bicycle.svg
   String get bicycle => 'assets/icons/bicycle.svg';
 
@@ -558,6 +561,12 @@ class $AssetsIconsGen {
   /// File path: assets/icons/upload.svg
   String get upload => 'assets/icons/upload.svg';
 
+  /// File path: assets/icons/user_off.svg
+  String get userOff => 'assets/icons/user_off.svg';
+
+  /// File path: assets/icons/user_on.svg
+  String get userOn => 'assets/icons/user_on.svg';
+
   /// File path: assets/icons/vector.svg
   String get vector => 'assets/icons/vector.svg';
 
@@ -595,6 +604,7 @@ class $AssetsIconsGen {
   List<String> get values => [
         arrowleft,
         batteryLow,
+        bell,
         bicycle,
         bookmark,
         box,
@@ -775,6 +785,8 @@ class $AssetsIconsGen {
         underline,
         unlock,
         upload,
+        userOff,
+        userOn,
         vector,
         vest,
         vibrate,

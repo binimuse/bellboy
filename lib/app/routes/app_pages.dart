@@ -8,6 +8,8 @@ import '../modules/on_bording/bindings/on_bording_binding.dart';
 import '../modules/on_bording/views/on_bording_view.dart';
 import '../modules/quiz/bindings/quiz_binding.dart';
 import '../modules/quiz/views/quiz_view.dart';
+import '../modules/recover_account/bindings/recover_account_binding.dart';
+import '../modules/recover_account/views/recover_account_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
 
@@ -43,6 +45,11 @@ class AppPages {
       name: _Paths.QUIZ,
       page: () => const QuizView(),
       binding: QuizBinding(),
+    ),
+    GetPage(
+      name: _Paths.RECOVER_ACCOUNT,
+      page: () => const RecoverAccountView(),
+      binding: RecoverAccountBinding(),
     ),
   ];
 }

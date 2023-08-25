@@ -167,9 +167,10 @@ class OnBordingView extends GetView<OnBordingController> {
               vertical: AppSizes.mp_v_2,
               horizontal: AppSizes.mp_w_6,
             ),
-            onPressed: () {
+            onPressed: () async {
               AppToasts.showSuccess("Success toast message");
-              //  Get.toNamed(Routes.QUIZ);
+              await Future.delayed(const Duration(milliseconds: 400));
+              Get.toNamed(Routes.LOGIN);
             },
           ),
           SizedBox(
