@@ -98,7 +98,9 @@ class LoginView extends GetView<LoginController> {
                           ),
                         ),
                         MaterialButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.toNamed(Routes.FORGOTPASSWORD);
+                          },
                           child: Padding(
                             padding:
                                 EdgeInsets.symmetric(vertical: AppSizes.mp_v_2),

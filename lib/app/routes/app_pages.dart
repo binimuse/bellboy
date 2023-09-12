@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/forgotpassword/bindings/forgotpassword_binding.dart';
+import '../modules/forgotpassword/views/forgotpassword_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -50,6 +52,11 @@ class AppPages {
       name: _Paths.RECOVER_ACCOUNT,
       page: () => const RecoverAccountView(),
       binding: RecoverAccountBinding(),
+    ),
+    GetPage(
+      name: _Paths.FORGOTPASSWORD,
+      page: () => const ForgotpasswordView(),
+      binding: ForgotpasswordBinding(),
     ),
   ];
 }
