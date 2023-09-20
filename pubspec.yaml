@@ -34,11 +34,15 @@ dependencies:
   smooth_page_indicator: ^1.1.0
 
   cupertino_icons: ^1.0.2
-
+  #For toast message
+  bot_toast: ^4.0.4
+  
 
   flutter:
     sdk: flutter
-  bot_toast: ^4.0.4
+  connectivity: ^3.0.6
+
+
 
 
 

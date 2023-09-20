@@ -1,3 +1,4 @@
+import 'package:bellboy/app/common/widgets/app_toasts.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -15,23 +16,36 @@ class SplashController extends GetxController {
   }
 
   waitAndNavigate() async {
-    Future.delayed(const Duration(seconds: 2), () async {
-      await requestNotificationPermission();
-      await requestLocationPermission();
+    bool hasShownToast = false;
 
-      Get.offAllNamed(Routes.ON_BORDING);
-    });
-  }
+    while (true) {
+      await Future.delayed(const Duration(seconds: 1));
 
-  Future<void> requestNotificationPermission() async {
-    final status = await Permission.notification.request();
-    if (status.isDenied) {}
-  }
+      final notificationPermissionStatus =
+          await requestNotificationPermission();
+      final locationPermissionStatus = await requestLocationPermission();
 
-  Future<void> requestLocationPermission() async {
-    final status = await Permission.location.request();
-    if (status.isDenied) {
-      // Handle denied permission
+      if (notificationPermissionStatus == PermissionStatus.granted &&
+          locationPermissionStatus == PermissionStatus.granted) {
+        Get.offAllNamed(Routes.ON_BORDING);
+        break;
+      } else {
+        if (!hasShownToast) {
+          AppToasts.showError("Please Enable Permissions");
+          await openAppSettings();
+          hasShownToast = true;
+        }
+      }
     }
+  }
+
+  Future<PermissionStatus> requestNotificationPermission() async {
+    final status = await Permission.notification.request();
+    return status;
+  }
+
+  Future<PermissionStatus> requestLocationPermission() async {
+    final status = await Permission.location.request();
+    return status;
   }
 }

@@ -3,6 +3,7 @@ import 'package:bellboy/app/config/theme/app_colors.dart';
 import 'package:bellboy/app/config/theme/app_sizes.dart';
 import 'package:bellboy/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
+import 'package:connectivity/connectivity.dart';
 
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
@@ -168,9 +169,7 @@ class OnBordingView extends GetView<OnBordingController> {
               horizontal: AppSizes.mp_w_6,
             ),
             onPressed: () async {
-              AppToasts.showSuccess("Success toast message");
-              await Future.delayed(const Duration(milliseconds: 400));
-              Get.toNamed(Routes.LOGIN);
+              navigateToLogin();
             },
           ),
           SizedBox(
@@ -189,5 +188,21 @@ class OnBordingView extends GetView<OnBordingController> {
         ],
       ),
     );
+  }
+
+// ...
+
+  Future<void> navigateToLogin() async {
+    await Future.delayed(const Duration(milliseconds: 400));
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.mobile ||
+        connectivityResult == ConnectivityResult.wifi) {
+      // I have internet
+
+      Get.toNamed(Routes.LOGIN);
+    } else {
+      // I don't have internet
+      AppToasts.showError("Network error, try again later");
+    }
   }
 }

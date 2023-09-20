@@ -11,7 +11,7 @@ import 'app/Services/graphql_conf.dart';
 import 'app/routes/app_pages.dart';
 
 GraphQLConfiguration graphQLConfiguration = GraphQLConfiguration();
-void main() async {
+void main() async { 
   //for status  bar color
 
   runApp(App());
