@@ -1,11 +1,14 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ForgotpasswordController extends GetxController {
-  //TODO: Implement ForgotpasswordController
+  late TextEditingController emailController = TextEditingController();
 
   final count = 0.obs;
   @override
   void onInit() {
+    emailController = TextEditingController();
+
     super.onInit();
   }
 

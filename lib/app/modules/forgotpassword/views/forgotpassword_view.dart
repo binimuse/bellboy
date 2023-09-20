@@ -44,8 +44,9 @@ class ForgotpasswordView extends GetView<ForgotpasswordController> {
                   SizedBox(
                     height: AppSizes.mp_v_4,
                   ),
-                  const TextInputLogin(
+                  TextInputLogin(
                     hint: 'Email',
+                    controller: controller.emailController,
                   ),
                   SizedBox(
                     height: AppSizes.mp_v_4,

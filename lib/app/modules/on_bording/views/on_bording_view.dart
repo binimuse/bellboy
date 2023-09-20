@@ -19,6 +19,7 @@ class OnBordingView extends GetView<OnBordingController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       body: Stack(
         children: [

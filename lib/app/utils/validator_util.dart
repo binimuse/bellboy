@@ -1,4 +1,4 @@
-class ValidatorUtil{
+class ValidatorUtil {
   static bool isPhoneValidEthiopian(String text) {
     bool isPhoneValidEthiopian = true;
 
@@ -32,6 +32,9 @@ class ValidatorUtil{
     return isPhoneValidEthiopian;
   }
 
+
+
+
   static String formatPhoneNumber(String text) {
     ///VALIDATE PHONE NUMBER FIRST
     if (!isPhoneValidEthiopian(text)) {
@@ -58,5 +61,4 @@ class ValidatorUtil{
 
     return formattedPhoneNumber;
   }
-
 }
