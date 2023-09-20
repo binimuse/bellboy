@@ -9,6 +9,9 @@ abstract class Routes {
   static const ON_BORDING = _Paths.ON_BORDING;
   static const QUIZ = _Paths.QUIZ;
   static const RECOVER_ACCOUNT = _Paths.RECOVER_ACCOUNT;
+  static const FIND_EMAIL = _Paths.FIND_EMAIL;
+  static const FIND_PASSWORD = _Paths.FIND_PASSWORD;
+  static const SIGNUP = _Paths.SIGNUP;
 }
 
 abstract class _Paths {
@@ -19,4 +22,7 @@ abstract class _Paths {
   static const ON_BORDING = '/on-bording';
   static const QUIZ = '/quiz';
   static const RECOVER_ACCOUNT = '/recover-account';
+  static const FIND_EMAIL = '/find-email';
+  static const FIND_PASSWORD = '/find-password';
+  static const SIGNUP = '/signup';
 }

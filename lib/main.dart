@@ -26,6 +26,7 @@ Sizer App() {
         child: CacheProvider(
           child: MaterialApp(
             builder: BotToastInit(),
+            debugShowCheckedModeBanner: false,
             navigatorObservers: [BotToastNavigatorObserver()],
             home: GetMaterialApp(
               theme: ThemeData(
@@ -34,9 +35,8 @@ Sizer App() {
               themeMode: ThemeMode.light,
               title: "BellBoy Rider",
               initialRoute: AppPages.INITIAL,
-              debugShowCheckedModeBanner: false,
               getPages: AppPages.routes,
-              defaultTransition: Transition.native,
+              debugShowCheckedModeBanner: false,
             ),
           ),
         ),
