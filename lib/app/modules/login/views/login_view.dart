@@ -16,6 +16,7 @@ class LoginView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -98,7 +99,9 @@ class LoginView extends GetView<LoginController> {
                           ),
                         ),
                         MaterialButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.toNamed(Routes.FORGOTPASSWORD);
+                          },
                           child: Padding(
                             padding:
                                 EdgeInsets.symmetric(vertical: AppSizes.mp_v_2),

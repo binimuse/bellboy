@@ -4,14 +4,9 @@ import 'package:bellboy/app/common/widgets/custom_normal_button.dart';
 import 'package:bellboy/app/config/theme/app_assets.dart';
 import 'package:bellboy/app/config/theme/app_colors.dart';
 import 'package:bellboy/app/config/theme/app_text_styles.dart';
-import 'package:bellboy/app/routes/app_pages.dart';
-import 'package:bellboy/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
-
 import '../../../config/theme/app_sizes.dart';
 import '../controllers/quiz_controller.dart';
 import 'widgets/quations.dart';

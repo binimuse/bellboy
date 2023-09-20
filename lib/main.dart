@@ -25,8 +25,8 @@ Sizer App() {
         client: graphQLConfiguration.client,
         child: CacheProvider(
           child: MaterialApp(
-            builder: BotToastInit(),
             debugShowCheckedModeBanner: false,
+            builder: BotToastInit(),
             navigatorObservers: [BotToastNavigatorObserver()],
             home: GetMaterialApp(
               theme: ThemeData(

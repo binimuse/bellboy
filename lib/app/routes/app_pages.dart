@@ -1,9 +1,7 @@
 import 'package:get/get.dart';
 
-import '../modules/find_email/bindings/find_email_binding.dart';
-import '../modules/find_email/views/find_email_view.dart';
-import '../modules/find_password/bindings/find_password_binding.dart';
-import '../modules/find_password/views/find_password_view.dart';
+import '../modules/forgotpassword/bindings/forgotpassword_binding.dart';
+import '../modules/forgotpassword/views/forgotpassword_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -14,8 +12,6 @@ import '../modules/quiz/bindings/quiz_binding.dart';
 import '../modules/quiz/views/quiz_view.dart';
 import '../modules/recover_account/bindings/recover_account_binding.dart';
 import '../modules/recover_account/views/recover_account_view.dart';
-import '../modules/signup/bindings/signup_binding.dart';
-import '../modules/signup/views/signup_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
 
@@ -58,19 +54,9 @@ class AppPages {
       binding: RecoverAccountBinding(),
     ),
     GetPage(
-      name: _Paths.FIND_EMAIL,
-      page: () => const FindEmailView(),
-      binding: FindEmailBinding(),
-    ),
-    GetPage(
-      name: _Paths.FIND_PASSWORD,
-      page: () => const FindPasswordView(),
-      binding: FindPasswordBinding(),
-    ),
-    GetPage(
-      name: _Paths.SIGNUP,
-      page: () => const SignupView(),
-      binding: SignupBinding(),
+      name: _Paths.FORGOTPASSWORD,
+      page: () => const ForgotpasswordView(),
+      binding: ForgotpasswordBinding(),
     ),
   ];
 }
