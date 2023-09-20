@@ -19,10 +19,23 @@ class ButtonPrimaryFill extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color buttonColor = isDisabled ? AppColors.grayLighter : AppColors.primary;
+    Color buttonColor;
 
-    if (!isDisabled && text == 'Next') {
-      buttonColor = AppColors.black;
+    switch (text) {
+      case 'Enter your e-mail address':
+        buttonColor = AppColors.grayLight;
+        break;
+      case 'Next':
+        buttonColor = AppColors.black;
+        break;
+      case 'Enter password':
+        buttonColor = AppColors.grayLight;
+        break;
+      case 'Login':
+        buttonColor = AppColors.primary;
+        break;
+      default:
+        buttonColor = AppColors.black; // Default background color
     }
 
     return SizedBox(
@@ -31,7 +44,7 @@ class ButtonPrimaryFill extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           elevation: 0,
           shadowColor: AppColors.grayLight,
-          backgroundColor: buttonColor,
+          backgroundColor: buttonColor, // Use the determined background color
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppSizes.radius_8),
           ),

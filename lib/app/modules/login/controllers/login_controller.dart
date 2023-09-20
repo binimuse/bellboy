@@ -5,7 +5,8 @@ class LoginController extends GetxController {
   late TextEditingController emailController = TextEditingController();
   late TextEditingController passwordController = TextEditingController();
 
-  late FocusNode passwordFocusNode = FocusNode();
+  final FocusNode passwordFocusNode = FocusNode(); // Added password focus node
+  final emailFocusNode = FocusNode();
 
   var isEmailValidated = false.obs;
   var isNextPressed = false.obs;
@@ -17,8 +18,6 @@ class LoginController extends GetxController {
 
     emailController = TextEditingController();
     passwordController = TextEditingController();
-
-    passwordFocusNode = FocusNode();
   }
 
   bool validateEmail() {
@@ -34,11 +33,12 @@ class LoginController extends GetxController {
 
   bool validatePassword() {
     final password = passwordController.text;
-    if (password.isNotEmpty) {
-      isPasswordValid.value = true;
+    if (password.length >= 8) {
+      print("""object""");
+      isPasswordValid(true);
       return true;
     } else {
-      isPasswordValid.value = false;
+      isPasswordValid(false);
       return false;
     }
   }

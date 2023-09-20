@@ -14,13 +14,12 @@ import '../../../common/widgets/buttons/button_primary_fill.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
-  const LoginView({Key? key}) : super(key: key);
+  LoginView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final emailFocusNode = FocusNode();
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      FocusScope.of(context).requestFocus(emailFocusNode);
+      FocusScope.of(context).requestFocus(controller.emailFocusNode);
     });
 
     return WillPopScope(
@@ -58,12 +57,18 @@ class LoginView extends GetView<LoginController> {
                             TextInputLogin(
                               hint: 'Email',
                               controller: controller.emailController,
-                              focusNode: emailFocusNode,
+                              focusNode: controller.emailFocusNode,
                               logincontroller: controller,
                               onChanged: (value) {
                                 // Validate email on type
                                 bool isValid = controller.validateEmail();
                                 controller.isEmailValidated.value = isValid;
+
+                                // Check if email is valid and update UI accordingly
+                                if (isValid) {
+                                  controller.isNextPressed(
+                                      false); // Reset Next button
+                                }
                               },
                               validator: (value) {
                                 if (value!.isEmpty) {
@@ -76,31 +81,41 @@ class LoginView extends GetView<LoginController> {
                               },
                             ),
                             SizedBox(height: 1.h),
+
+                            // Show Password field only when Next is pressed
                             if (controller.isNextPressed.value)
+
+                              // Inside the password field widget
                               TextInputLogin(
                                 hint: 'Password',
                                 isPassword: true,
                                 onChanged: (value) {
-                                  // Validate email on type
-                                  bool isValid = controller.validateEmail();
+                                  // Validate password on type
+                                  bool isValid = controller
+                                      .validatePassword(); // Pass the value to validatePassword
                                   controller.isPasswordValid.value = isValid;
+
+                                  // Check if the password is valid and display the appropriate text
+                                  if (isValid) {
+                                    controller.isNextPressed(
+                                        true); // Set to true but don't hide password field
+                                  }
                                 },
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return 'Please enter your Password';
                                   }
-                                  if (!controller.isEmailValidated.value) {
-                                    return 'Invalid Password';
+                                  if (!controller.isPasswordValid.value) {
+                                    return 'Password must be at least 8 characters';
                                   }
                                   return null;
                                 },
                                 controller: controller.passwordController,
-                                focusNode: controller.passwordFocusNode,
                               ),
                           ],
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -178,20 +193,21 @@ class LoginView extends GetView<LoginController> {
                                         (controller.isEmailValidated.value &&
                                             !controller.isNextPressed.value),
                                 text: controller.isEmailValidated.value
-                                    ? 'Next'
-                                    : controller.isNextPressed.value
-                                        ? "Enter password"
-                                        : controller.isPasswordValid.value
+                                    ? controller.isNextPressed.value
+                                        ? controller.isPasswordValid.value
                                             ? "Login"
-                                            : 'Enter your e-mail address',
+                                            : "Enter password"
+                                        : "Next"
+                                    : 'Enter your e-mail address',
                                 onTap: () {
                                   if (!controller.isEmailValidated.value) {
                                     controller.isEmailValidated.value = false;
                                     FocusScope.of(context).requestFocus(
                                         controller.passwordFocusNode);
-                                  } else {
+                                  } else if (!controller.isNextPressed.value) {
                                     controller.isNextPressed(true);
-                                    controller.isEmailValidated(false);
+                                    // Change the button text to "Enter password"
+                                  } else {
                                     // Handle login logic
                                   }
                                 },

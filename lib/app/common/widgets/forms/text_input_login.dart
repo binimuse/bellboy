@@ -24,6 +24,7 @@ class TextInputLogin extends StatefulWidget {
   final LoginController? logincontroller;
   final String? Function(String?)? validator;
   final FocusNode? focusNode;
+
   final void Function(String)? onChanged; // Callback when the text changes
 
   @override
@@ -75,8 +76,18 @@ class _TextInputLoginState extends State<TextInputLogin> {
                       setState(() {
                         widget.controller.clear();
                         _showClearButton = false;
-                        widget.logincontroller!.isEmailValidated.value = false;
-                        widget.logincontroller!.isNextPressed.value = false;
+
+                        bool isValid = widget.logincontroller!.validateEmail();
+                        widget.logincontroller!.isEmailValidated.value =
+                            isValid;
+
+                        if (isValid) {
+                          widget.logincontroller!
+                              .isNextPressed(false); // Reset Next button
+                        } else {
+                          widget.logincontroller!.isNextPressed(false);
+                        }
+                        //  widget.logincontroller!.isPasswordValid(false);
                       });
                     },
                   )
@@ -114,6 +125,8 @@ class _TextInputLoginState extends State<TextInputLogin> {
             setState(() {
               _isFocused = true;
             });
+
+            // Request focus for the password field when tapping
           },
           focusNode: widget.focusNode,
         ),
