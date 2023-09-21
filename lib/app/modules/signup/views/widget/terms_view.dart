@@ -13,11 +13,54 @@ import 'package:get/get.dart';
 
 import '../../../../config/theme/app_text_styles.dart';
 
-class TermsView extends GetView<SignupController> {
+class TermsView extends StatefulWidget {
   TermsView({Key? key}) : super(key: key);
 
   @override
-  final SignupController controller = Get.put(SignupController());
+  _TermsViewState createState() => _TermsViewState();
+}
+
+class _TermsViewState extends State<TermsView> {
+  late ValueNotifier<bool> allTermsChecked;
+  late List<ValueNotifier<bool>> termCheckboxes;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Initialize allTermsChecked and termCheckboxes in the state's initState
+    allTermsChecked = ValueNotifier<bool>(false);
+    termCheckboxes = [
+      ValueNotifier<bool>(false), // Checkbox for "Terms of Use"
+      ValueNotifier<bool>(false), // Checkbox for "Privacy Notice"
+      // Add more checkboxes if needed
+    ];
+  }
+
+  void toggleAllTerms() {
+    setState(() {
+      final bool isChecked = allTermsChecked.value;
+
+      for (final termCheckbox in termCheckboxes) {
+        termCheckbox.value = isChecked;
+      }
+    });
+  }
+
+  void toggleTerm(int index) {
+    setState(() {
+      termCheckboxes[index].value = !termCheckboxes[index].value;
+
+      // Uncheck the "I agree with all terms" checkbox if any term checkbox is unchecked
+      if (!termCheckboxes[index].value) {
+        allTermsChecked.value = false;
+      } else {
+        // Check the "I agree with all terms" checkbox if all term checkboxes are checked
+        allTermsChecked.value =
+            termCheckboxes.every((checkbox) => checkbox.value);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,13 +104,16 @@ class TermsView extends GetView<SignupController> {
                           Row(
                             children: [
                               // Checkbox for "I agree with all terms"
-                              CheckBox(
-                                text: "I agree with all terms",
-                                isInitSelected:
-                                    controller.allTermsChecked.value,
+                              MyCheckBox(
+                                isInitSelected: allTermsChecked.value,
                                 checkBoxSize: CheckBoxSize.LARGE,
-                                onTap: controller.markAllTerms,
+                                onChanged: (isChecked) {
+                                  allTermsChecked.value = isChecked;
+                                  toggleAllTerms();
+                                },
+                                text: "I agree with all terms",
                               ),
+
                               const Expanded(child: SizedBox()),
                               AppSvgButton(
                                 imagePath: Assets.icons.chevronRight,
@@ -86,50 +132,25 @@ class TermsView extends GetView<SignupController> {
                             ),
                           ),
                           // Individual term checkboxes
-                          ValueListenableBuilder<bool>(
-                            valueListenable: controller.termCheckboxes[0],
-                            builder: (context, value, child) {
-                              return Row(
-                                children: [
-                                  CheckBox(
-                                    text: "Terms of Use",
-                                    isInitSelected: value,
-                                    checkBoxSize: CheckBoxSize.MEDIUM,
-                                    onTap: () => controller.markTerm(0),
-                                  ),
-                                  const Expanded(child: SizedBox()),
-                                  AppSvgButton(
-                                    imagePath: Assets.icons.chevronRight,
-                                    iconColor: AppColors.grayLight,
-                                    onPressed: () {},
-                                    size: AppSizes.icon_size_6,
-                                  ),
-                                ],
-                              );
-                            },
-                          ),
-                          ValueListenableBuilder<bool>(
-                            valueListenable: controller.termCheckboxes[1],
-                            builder: (context, value, child) {
-                              return Row(
-                                children: [
-                                  CheckBox(
-                                    text: "Privacy Notice",
-                                    isInitSelected: value,
-                                    checkBoxSize: CheckBoxSize.MEDIUM,
-                                    onTap: () => controller.markTerm(1),
-                                  ),
-                                  const Expanded(child: SizedBox()),
-                                  AppSvgButton(
-                                    imagePath: Assets.icons.chevronRight,
-                                    iconColor: AppColors.grayLight,
-                                    onPressed: () {},
-                                    size: AppSizes.icon_size_6,
-                                  ),
-                                ],
-                              );
-                            },
-                          ),
+                          for (int index = 0;
+                              index < termCheckboxes.length;
+                              index++)
+                            Row(
+                              children: [
+                                MyCheckBox(
+                                  isInitSelected: termCheckboxes[index].value,
+                                  checkBoxSize: CheckBoxSize.MEDIUM,
+                                  onChanged: (isChecked) {
+                                    toggleTerm(index);
+                                  },
+                                  text: index == 0
+                                      ? "Terms of Use"
+                                      : "Privacy Notice",
+                                ),
+                                const Expanded(child: SizedBox()),
+                                // ...
+                              ],
+                            ),
                         ],
                       ),
                     ),
@@ -143,10 +164,14 @@ class TermsView extends GetView<SignupController> {
                     padding: EdgeInsets.symmetric(horizontal: AppSizes.mp_w_4),
                     child: ButtonPrimaryFill(
                       buttonSizeType: ButtonSizeType.LARGE,
-                      isDisabled: false,
+                      isDisabled: !allTermsChecked
+                          .value, // Disable the button if not all terms are checked
                       text: "Next",
                       onTap: () {
-                        Get.toNamed(Routes.SIGNUP);
+                        if (allTermsChecked.value) {
+                          // Only navigate if all terms are checked
+                          Get.toNamed(Routes.SIGNUP);
+                        }
                       },
                     ),
                   ),
@@ -161,5 +186,15 @@ class TermsView extends GetView<SignupController> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    // Dispose of ValueNotifier objects when the widget is disposed
+    allTermsChecked.dispose();
+    for (final termCheckbox in termCheckboxes) {
+      termCheckbox.dispose();
+    }
+    super.dispose();
   }
 }

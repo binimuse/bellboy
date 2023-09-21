@@ -1,3 +1,4 @@
+import 'package:bellboy/app/common/widgets/buttons/button_primary_fill_login.dart';
 import 'package:bellboy/app/common/widgets/forms/text_input_login.dart';
 import 'package:bellboy/app/common/widgets/navigation/top_nav_back_text.dart';
 import 'package:bellboy/app/config/theme/app_colors.dart';
@@ -186,8 +187,8 @@ class LoginView extends GetView<LoginController> {
                             ),
                             SizedBox(height: 2.h),
                             Obx(
-                              () => ButtonPrimaryFill(
-                                buttonSizeType: ButtonSizeType.LARGE,
+                              () => ButtonPrimaryFillLogin(
+                                buttonSizeType: ButtonSizeTypeLogin.LARGE,
                                 isDisabled:
                                     !controller.isEmailValidated.value ||
                                         (controller.isEmailValidated.value &&
