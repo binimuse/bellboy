@@ -1,23 +1,24 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SignupController extends GetxController {
-  //TODO: Implement SignupController
+  RxBool allTermsChecked = false.obs;
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
+  final List<ValueNotifier<bool>> termCheckboxes = [
+    ValueNotifier<bool>(false),
+    ValueNotifier<bool>(false),
+  ];
+
+  void markAllTerms() {
+    for (var termCheckbox in termCheckboxes) {
+      termCheckbox.value = true;
+    }
+    allTermsChecked.value = true;
   }
 
-  @override
-  void onReady() {
-    super.onReady();
+  void markTerm(int index) {
+    termCheckboxes[index].value = true;
+    allTermsChecked.value =
+        termCheckboxes.every((checkbox) => checkbox.value == true);
   }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }

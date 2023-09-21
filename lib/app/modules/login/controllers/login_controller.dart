@@ -34,7 +34,7 @@ class LoginController extends GetxController {
   bool validatePassword() {
     final password = passwordController.text;
     if (password.length >= 8) {
-      print("""object""");
+   
       isPasswordValid(true);
       return true;
     } else {

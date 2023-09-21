@@ -12,6 +12,7 @@ import '../../../common/widgets/custom_normal_button.dart';
 import '../../../config/theme/app_assets.dart';
 import '../../../config/theme/app_text_styles.dart';
 
+import '../../signup/views/widget/terms_view.dart';
 import '../controllers/on_bording_controller.dart';
 
 class OnBordingView extends GetView<OnBordingController> {
@@ -176,13 +177,18 @@ class OnBordingView extends GetView<OnBordingController> {
           SizedBox(
             height: AppSizes.mp_v_2,
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              "New to Bellboy? Sign up!",
-              textAlign: TextAlign.start,
-              style: AppTextStyles.bodyLargeBold.copyWith(
-                color: AppColors.grayDefault,
+          GestureDetector(
+            onTap: () {
+              Get.to(TermsView());
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                "New to Bellboy? Sign up!",
+                textAlign: TextAlign.start,
+                style: AppTextStyles.bodyLargeBold.copyWith(
+                  color: AppColors.grayDefault,
+                ),
               ),
             ),
           ),

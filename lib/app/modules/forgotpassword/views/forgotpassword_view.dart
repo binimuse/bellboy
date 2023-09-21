@@ -74,7 +74,7 @@ class ForgotpasswordView extends GetView<ForgotpasswordController> {
                     isDisabled: false,
                     text: "Enter your E-mail",
                     onTap: () {
-                      print("object");
+                    
                       Get.to(const ForgotAccountDone());
                     },
                   ),

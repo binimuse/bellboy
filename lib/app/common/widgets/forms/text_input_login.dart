@@ -140,16 +140,14 @@ class _TextInputLoginState extends State<TextInputLogin> {
                   child: buildHideUnhideButton(),
                 ),
               )
-            : SizedBox(),
+            : const SizedBox(),
       ],
     );
   }
 
   bool checkIsPassword() {
-    if (widget.isPassword != null) {
-      if (widget.isPassword) {
-        return true;
-      }
+    if (widget.isPassword) {
+      return true;
     }
     return false;
   }

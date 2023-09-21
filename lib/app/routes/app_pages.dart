@@ -1,3 +1,7 @@
+// ignore_for_file: constant_identifier_names
+
+import 'package:bellboy/app/modules/signup/bindings/signup_binding.dart';
+import 'package:bellboy/app/modules/signup/views/signup_view.dart';
 import 'package:get/get.dart';
 
 import '../modules/forgotpassword/bindings/forgotpassword_binding.dart';
@@ -35,12 +39,17 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.LOGIN,
-      page: () => LoginView(),
+      page: () => const LoginView(),
       binding: LoginBinding(),
     ),
     GetPage(
+      name: _Paths.SIGNUP,
+      page: () => const SignupView(),
+      binding: SignupBinding(),
+    ),
+    GetPage(
       name: _Paths.ON_BORDING,
-      page: () => OnBordingView(),
+      page: () => const OnBordingView(),
       binding: OnBordingBinding(),
     ),
     GetPage(

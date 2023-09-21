@@ -163,7 +163,7 @@ class QuationsView extends GetView<QuizController> {
                   Expanded(
                     child: Text(
                       answer,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -186,7 +186,7 @@ class QuationsView extends GetView<QuizController> {
                             child: Container(
                               width: 10,
                               height: 10,
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: Colors.white,
                               ),

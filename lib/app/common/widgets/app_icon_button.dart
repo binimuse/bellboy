@@ -6,12 +6,14 @@ class AppSvgButton extends StatelessWidget {
   final String imagePath;
   final VoidCallback onPressed;
   final double size;
+  final Color? iconColor;
 
   const AppSvgButton(
       {super.key,
       required this.imagePath,
       required this.onPressed,
-      required this.size});
+      required this.size,
+      this.iconColor});
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +26,7 @@ class AppSvgButton extends StatelessWidget {
         imagePath,
         width: size,
         height: size,
+        color: iconColor,
       ),
     );
   }
