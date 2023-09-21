@@ -1,9 +1,7 @@
-// ignore_for_file: constant_identifier_names
-
-import 'package:bellboy/app/modules/signup/bindings/signup_binding.dart';
-import 'package:bellboy/app/modules/signup/views/signup_view.dart';
 import 'package:get/get.dart';
 
+import '../modules/email_verification/bindings/email_verification_binding.dart';
+import '../modules/email_verification/views/email_verification_view.dart';
 import '../modules/forgotpassword/bindings/forgotpassword_binding.dart';
 import '../modules/forgotpassword/views/forgotpassword_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -16,8 +14,12 @@ import '../modules/quiz/bindings/quiz_binding.dart';
 import '../modules/quiz/views/quiz_view.dart';
 import '../modules/recover_account/bindings/recover_account_binding.dart';
 import '../modules/recover_account/views/recover_account_view.dart';
+import '../modules/signup/bindings/signup_binding.dart';
+import '../modules/signup/views/signup_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
+
+// ignore_for_file: constant_identifier_names
 
 part 'app_routes.dart';
 
@@ -66,6 +68,11 @@ class AppPages {
       name: _Paths.FORGOTPASSWORD,
       page: () => const ForgotpasswordView(),
       binding: ForgotpasswordBinding(),
+    ),
+    GetPage(
+      name: _Paths.EMAIL_VERIFICATION,
+      page: () => const EmailVerificationView(),
+      binding: EmailVerificationBinding(),
     ),
   ];
 }

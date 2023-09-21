@@ -13,6 +13,7 @@ abstract class Routes {
   static const RECOVER_ACCOUNT = _Paths.RECOVER_ACCOUNT;
   static const FORGOTPASSWORD = _Paths.FORGOTPASSWORD;
   static const SIGNUP = _Paths.SIGNUP;
+  static const EMAIL_VERIFICATION = _Paths.EMAIL_VERIFICATION;
 }
 
 abstract class _Paths {
@@ -25,4 +26,5 @@ abstract class _Paths {
   static const QUIZ = '/quiz';
   static const RECOVER_ACCOUNT = '/recover-account';
   static const FORGOTPASSWORD = '/forgotpassword';
+  static const EMAIL_VERIFICATION = '/email-verification';
 }

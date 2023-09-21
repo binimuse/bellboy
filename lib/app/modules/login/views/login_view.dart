@@ -11,7 +11,6 @@ import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../../common/widgets/buttons/button_primary_fill.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
