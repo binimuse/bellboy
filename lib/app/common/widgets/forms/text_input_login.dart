@@ -24,7 +24,6 @@ class TextInputLogin extends StatefulWidget {
   final LoginController? logincontroller;
   final String? Function(String?)? validator;
   final FocusNode? focusNode;
-
   final void Function(String)? onChanged; // Callback when the text changes
 
   @override
@@ -34,6 +33,7 @@ class TextInputLogin extends StatefulWidget {
 class _TextInputLoginState extends State<TextInputLogin> {
   bool _showClearButton = false;
   bool _isFocused = false;
+  bool isPasswordVisible = false; // Added property
 
   @override
   void initState() {
@@ -55,7 +55,7 @@ class _TextInputLoginState extends State<TextInputLogin> {
           textInputAction:
               widget.isPassword ? TextInputAction.done : TextInputAction.next,
           style: AppTextStyles.titleBold.copyWith(color: AppColors.blackLight),
-          obscureText: checkIsPassword(),
+          obscureText: checkIsPassword() && !isPasswordVisible, // Modified line
           obscuringCharacter: '●',
           validator: widget.validator,
           decoration: InputDecoration(
@@ -130,8 +130,6 @@ class _TextInputLoginState extends State<TextInputLogin> {
           },
           focusNode: widget.focusNode,
         ),
-
-        ///
         checkIsPassword()
             ? Align(
                 alignment: Alignment.centerRight,
@@ -158,22 +156,33 @@ class _TextInputLoginState extends State<TextInputLogin> {
 
   buildHideUnhideButton() {
     return MaterialButton(
-      onPressed: () {},
+      onPressed: () {
+        setState(() {
+          isPasswordVisible =
+              !isPasswordVisible; // Toggle the visibility of the password
+        });
+      },
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           SvgPicture.asset(
-            Assets.icons.eyeSlash,
-            color: AppColors.grayLighter,
+            isPasswordVisible
+                ? Assets.icons.eye
+                : Assets.icons
+                    .eyeSlash, // Use different icons based on the password visibility
+            color: isPasswordVisible ? AppColors.primary : AppColors.grayLight,
             width: AppSizes.icon_size_6,
           ),
           SizedBox(
             width: AppSizes.mp_w_2,
           ),
           Text(
-            "Hidden",
+            isPasswordVisible
+                ? "Show"
+                : "Hidden", // Change the text based on the password visibility
             style: AppTextStyles.captionBold.copyWith(
-              color: AppColors.grayLight,
+              color:
+                  isPasswordVisible ? AppColors.primary : AppColors.grayLight,
             ),
           ),
         ],
