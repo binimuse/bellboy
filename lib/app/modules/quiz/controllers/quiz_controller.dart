@@ -20,18 +20,28 @@ class QuizController extends GetxController {
     });
   }
 
-  void answerQuestion(int index) {
-    if (currentIndex < questions.length - 1) {
-      // Proceed to the next question
+  void answerQuestion(int selectedAnswerIndex) {
+    // ... your existing code to process the answer
 
-      currentIndex++;
-      questionNumber++; // Increment the question number
-      selectedAnswerIndex.value = -1;
-    } else {
-      // Reached the end of the quiz
-      // Handle end of quiz logic here
-      // For example, show a dialog with the quiz results
+    // Update the questionNumber to move to the next question
+  }
+
+  void nextQuestion() {
+    // Increment the currentIndex to move to the next question
+    currentIndex.value++;
+
+    // Reset the selectedAnswerIndex to -1 for the next question
+    selectedAnswerIndex.value = -1;
+
+    // Check if all questions have been answered
+    if (currentIndex.value >= questions.value.length) {
+      // All questions have been answered, perform any necessary actions
+      // or navigate to a different screen
+      return;
     }
+
+    // If there are more questions, perform any necessary actions
+    // for the next question, such as loading additional data, etc.
   }
 
   Future<List<Question>> fetchQuestions() async {

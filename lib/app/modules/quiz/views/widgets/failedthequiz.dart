@@ -1,18 +1,20 @@
-// ignore_for_file: invalid_use_of_protected_member
-
+import 'package:bellboy/app/common/widgets/buttons/button_gray_scale_outline.dart';
+import 'package:bellboy/app/common/widgets/buttons/button_white_fill.dart';
 import 'package:bellboy/app/common/widgets/buttons/custom_normal_button.dart';
 import 'package:bellboy/app/config/theme/app_assets.dart';
 import 'package:bellboy/app/config/theme/app_colors.dart';
+import 'package:bellboy/app/config/theme/app_sizes.dart';
 import 'package:bellboy/app/config/theme/app_text_styles.dart';
+import 'package:bellboy/app/modules/quiz/views/widgets/passthequiz.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
-import '../../../config/theme/app_sizes.dart';
-import '../controllers/quiz_controller.dart';
-import 'widgets/quations.dart';
 
-class QuizView extends GetView<QuizController> {
-  const QuizView({Key? key}) : super(key: key);
+import '../../../../common/widgets/buttons/button_primary_fill.dart';
+import '../../controllers/quiz_controller.dart';
+
+class Failedthequiz extends GetView<QuizController> {
+  const Failedthequiz({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,12 +23,6 @@ class QuizView extends GetView<QuizController> {
       backgroundColor: Colors.white,
       body: Stack(
         children: [
-          ///BUILD BG GRADIENT
-          // buildBgGradient(),
-
-          ///BUILD BG IMAGE
-          //   buildBgImage(),
-
           Padding(
             padding: EdgeInsets.symmetric(
               horizontal: AppSizes.mp_w_2,
@@ -38,16 +34,11 @@ class QuizView extends GetView<QuizController> {
                 ),
 
                 ///BUILD HEADER
+                buildScore(),
 
-                Container(
-                  margin: EdgeInsets.symmetric(
-                    horizontal: AppSizes.mp_w_4,
-                  ),
-                  child: Image.asset(
-                    'assets/images/quizimage.png',
-                    fit: BoxFit.contain,
-                  ),
-                ),
+                buildOverallscore(),
+
+                buildImage(),
 
                 ///BUILD TITLE AND SUB TITLE
                 buildTitlAndSubTitle(context),
@@ -55,6 +46,7 @@ class QuizView extends GetView<QuizController> {
                   child: SizedBox(),
                 ),
                 ////BUILD ACTION BUTTONS
+                buildActionButtons2(),
                 buildActionButtons(),
 
                 const Expanded(
@@ -109,23 +101,23 @@ class QuizView extends GetView<QuizController> {
     return Padding(
       padding: const EdgeInsets.all(6.0),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
             height: AppSizes.mp_v_2,
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text("Thank you for applying the rider",
-                textAlign: TextAlign.start,
+            child: Text("You need to study",
+                textAlign: TextAlign.center,
                 style: AppTextStyles.displayTwoBold),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
                 "Please take the quiz after understanding the rider's guide manual provided by e-mail.",
-                textAlign: TextAlign.start,
+                textAlign: TextAlign.center,
                 style: AppTextStyles.bodySmallRegular),
           ),
         ],
@@ -139,7 +131,7 @@ class QuizView extends GetView<QuizController> {
       child: Column(
         children: [
           CustomNormalButton(
-            text: 'Start the quiz',
+            text: 'Try again 1/3',
             textStyle: AppTextStyles.bodyLargeBold.copyWith(
               color: AppColors.whiteOff,
             ),
@@ -151,10 +143,70 @@ class QuizView extends GetView<QuizController> {
               horizontal: AppSizes.mp_w_6,
             ),
             onPressed: () {
-              Get.to(QuationsView());
+              Get.to(const Passthequiz());
             },
           ),
         ],
+      ),
+    );
+  }
+
+  buildActionButtons2() {
+    return Padding(
+      padding: EdgeInsets.all(12.sp),
+      child: Column(
+        children: [
+          ButtonGrayScaleOutline(
+            text: 'Check the problem',
+            buttonSizeType: ButtonSizeType.LARGE,
+            onTap: () {},
+            isDisabled: false,
+          ),
+        ],
+      ),
+    );
+  }
+
+  buildScore() {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text("20",
+            textAlign: TextAlign.center,
+            style: AppTextStyles.bodyLargeRegular.copyWith(
+                fontSize: AppSizes.font_64, color: AppColors.grayDefault)),
+      ),
+    );
+  }
+
+  buildOverallscore() {
+    return Align(
+      alignment: Alignment.center,
+      child: Padding(
+        padding: const EdgeInsets.only(top: 8.0, right: 16.0),
+        child: ClipOval(
+          child: Container(
+            color: AppColors.grayLighter,
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              ' ${controller.questionNumber}/${controller.questions.value.length}',
+              style: AppTextStyles.bodySmallBold
+                  .copyWith(color: AppColors.grayDefault),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  buildImage() {
+    return Container(
+      margin: EdgeInsets.symmetric(
+        horizontal: AppSizes.mp_w_4,
+      ),
+      child: Image.asset(
+        'assets/images/fail.png',
+        fit: BoxFit.contain,
       ),
     );
   }

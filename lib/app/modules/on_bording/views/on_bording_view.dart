@@ -8,7 +8,7 @@ import 'package:connectivity/connectivity.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import '../../../common/widgets/custom_normal_button.dart';
+import '../../../common/widgets/buttons/custom_normal_button.dart';
 import '../../../config/theme/app_assets.dart';
 import '../../../config/theme/app_text_styles.dart';
 

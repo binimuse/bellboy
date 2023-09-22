@@ -1,12 +1,13 @@
+
+import 'package:bellboy/app/config/theme/app_colors.dart';
+import 'package:bellboy/app/config/theme/app_sizes.dart';
 import 'package:bellboy/app/config/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
-import '../../../config/theme/app_colors.dart';
-import '../../../config/theme/app_sizes.dart';
 import 'button_primary_fill.dart';
 
-class ButtonPrimaryFill extends StatelessWidget {
-  const ButtonPrimaryFill(
+class ButtonGrayScaleOutline extends StatelessWidget {
+  const ButtonGrayScaleOutline(
       {Key? key,
       required this.buttonSizeType,
       required this.text,
@@ -28,9 +29,17 @@ class ButtonPrimaryFill extends StatelessWidget {
           elevation: 0,
           shadowColor: AppColors.grayLight,
           backgroundColor:
-              isDisabled ? AppColors.grayLighter : AppColors.primary,
+              isDisabled ? AppColors.grayLighter : Colors.transparent,
+          // shape: RoundedRectangleBorder(
+          //   borderRadius: BorderRadius.circular(AppSizes.radius_8),
+          //
+          // ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppSizes.radius_8),
+            side: BorderSide(
+              color: AppColors.grayLight,
+              width: 2,
+            ),
           ),
         ),
         onPressed: onTap,
@@ -41,11 +50,12 @@ class ButtonPrimaryFill extends StatelessWidget {
                 : buttonSizeType == ButtonSizeType.MEDIUM
                     ? AppSizes.mp_v_1 * 1.5
                     : AppSizes.mp_v_1 / 2,
+            horizontal: AppSizes.mp_w_2
           ),
           child: Text(
             text,
             style: AppTextStyles.bodyLargeBold.copyWith(
-              color: AppColors.whiteOff,
+              color: AppColors.grayDark,
             ),
           ),
         ),

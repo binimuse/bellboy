@@ -1,5 +1,6 @@
 // ignore_for_file: invalid_use_of_protected_member
 
+import 'package:bellboy/app/common/widgets/buttons/button_primary_fill.dart';
 import 'package:bellboy/app/config/theme/app_colors.dart';
 import 'package:bellboy/app/config/theme/app_text_styles.dart';
 import 'package:bellboy/gen/assets.gen.dart';
@@ -10,10 +11,12 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../controllers/quiz_controller.dart';
+import 'failedthequiz.dart';
 
 class QuationsView extends GetView<QuizController> {
-  const QuationsView({Key? key}) : super(key: key);
-
+  QuationsView({Key? key}) : super(key: key);
+  @override
+  QuizController controller = Get.put(QuizController());
   @override
   Widget build(BuildContext context) {
     return Obx(() => controller.isquestionsFeched.isTrue
@@ -39,6 +42,38 @@ class QuationsView extends GetView<QuizController> {
                       getimage(),
                       SizedBox(height: 2.h),
                       getAnswerOptions(),
+                      const SizedBox(height: 16),
+                      ButtonPrimaryFill(
+                        buttonSizeType: ButtonSizeType.LARGE,
+                        isDisabled: controller.selectedAnswerIndex.value == -1,
+                        text: () {
+                          final currentQuestionIndex =
+                              controller.questionNumber;
+                          final totalQuestions = controller.questions.length;
+
+                          if (currentQuestionIndex < totalQuestions) {
+                            return 'Next';
+                          } else {
+                            return 'Quiz Complete';
+                          }
+                        }(),
+                        onTap: () {
+                          controller.answerQuestion(
+                              controller.selectedAnswerIndex.value);
+                          final currentQuestionIndex =
+                              controller.questionNumber;
+                          final totalQuestions = controller.questions.length;
+
+                          if (currentQuestionIndex < totalQuestions) {
+                            controller.nextQuestion();
+                            controller.questionNumber++;
+                          } else {
+                            // Last question, quiz complete
+                            // Perform any necessary actions or navigate to a different screen
+                            Get.to(const Failedthequiz());
+                          }
+                        },
+                      )
                     ],
                   ),
                 ),
@@ -84,122 +119,135 @@ class QuationsView extends GetView<QuizController> {
     );
   }
 
-  getimage() {
-    return Container(
-      width: double.infinity,
-      height: 200, // Adjust the height as needed
-      decoration: BoxDecoration(
-        color: AppColors.black,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.black.withOpacity(0.2),
-            spreadRadius: 4,
-            blurRadius: 12,
-          ),
-        ],
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(12),
-        child: CachedNetworkImage(
+  Widget getimage() {
+    final currentIndex = controller.currentIndex.value;
+    if (currentIndex >= 0 && currentIndex < controller.questions.length) {
+      final question = controller.questions[currentIndex];
+      final imageUrl = question.image;
+      if (imageUrl != null && imageUrl.isNotEmpty) {
+        return Container(
           width: double.infinity,
-          height: double.infinity,
-          imageUrl:
-              controller.questions.value[controller.currentIndex.value].image,
-          imageBuilder: (context, imageProvider) => Container(
-            width: double.infinity,
-            height: double.infinity,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: imageProvider,
-                fit: BoxFit.cover,
+          height: 200, // Adjust the height as needed
+          decoration: BoxDecoration(
+            color: AppColors.black,
+            borderRadius: BorderRadius.circular(12),
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.black.withOpacity(0.2),
+                spreadRadius: 4,
+                blurRadius: 12,
+              ),
+            ],
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: CachedNetworkImage(
+              width: double.infinity,
+              height: double.infinity,
+              imageUrl: imageUrl,
+              imageBuilder: (context, imageProvider) => Container(
+                width: double.infinity,
+                height: double.infinity,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: imageProvider,
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
             ),
           ),
-        ),
-      ),
-    );
+        );
+      }
+    }
+    return const SizedBox();
   }
 
   Widget getAnswerOptions() {
     return Obx(() {
-      final selectedIndex = controller.selectedAnswerIndex.value;
+      final currentIndex = controller.currentIndex.value;
+      final questions = controller.questions.value;
 
-      return ListView.builder(
-        shrinkWrap: true,
-        itemCount: controller
-            .questions.value[controller.currentIndex.value].answers.length,
-        itemBuilder: (context, index) {
-          final answer = controller
-              .questions.value[controller.currentIndex.value].answers[index];
+      if (currentIndex >= 0 && currentIndex < questions.length) {
+        final selectedIndex = controller.selectedAnswerIndex.value;
+        final answers = questions[currentIndex].answers;
 
-          return InkWell(
-            onTap: () async {
-              controller.selectedAnswerIndex.value = index;
-              await Future.delayed(const Duration(milliseconds: 400));
+        return ListView.builder(
+          shrinkWrap: true,
+          itemCount: answers.length,
+          itemBuilder: (context, index) {
+            final answer = answers[index];
 
-              controller.answerQuestion(index);
-            },
-            child: Container(
-              margin: const EdgeInsets.symmetric(vertical: 8.0),
-              decoration: BoxDecoration(
-                border: Border.all(
+            return InkWell(
+              onTap: () async {
+                controller.selectedAnswerIndex.value = index;
+                await Future.delayed(const Duration(milliseconds: 400));
+
+                controller.answerQuestion(index);
+              },
+              child: Container(
+                margin: const EdgeInsets.symmetric(vertical: 8.0),
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: selectedIndex == index
+                        ? AppColors.primary.withOpacity(1.0)
+                        : Colors.black.withOpacity(0.1),
+                    width: 1.0,
+                  ),
+                  borderRadius: BorderRadius.circular(8.0),
                   color: selectedIndex == index
-                      ? AppColors.primary.withOpacity(1.0)
-                      : Colors.black.withOpacity(0.1),
-                  width: 1.0,
+                      ? AppColors.primary.withOpacity(0.2)
+                      : Colors.transparent,
                 ),
-                borderRadius: BorderRadius.circular(8.0),
-                color: selectedIndex == index
-                    ? AppColors.primary.withOpacity(0.2)
-                    : Colors.transparent,
-              ),
-              padding: const EdgeInsets.symmetric(
-                horizontal: 16.0,
-                vertical: 12.0,
-              ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      answer,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16.0,
+                  vertical: 12.0,
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        answer,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
-                  ),
-                  Container(
-                    width: 24,
-                    height: 24,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: AppColors.grayDefault,
-                        width: selectedIndex == index ? 1.0 : 0.0,
+                    Container(
+                      width: 24,
+                      height: 24,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: AppColors.grayDefault,
+                          width: selectedIndex == index ? 1.0 : 0.0,
+                        ),
+                        color: selectedIndex == index
+                            ? AppColors.primary
+                            : Colors.transparent,
                       ),
-                      color: selectedIndex == index
-                          ? AppColors.primary
-                          : Colors.transparent,
-                    ),
-                    child: selectedIndex == index
-                        ? Center(
-                            child: Container(
-                              width: 10,
-                              height: 10,
-                              decoration: const BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.white,
+                      child: selectedIndex == index
+                          ? Center(
+                              child: Container(
+                                width: 10,
+                                height: 10,
+                                decoration: const BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.white,
+                                ),
                               ),
-                            ),
-                          )
-                        : null,
-                  ),
-                ],
+                            )
+                          : null,
+                    ),
+                  ],
+                ),
               ),
-            ),
-          );
-        },
-      );
+            );
+          },
+        );
+      } else {
+        return const SizedBox();
+      }
     });
   }
 
@@ -210,11 +258,19 @@ class QuationsView extends GetView<QuizController> {
     );
   }
 
-  getQuestion() {
-    return Text(
-      controller.questions.value[controller.currentIndex.value].question
-          .toString(),
-      style: AppTextStyles.headlineBold,
-    );
+  Widget getQuestion() {
+    final currentIndex = controller.currentIndex.value;
+    if (currentIndex >= 0 && currentIndex < controller.questions.length) {
+      final question = controller.questions[currentIndex].question;
+      return Text(
+        question,
+        style: const TextStyle(
+          fontSize: 18.0,
+          fontWeight: FontWeight.bold,
+        ),
+      );
+    } else {
+      return const SizedBox();
+    }
   }
 }
