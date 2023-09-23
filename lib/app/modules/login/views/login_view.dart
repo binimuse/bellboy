@@ -4,9 +4,9 @@ import 'package:bellboy/app/common/widgets/navigation/top_nav_back_text.dart';
 import 'package:bellboy/app/config/theme/app_colors.dart';
 import 'package:bellboy/app/config/theme/app_sizes.dart';
 import 'package:bellboy/app/config/theme/app_text_styles.dart';
+import 'package:bellboy/app/modules/login/views/widget/dialog_find_email.dart';
 import 'package:bellboy/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
@@ -18,10 +18,6 @@ class LoginView extends GetView<LoginController> {
 
   @override
   Widget build(BuildContext context) {
-    SchedulerBinding.instance.addPostFrameCallback((_) {
-      FocusScope.of(context).requestFocus(controller.emailFocusNode);
-    });
-
     return WillPopScope(
       onWillPop: () async {
         Get.back();
@@ -56,6 +52,7 @@ class LoginView extends GetView<LoginController> {
                           children: [
                             TextInputLogin(
                               hint: 'Email',
+                              autofocus: true,
                               controller: controller.emailController,
                               focusNode: controller.emailFocusNode,
                               logincontroller: controller,
@@ -111,6 +108,7 @@ class LoginView extends GetView<LoginController> {
                                   return null;
                                 },
                                 controller: controller.passwordController,
+                                autofocus: false,
                               ),
                           ],
                         ),
@@ -141,7 +139,10 @@ class LoginView extends GetView<LoginController> {
                               children: [
                                 MaterialButton(
                                   onPressed: () {
-                                    Get.toNamed(Routes.RECOVER_ACCOUNT);
+                                    Get.dialog(
+                                      const DialogFindEmail(),
+                                      barrierDismissible: true,
+                                    );
                                   },
                                   child: Padding(
                                     padding:
@@ -166,7 +167,7 @@ class LoginView extends GetView<LoginController> {
                                 ),
                                 MaterialButton(
                                   onPressed: () {
-                                    Get.toNamed(Routes.FORGOTPASSWORD);
+                                    Get.toNamed(Routes.FIND_PASSWORD);
                                   },
                                   child: Padding(
                                     padding:

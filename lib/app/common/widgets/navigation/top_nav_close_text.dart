@@ -7,11 +7,15 @@ import 'package:flutter/material.dart';
 
 class TopNavCloseText extends StatelessWidget {
   const TopNavCloseText(
-      {Key? key, required this.centerTitle, required this.rightText})
+      {Key? key,
+      required this.centerTitle,
+      required this.rightText,
+      required this.useHomeIcon})
       : super(key: key);
 
   final String centerTitle;
   final String rightText;
+  final bool useHomeIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -35,11 +39,13 @@ class TopNavCloseText extends StatelessWidget {
                 SizedBox(
                   width: AppSizes.mp_w_1,
                 ),
-                AppSvgButton(
-                  imagePath: Assets.icons.home,
-                  onPressed: () {},
-                  size: AppSizes.icon_size_8 * 0.9,
-                ),
+                useHomeIcon
+                    ? AppSvgButton(
+                        imagePath: Assets.icons.home,
+                        onPressed: () {},
+                        size: AppSizes.icon_size_8 * 0.9,
+                      )
+                    : SizedBox(),
               ],
             ),
           ),

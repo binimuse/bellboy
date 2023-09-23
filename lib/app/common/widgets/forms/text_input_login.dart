@@ -14,12 +14,14 @@ class TextInputLogin extends StatefulWidget {
     required this.controller,
     this.logincontroller,
     this.validator,
+    required this.autofocus,
     this.focusNode,
     this.onChanged, // Added onChanged callback
   }) : super(key: key);
 
   final String hint;
   final bool isPassword;
+  final bool autofocus;
   final TextEditingController controller;
   final LoginController? logincontroller;
   final String? Function(String?)? validator;
@@ -51,6 +53,7 @@ class _TextInputLoginState extends State<TextInputLogin> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextFormField(
+          autofocus: widget.autofocus!,
           controller: widget.controller,
           textInputAction:
               widget.isPassword ? TextInputAction.done : TextInputAction.next,

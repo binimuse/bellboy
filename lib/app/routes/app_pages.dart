@@ -2,12 +2,14 @@ import 'package:get/get.dart';
 
 import '../modules/email_verification/bindings/email_verification_binding.dart';
 import '../modules/email_verification/views/email_verification_view.dart';
-import '../modules/forgotpassword/bindings/forgotpassword_binding.dart';
-import '../modules/forgotpassword/views/forgotpassword_view.dart';
+import '../modules/find_password/bindings/find_password_binding.dart';
+import '../modules/find_password/views/find_password_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
+import '../modules/mobile_verification/bindings/mobile_verification_binding.dart';
+import '../modules/mobile_verification/views/mobile_verification_view.dart';
 import '../modules/on_bording/bindings/on_bording_binding.dart';
 import '../modules/on_bording/views/on_bording_view.dart';
 import '../modules/quiz/bindings/quiz_binding.dart';
@@ -26,7 +28,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.QUIZ;
+  static const INITIAL = Routes.SPLASH;
 
   static final routes = [
     GetPage(
@@ -65,14 +67,19 @@ class AppPages {
       binding: RecoverAccountBinding(),
     ),
     GetPage(
-      name: _Paths.FORGOTPASSWORD,
-      page: () => const ForgotpasswordView(),
-      binding: ForgotpasswordBinding(),
-    ),
-    GetPage(
       name: _Paths.EMAIL_VERIFICATION,
       page: () => const EmailVerificationView(),
       binding: EmailVerificationBinding(),
+    ),
+    GetPage(
+      name: _Paths.FIND_PASSWORD,
+      page: () => const FindPasswordView(),
+      binding: FindPasswordBinding(),
+    ),
+    GetPage(
+      name: _Paths.MOBILE_VERIFICATION,
+      page: () => const MobileVerificationView(),
+      binding: MobileVerificationBinding(),
     ),
   ];
 }

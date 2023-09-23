@@ -9,9 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-import '../../controllers/forgotpassword_controller.dart';
+import '../../controllers/find_password_controller.dart';
 
-class ForgotAccountDone extends GetView<ForgotpasswordController> {
+class ForgotAccountDone extends GetView<FindPasswordController> {
   const ForgotAccountDone({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class ForgotAccountDone extends GetView<ForgotpasswordController> {
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: AppSizes.mp_w_6),
-          child: buildEmailNotFound(),
+          child: buildEmailDound(),
         ),
       ),
     );
@@ -111,50 +111,28 @@ class ForgotAccountDone extends GetView<ForgotpasswordController> {
                 height: AppSizes.mp_v_2,
               ),
               Text(
-                "We found your e-mail!",
+                "Check your e-mail",
                 textAlign: TextAlign.center,
                 style: AppTextStyles.displayOneBold,
               ),
               SizedBox(
                 height: AppSizes.mp_v_2,
               ),
-              Material(
-                color: AppColors.primaryLighter,
-                borderRadius: BorderRadius.circular(AppSizes.radius_12),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: AppSizes.mp_w_4 * 1.2,
-                    vertical: AppSizes.mp_v_1 * 1.5,
-                  ),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "bellboy@bellboy.com",
-                        textAlign: TextAlign.center,
-                        style: AppTextStyles.titleBold
-                            .copyWith(color: AppColors.primary),
-                      ),
-                      ButtonWhiteFill(
-                        buttonSizeType: ButtonSizeType.SMALL,
-                        text: 'Copy',
-                        onTap: () {},
-                        isDisabled: false,
-                      ),
-                    ],
-                  ),
-                ),
+              Text(
+                "We sent your e-mail the password reset link.Please check your e-mail.",
+                textAlign: TextAlign.center,
+                style: AppTextStyles.bodySmallBold
+                    .copyWith(color: AppColors.grayLight),
               ),
             ],
           ),
         ),
-        ButtonPrimaryFill(
-          buttonSizeType: ButtonSizeType.LARGE,
-          isDisabled: false,
-          text: "Go to log in",
-          onTap: () {},
-        ),
+        // ButtonPrimaryFill(
+        //   buttonSizeType: ButtonSizeType.LARGE,
+        //   isDisabled: false,
+        //   text: "Go to log in",
+        //   onTap: () {},
+        // ),
         SizedBox(
           height: AppSizes.mp_v_4,
         ),

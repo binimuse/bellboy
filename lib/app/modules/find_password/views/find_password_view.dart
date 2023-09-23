@@ -1,4 +1,5 @@
-import 'package:bellboy/app/common/widgets/forms/text_input.dart';
+import 'package:bellboy/app/common/widgets/buttons/button_primary_fill.dart';
+import 'package:bellboy/app/common/widgets/forms/text_input_login.dart';
 import 'package:bellboy/app/common/widgets/navigation/top_nav_back_text.dart';
 import 'package:bellboy/app/config/theme/app_colors.dart';
 import 'package:bellboy/app/config/theme/app_sizes.dart';
@@ -7,8 +8,8 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-import '../../../common/widgets/buttons/button_primary_fill.dart';
 import '../controllers/find_password_controller.dart';
+import 'widget/findaccountdone.dart';
 
 class FindPasswordView extends GetView<FindPasswordController> {
   const FindPasswordView({Key? key}) : super(key: key);
@@ -42,8 +43,26 @@ class FindPasswordView extends GetView<FindPasswordController> {
                   SizedBox(
                     height: AppSizes.mp_v_4,
                   ),
-                  TextInput(
+                  TextInputLogin(
+                    autofocus: true,
                     hint: 'Email',
+                    controller: controller.emailController,
+                    onChanged: (value) {
+                      // Validate email on type
+                      bool isValid = controller.validateEmail();
+                      controller.isEmailValidated.value = isValid;
+
+                      // Check if email is valid and update UI accordingly
+                    },
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please enter your email';
+                      }
+                      if (!controller.isEmailValidated.value) {
+                        return 'Invalid email';
+                      }
+                      return null;
+                    },
                   ),
                   SizedBox(
                     height: AppSizes.mp_v_4,
@@ -66,12 +85,15 @@ class FindPasswordView extends GetView<FindPasswordController> {
               padding: EdgeInsets.symmetric(horizontal: AppSizes.mp_w_4),
               child: Column(
                 children: [
-                  ButtonPrimaryFill(
-                    buttonSizeType: ButtonSizeType.LARGE,
-                    isDisabled: false,
-                    text: "Enter your E-mail",
-                    onTap: () {},
-                  ),
+                  Obx(() => ButtonPrimaryFill(
+                        buttonSizeType: ButtonSizeType.LARGE,
+                        isDisabled:
+                            controller.isEmailValidated.value ? false : true,
+                        text: "Enter your E-mail",
+                        onTap: () {
+                          Get.to(const ForgotAccountDone());
+                        },
+                      )),
                   SizedBox(
                     height: AppSizes.mp_v_2,
                   ),

@@ -91,6 +91,7 @@ class SignupView extends GetView<SignupController> {
 
                               // Inside the password field widget
                               TextInputLogin(
+                                autofocus: false,
                                 hint: 'Password',
                                 isPassword: true,
                                 onChanged: (value) {
