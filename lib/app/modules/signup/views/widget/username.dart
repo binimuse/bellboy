@@ -33,7 +33,7 @@ class SignUpUserName extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Your Name",
+                    "Your name",
                     textAlign: TextAlign.start,
                     style: AppTextStyles.displayOneBold,
                   ),
@@ -61,7 +61,7 @@ class SignUpUserName extends StatelessWidget {
                 children: [
                   ButtonPrimaryFill(
                     buttonSizeType: ButtonSizeType.LARGE,
-                    isDisabled: false,
+                    isDisabled: true,
                     text: "Enter your name",
                     onTap: () {
                       Get.toNamed(Routes.EMAIL_VERIFICATION);

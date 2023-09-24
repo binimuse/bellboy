@@ -64,7 +64,8 @@ class RecoverAccountView extends GetView<RecoverAccountController> {
                     Text(
                       "Your account is currently applying for withdrawal. Do you want to recover your account again?",
                       textAlign: TextAlign.center,
-                      style: AppTextStyles.bodySmallBold,
+                      style: AppTextStyles.bodySmallBold
+                          .copyWith(color: AppColors.grayLight),
                     ),
                   ],
                 ),

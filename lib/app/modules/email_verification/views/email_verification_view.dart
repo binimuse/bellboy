@@ -45,7 +45,7 @@ class EmailVerificationView extends GetView<EmailVerificationController> {
                       height: AppSizes.mp_v_2,
                     ),
                     Text(
-                      "We sent you an authentication e-mail!",
+                      "We sent a rider application e-mail!",
                       textAlign: TextAlign.center,
                       style: AppTextStyles.displayOneBold,
                     ),
@@ -65,22 +65,16 @@ class EmailVerificationView extends GetView<EmailVerificationController> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "bellboy@bellboy.com",
+                              "doubled@doubled.com",
                               textAlign: TextAlign.center,
                               style: AppTextStyles.titleBold.copyWith(
                                   color: AppColors.primary,
-                                  fontSize: AppSizes.font_12),
+                                  fontSize: AppSizes.font_14),
                             ),
                             ButtonWhiteFill(
                               buttonSizeType: ButtonSizeType.SMALL,
                               text: 'Change',
-                              onTap: () {
-                                KeyboardUtil.hideKeyboard(context);
-                                Get.dialog(
-                                  DialogEmailResend(),
-                                  barrierDismissible: true,
-                                );
-                              },
+                              onTap: () {},
                               isDisabled: false,
                             ),
                           ],
@@ -90,11 +84,14 @@ class EmailVerificationView extends GetView<EmailVerificationController> {
                     SizedBox(
                       height: AppSizes.mp_v_2,
                     ),
-                    Text(
-                      "Press the authentication button at your e-mail to complete the membership registration.",
-                      textAlign: TextAlign.center,
-                      style: AppTextStyles.bodySmallBold
-                          .copyWith(color: AppColors.grayDark),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        "Please complete the registration through the rider application.",
+                        textAlign: TextAlign.center,
+                        style: AppTextStyles.bodySmallBold
+                            .copyWith(color: AppColors.grayDark),
+                      ),
                     ),
                   ],
                 ),
@@ -118,7 +115,13 @@ class EmailVerificationView extends GetView<EmailVerificationController> {
                   ),
                   MaterialButton(
                     padding: EdgeInsets.symmetric(horizontal: AppSizes.mp_w_2),
-                    onPressed: () {},
+                    onPressed: () {
+                      KeyboardUtil.hideKeyboard(context);
+                      Get.dialog(
+                        DialogEmailResend(),
+                        barrierDismissible: true,
+                      );
+                    },
                     child: Padding(
                       padding: EdgeInsets.symmetric(vertical: AppSizes.mp_v_2),
                       child: Center(

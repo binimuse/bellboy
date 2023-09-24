@@ -3,6 +3,7 @@
 import 'package:bellboy/app/common/widgets/buttons/button_primary_fill.dart';
 import 'package:bellboy/app/config/theme/app_colors.dart';
 import 'package:bellboy/app/config/theme/app_text_styles.dart';
+import 'package:bellboy/app/modules/quiz/views/widgets/passthequiz.dart';
 import 'package:bellboy/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -54,7 +55,7 @@ class QuationsView extends GetView<QuizController> {
                           if (currentQuestionIndex < totalQuestions) {
                             return 'Next';
                           } else {
-                            return 'Quiz Complete';
+                            return 'Quiz complete';
                           }
                         }(),
                         onTap: () {
@@ -70,7 +71,7 @@ class QuationsView extends GetView<QuizController> {
                           } else {
                             // Last question, quiz complete
                             // Perform any necessary actions or navigate to a different screen
-                            Get.to(const Failedthequiz());
+                            Get.to(const Passthequiz());
                           }
                         },
                       )
@@ -99,14 +100,14 @@ class QuationsView extends GetView<QuizController> {
         },
       ),
       title: Text(
-        'Ridder Quiz',
+        'Rider Quiz',
         style: AppTextStyles.titleBold,
       ),
       actions: [
         Align(
           alignment: Alignment.center,
           child: Padding(
-            padding: const EdgeInsets.only(top: 8.0, right: 16.0),
+            padding: const EdgeInsets.only(top: 0.0, right: 16.0),
             child: Text(
               ' ${controller.questionNumber}/${controller.questions.value.length}',
               style: AppTextStyles.bodySmallBold
@@ -206,12 +207,9 @@ class QuationsView extends GetView<QuizController> {
                 child: Row(
                   children: [
                     Expanded(
-                      child: Text(
-                        answer,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                      child: Text(answer,
+                          style: AppTextStyles.bodyLargeBold
+                              .copyWith(color: AppColors.black)),
                     ),
                     Container(
                       width: 24,
@@ -264,10 +262,7 @@ class QuationsView extends GetView<QuizController> {
       final question = controller.questions[currentIndex].question;
       return Text(
         question,
-        style: const TextStyle(
-          fontSize: 18.0,
-          fontWeight: FontWeight.bold,
-        ),
+        style: AppTextStyles.titleBold.copyWith(color: AppColors.black),
       );
     } else {
       return const SizedBox();

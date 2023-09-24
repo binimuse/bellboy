@@ -33,7 +33,7 @@ class ButtonPrimaryFillLogin extends StatelessWidget {
       case 'Enter password':
         buttonColor = AppColors.grayLight;
         break;
-      case 'Login':
+      case 'Log in':
         buttonColor = AppColors.primary;
         break;
       default:

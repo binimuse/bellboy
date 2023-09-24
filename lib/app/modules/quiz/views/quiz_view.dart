@@ -119,7 +119,8 @@ class QuizView extends GetView<QuizController> {
             padding: const EdgeInsets.all(8.0),
             child: Text("Thank you for applying the rider",
                 textAlign: TextAlign.start,
-                style: AppTextStyles.displayTwoBold),
+                style: AppTextStyles.displayTwoBold
+                    .copyWith(fontSize: AppSizes.font_24)),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -151,6 +152,7 @@ class QuizView extends GetView<QuizController> {
               horizontal: AppSizes.mp_w_6,
             ),
             onPressed: () {
+              
               Get.to(QuationsView());
             },
           ),

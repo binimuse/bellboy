@@ -196,7 +196,7 @@ class LoginView extends GetView<LoginController> {
                                 text: controller.isEmailValidated.value
                                     ? controller.isNextPressed.value
                                         ? controller.isPasswordValid.value
-                                            ? "Login"
+                                            ? "Log in"
                                             : "Enter password"
                                         : "Next"
                                     : 'Enter your e-mail address',

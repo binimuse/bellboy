@@ -111,12 +111,13 @@ class Failedthequiz extends GetView<QuizController> {
             padding: const EdgeInsets.all(8.0),
             child: Text("You need to study",
                 textAlign: TextAlign.center,
-                style: AppTextStyles.displayTwoBold),
+                style: AppTextStyles.displayTwoBold
+                    .copyWith(fontSize: AppSizes.font_24)),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-                "Please take the quiz after understanding the rider's guide manual provided by e-mail.",
+                "Unfortunately, I didn't meet the score. \nPlease try again after studying.",
                 textAlign: TextAlign.center,
                 style: AppTextStyles.bodySmallRegular),
           ),
@@ -183,10 +184,10 @@ class Failedthequiz extends GetView<QuizController> {
     return Align(
       alignment: Alignment.center,
       child: Padding(
-        padding: const EdgeInsets.only(top: 8.0, right: 16.0),
+        padding: const EdgeInsets.only(top: 0.0, right: 16.0),
         child: ClipOval(
           child: Container(
-            color: AppColors.grayLighter,
+            color: AppColors.grayLighter.withOpacity(0.3),
             padding: const EdgeInsets.all(8.0),
             child: Text(
               ' ${controller.questionNumber}/${controller.questions.value.length}',

@@ -20,7 +20,7 @@ class Reviewthequiz extends GetView<QuizController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: getAppBar(),
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.white70.withOpacity(0.9),
       body: ListView.builder(
         itemCount: cardData.length,
         itemBuilder: (context, index) {
