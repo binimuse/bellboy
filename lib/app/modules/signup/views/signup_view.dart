@@ -2,15 +2,12 @@ import 'package:bellboy/app/common/widgets/buttons/button_primary_fill_login.dar
 import 'package:bellboy/app/common/widgets/forms/text_input_signup.dart';
 
 import 'package:bellboy/app/common/widgets/navigation/top_nav_back_text.dart';
-import 'package:bellboy/app/config/theme/app_colors.dart';
 import 'package:bellboy/app/config/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../../common/widgets/forms/text_input_login.dart';
 import '../../../config/theme/app_sizes.dart';
 import '../controllers/signup_controller.dart';
 import 'widget/user_name.dart';

@@ -29,7 +29,7 @@ class Passthequiz extends GetView<QuizController> {
             child: Column(
               children: [
                 SizedBox(
-                  height: AppSizes.mp_v_6,
+                  height: AppSizes.mp_v_8,
                 ),
 
                 ///BUILD HEADER

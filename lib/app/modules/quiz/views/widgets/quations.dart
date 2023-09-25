@@ -43,9 +43,9 @@ class QuationsView extends GetView<QuizController> {
                     children: [
                       getNumber(),
                       getQuestion(),
-                      SizedBox(height: 2.h),
+                      SizedBox(height: 1.h),
                       getimage(),
-                      SizedBox(height: 2.h),
+                      SizedBox(height: 1.h),
                       getAnswerOptions(),
                       const SizedBox(height: 16),
                       ButtonPrimaryFill(
@@ -230,7 +230,7 @@ class QuationsView extends GetView<QuizController> {
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         border: Border.all(
-                          color: AppColors.grayDefault,
+                          color: Colors.transparent,
                           width: selectedIndex == index ? 1.0 : 0.0,
                         ),
                         color: selectedIndex == index

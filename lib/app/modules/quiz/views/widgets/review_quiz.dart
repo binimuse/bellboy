@@ -1,5 +1,3 @@
-import 'package:bellboy/app/common/widgets/buttons/button_gray_scale_outline.dart';
-import 'package:bellboy/app/common/widgets/buttons/button_primary_fill.dart';
 import 'package:bellboy/app/common/widgets/buttons/custom_normal_button.dart';
 import 'package:bellboy/app/config/theme/app_colors.dart';
 import 'package:bellboy/app/config/theme/app_sizes.dart';
@@ -20,7 +18,7 @@ class Reviewthequiz extends GetView<QuizController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: getAppBar(),
-      backgroundColor: AppColors.white70.withOpacity(0.9),
+      backgroundColor: AppColors.backgroundLight,
       body: ListView.builder(
         itemCount: cardData.length,
         itemBuilder: (context, index) {
@@ -97,12 +95,12 @@ class CardWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(12.0),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             getNumber(),
-            SizedBox(height: 2.h),
+            SizedBox(height: 1.h),
             getQuestion(),
             SizedBox(height: 2.h),
             getImage(),

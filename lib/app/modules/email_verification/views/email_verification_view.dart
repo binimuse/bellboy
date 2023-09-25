@@ -67,14 +67,14 @@ class EmailVerificationView extends GetView<EmailVerificationController> {
                           children: [
                             SizedBox(
                               width: 50.w, // Set a specific width
-                              height: 6.h, // Set a specific height
+                              height: 9.h, // Set a specific height
                               child: Center(
                                 child: Text(
-                                  "doubled@doubled.com",
-                                  textAlign: TextAlign.center,
+                                  "doubled@doubled.comfgfgfgf",
+                                  textAlign: TextAlign.left,
                                   style: AppTextStyles.titleBold.copyWith(
                                     color: AppColors.primary,
-                                    fontSize: AppSizes.font_14,
+                                    fontSize: AppSizes.font_18,
                                   ),
                                   overflow: TextOverflow.fade,
                                 ),
@@ -109,7 +109,6 @@ class EmailVerificationView extends GetView<EmailVerificationController> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   MaterialButton(
-                    padding: EdgeInsets.symmetric(horizontal: AppSizes.mp_w_2),
                     onPressed: () {},
                     child: Padding(
                       padding: EdgeInsets.symmetric(vertical: AppSizes.mp_v_2),
@@ -137,8 +136,9 @@ class EmailVerificationView extends GetView<EmailVerificationController> {
                       child: Center(
                         child: Text(
                           "Send again",
-                          style: AppTextStyles.bodyLargeBold
-                              .copyWith(color: AppColors.primary),
+                          style: AppTextStyles.bodyLargeBold.copyWith(
+                              color: AppColors.primary,
+                              fontSize: AppSizes.font_14),
                         ),
                       ),
                     ),

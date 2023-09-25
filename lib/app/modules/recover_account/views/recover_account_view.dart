@@ -66,7 +66,7 @@ class RecoverAccountView extends GetView<RecoverAccountController> {
                       "Your account is currently applying for withdrawal. Do you want to recover your account again?",
                       textAlign: TextAlign.center,
                       style: AppTextStyles.bodySmallBold
-                          .copyWith(color: AppColors.grayLight),
+                          .copyWith(color: AppColors.grayDark),
                     ),
                   ],
                 ),
@@ -74,7 +74,7 @@ class RecoverAccountView extends GetView<RecoverAccountController> {
               ButtonPrimaryFill(
                 buttonSizeType: ButtonSizeType.LARGE,
                 isDisabled: false,
-                isterms: true,
+                isterms: false,
                 text: "Recover my account",
                 onTap: () {},
               ),

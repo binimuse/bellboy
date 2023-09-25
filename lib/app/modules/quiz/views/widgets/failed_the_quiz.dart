@@ -29,7 +29,7 @@ class Failedthequiz extends GetView<QuizController> {
             child: Column(
               children: [
                 SizedBox(
-                  height: AppSizes.mp_v_4,
+                  height: AppSizes.mp_v_8,
                 ),
 
                 ///BUILD HEADER
@@ -127,7 +127,7 @@ class Failedthequiz extends GetView<QuizController> {
 
   buildActionButtons() {
     return Padding(
-      padding: EdgeInsets.all(12.sp),
+      padding: EdgeInsets.all(6.sp),
       child: Column(
         children: [
           CustomNormalButton(
@@ -153,7 +153,7 @@ class Failedthequiz extends GetView<QuizController> {
 
   buildActionButtons2() {
     return Padding(
-      padding: EdgeInsets.all(12.sp),
+      padding: EdgeInsets.all(6.sp),
       child: Column(
         children: [
           ButtonGrayScaleOutline(
@@ -170,7 +170,7 @@ class Failedthequiz extends GetView<QuizController> {
   buildScore() {
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(5.0),
         child: Text("20",
             textAlign: TextAlign.center,
             style: AppTextStyles.bodyLargeRegular.copyWith(
@@ -183,13 +183,13 @@ class Failedthequiz extends GetView<QuizController> {
     return Align(
       alignment: Alignment.center,
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(2.0),
         child: ClipRRect(
           borderRadius:
-              BorderRadius.circular(15.0), // Adjust the radius as needed
+              BorderRadius.circular(20.0), // Adjust the radius as needed
           child: Container(
             color: AppColors.grayLighter.withOpacity(0.3),
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(4.0),
             child: Text(
               '  ${controller.questionNumber}/${controller.questions.value.length}  ',
               style: AppTextStyles.bodySmallBold

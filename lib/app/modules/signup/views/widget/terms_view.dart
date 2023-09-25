@@ -119,7 +119,7 @@ class _TermsViewState extends State<TermsView> {
                           Padding(
                             padding: EdgeInsets.symmetric(
                                 vertical: AppSizes.mp_v_1 / 2,
-                                horizontal: AppSizes.mp_w_4),
+                                horizontal: AppSizes.mp_w_3),
                             child: Divider(
                               color: AppColors.grayLighter,
                               thickness: 1,
