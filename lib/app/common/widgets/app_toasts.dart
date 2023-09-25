@@ -112,7 +112,6 @@ class ToastErrorWidget extends StatelessWidget {
           children: [
             SvgPicture.asset(
               Assets.icons.dangerCircle,
-              color: AppColors.danger,
               width: AppSizes.icon_size_8,
               height: AppSizes.icon_size_8,
             ),

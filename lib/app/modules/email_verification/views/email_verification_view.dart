@@ -9,6 +9,7 @@ import 'package:bellboy/app/utils/keyboard.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 
 import '../controllers/email_verification_controller.dart';
 import 'widgets/dialog_email_resend.dart';
@@ -64,12 +65,20 @@ class EmailVerificationView extends GetView<EmailVerificationController> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              "doubled@doubled.com",
-                              textAlign: TextAlign.center,
-                              style: AppTextStyles.titleBold.copyWith(
-                                  color: AppColors.primary,
-                                  fontSize: AppSizes.font_14),
+                            SizedBox(
+                              width: 50.w, // Set a specific width
+                              height: 6.h, // Set a specific height
+                              child: Center(
+                                child: Text(
+                                  "doubled@doubled.com",
+                                  textAlign: TextAlign.center,
+                                  style: AppTextStyles.titleBold.copyWith(
+                                    color: AppColors.primary,
+                                    fontSize: AppSizes.font_14,
+                                  ),
+                                  overflow: TextOverflow.fade,
+                                ),
+                              ),
                             ),
                             ButtonWhiteFill(
                               buttonSizeType: ButtonSizeType.SMALL,
@@ -107,8 +116,9 @@ class EmailVerificationView extends GetView<EmailVerificationController> {
                       child: Center(
                         child: Text(
                           "Didn’t get an e-mail?",
-                          style: AppTextStyles.bodyLargeBold
-                              .copyWith(color: AppColors.grayLight),
+                          style: AppTextStyles.bodyLargeBold.copyWith(
+                              color: AppColors.grayLight,
+                              fontSize: AppSizes.font_16),
                         ),
                       ),
                     ),
@@ -118,7 +128,7 @@ class EmailVerificationView extends GetView<EmailVerificationController> {
                     onPressed: () {
                       KeyboardUtil.hideKeyboard(context);
                       Get.dialog(
-                        DialogEmailResend(),
+                        const DialogEmailResend(),
                         barrierDismissible: true,
                       );
                     },

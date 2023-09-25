@@ -1,5 +1,4 @@
 import 'package:bellboy/app/common/widgets/buttons/button_primary_fill.dart';
-import 'package:bellboy/app/common/widgets/buttons/button_white_fill.dart';
 import 'package:bellboy/app/config/theme/app_assets.dart';
 import 'package:bellboy/app/config/theme/app_colors.dart';
 import 'package:bellboy/app/config/theme/app_sizes.dart';
@@ -78,6 +77,7 @@ class ForgotAccountDone extends GetView<FindPasswordController> {
           ),
         ),
         ButtonPrimaryFill(
+          isterms: false,
           buttonSizeType: ButtonSizeType.LARGE,
           isDisabled: false,
           text: "Go to log in",

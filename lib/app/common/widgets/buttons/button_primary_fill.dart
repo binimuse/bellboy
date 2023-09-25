@@ -11,6 +11,7 @@ class ButtonPrimaryFill extends StatelessWidget {
       required this.buttonSizeType,
       required this.text,
       required this.onTap,
+      required this.isterms,
       required this.isDisabled})
       : super(key: key);
 
@@ -18,6 +19,7 @@ class ButtonPrimaryFill extends StatelessWidget {
   final String text;
   final VoidCallback onTap;
   final bool isDisabled;
+  final bool isterms;
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +29,11 @@ class ButtonPrimaryFill extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           elevation: 0,
           shadowColor: AppColors.grayLight,
-          backgroundColor:
-              isDisabled ? AppColors.grayLighter : AppColors.primary,
+          backgroundColor: isDisabled
+              ? AppColors.grayLighter
+              : isterms
+                  ? AppColors.black
+                  : AppColors.primary,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppSizes.radius_8),
           ),
@@ -44,7 +49,7 @@ class ButtonPrimaryFill extends StatelessWidget {
           ),
           child: Text(
             text,
-            style: AppTextStyles.bodySmallRegular.copyWith(
+            style: AppTextStyles.bodyLargeBold.copyWith(
               color: AppColors.whiteOff,
             ),
           ),

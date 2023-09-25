@@ -120,7 +120,7 @@ class MyCheckBox extends StatelessWidget {
       );
     }
     if (checkBoxSize == CheckBoxSize.LARGE) {
-      return AppTextStyles.bodyLargeRegular.copyWith(
+      return AppTextStyles.bodyLargeBold.copyWith(
         color: isInitSelected ? AppColors.grayDark : AppColors.grayDefault,
       );
     }

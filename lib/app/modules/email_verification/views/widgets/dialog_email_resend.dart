@@ -39,6 +39,7 @@ class DialogEmailResend extends StatelessWidget {
               height: AppSizes.mp_v_4,
             ),
             ButtonPrimaryFill(
+              isterms: false,
               buttonSizeType: ButtonSizeType.LARGE,
               isDisabled: false,
               text: "Confirm",

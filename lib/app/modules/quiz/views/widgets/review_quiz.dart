@@ -97,7 +97,7 @@ class CardWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(12.0),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -119,18 +119,14 @@ class CardWidget extends StatelessWidget {
   getNumber() {
     return Text(
       'Q${1}',
-      style: AppTextStyles.titleBold.copyWith(color: AppColors.grayLight),
+      style: AppTextStyles.titleBold.copyWith(color: AppColors.success),
     );
   }
 
   Widget getQuestion() {
-    return Text(
-      "Choose the correct one from the following.",
-      style: const TextStyle(
-        fontSize: 18.0,
-        fontWeight: FontWeight.bold,
-      ),
-    );
+    return Text("Choose the correct one from the following.",
+        style: AppTextStyles.bodyLargeBold
+            .copyWith(fontSize: AppSizes.font_16, color: AppColors.grayDark));
   }
 
   getImage() {
@@ -173,7 +169,7 @@ class CardWidget extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
-        color: AppColors.grayLighter.withOpacity(0.5), // Gray background color
+        color: AppColors.grayLighter.withOpacity(0.3), // Gray background color
         borderRadius: BorderRadius.circular(8.0), // Border radius
       ),
       child: Column(
@@ -182,7 +178,7 @@ class CardWidget extends StatelessWidget {
         children: [
           Text(
             "Your answer",
-            style: AppTextStyles.bodySmallRegular,
+            style: AppTextStyles.captionRegular,
           ),
           Text("Answer 1", style: AppTextStyles.bodySmallBold),
         ],

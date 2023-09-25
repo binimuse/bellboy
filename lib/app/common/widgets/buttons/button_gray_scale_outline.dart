@@ -1,7 +1,8 @@
-
+import 'package:bellboy/app/common/widgets/app_icon_button.dart';
 import 'package:bellboy/app/config/theme/app_colors.dart';
 import 'package:bellboy/app/config/theme/app_sizes.dart';
 import 'package:bellboy/app/config/theme/app_text_styles.dart';
+import 'package:bellboy/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 
 import 'button_primary_fill.dart';
@@ -45,18 +46,27 @@ class ButtonGrayScaleOutline extends StatelessWidget {
         onPressed: onTap,
         child: Padding(
           padding: EdgeInsets.symmetric(
-            vertical: buttonSizeType == ButtonSizeType.LARGE
-                ? AppSizes.mp_v_2 * 0.9
-                : buttonSizeType == ButtonSizeType.MEDIUM
-                    ? AppSizes.mp_v_1 * 1.5
-                    : AppSizes.mp_v_1 / 2,
-            horizontal: AppSizes.mp_w_2
-          ),
-          child: Text(
-            text,
-            style: AppTextStyles.bodyLargeBold.copyWith(
-              color: AppColors.grayDark,
-            ),
+              vertical: buttonSizeType == ButtonSizeType.LARGE
+                  ? AppSizes.mp_v_2 * 0.9
+                  : buttonSizeType == ButtonSizeType.MEDIUM
+                      ? AppSizes.mp_v_1 * 1.5
+                      : AppSizes.mp_v_1 / 2,
+              horizontal: AppSizes.mp_w_2),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                text,
+                style: AppTextStyles.bodyLargeBold.copyWith(
+                  color: AppColors.grayDark,
+                ),
+              ),
+              AppSvgButton(
+                imagePath: Assets.icons.chevronRight,
+                size: AppSizes.icon_size_8 * 0.9,
+                onPressed: () {},
+              ),
+            ],
           ),
         ),
       ),

@@ -45,6 +45,20 @@ class _TextInputLoginState extends State<TextInputLogin> {
         _showClearButton = widget.controller.text.isNotEmpty;
       });
     });
+
+    if (widget.focusNode != null) {
+      widget.focusNode!.addListener(_onFocusChange);
+    }
+  }
+
+  void _onFocusChange() {
+    setState(() {});
+  }
+
+  @override
+  void dispose() {
+    widget.focusNode!.removeListener(_onFocusChange);
+    super.dispose();
   }
 
   @override
@@ -53,48 +67,56 @@ class _TextInputLoginState extends State<TextInputLogin> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextFormField(
-          autofocus: widget.autofocus!,
+          cursorColor: AppColors.primary,
+          autofocus: widget.autofocus,
           controller: widget.controller,
           textInputAction:
               widget.isPassword ? TextInputAction.done : TextInputAction.next,
           style: AppTextStyles.titleBold.copyWith(color: AppColors.blackLight),
           obscureText: checkIsPassword() && !isPasswordVisible, // Modified line
           obscuringCharacter: '●',
+
           validator: widget.validator,
           decoration: InputDecoration(
-            labelText: widget.hint,
+            //  labelText: widget.hint,
             hintText: _isFocused ? null : widget.hint,
             hintStyle:
                 AppTextStyles.titleBold.copyWith(color: AppColors.grayLighter),
             labelStyle:
                 AppTextStyles.captionBold.copyWith(color: AppColors.grayLight),
             floatingLabelBehavior: FloatingLabelBehavior.always,
-            suffixIcon: _showClearButton
-                ? IconButton(
-                    icon: SvgPicture.asset(
-                      Assets.icons.cancel,
-                      color: AppColors.grayLight,
+            suffixIcon: _showClearButton && widget.focusNode!.hasFocus
+                ? Padding(
+                    padding: const EdgeInsets.only(
+                        top: 6), // adjust the value as needed
+                    child: IconButton(
+                      icon: SvgPicture.asset(
+                        Assets.icons.cancel,
+                        color: AppColors.grayLight,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          widget.controller.clear();
+                          _showClearButton = false;
+
+                          bool isValid =
+                              widget.logincontroller!.validateEmail();
+                          widget.logincontroller!.isEmailValidated.value =
+                              isValid;
+
+                          if (isValid) {
+                            widget.logincontroller!
+                                .isNextPressed(false); // Reset Next button
+                          } else {
+                            widget.logincontroller!.isNextPressed(false);
+                          }
+                          //  widget.logincontroller!.isPasswordValid(false);
+                        });
+                      },
                     ),
-                    onPressed: () {
-                      setState(() {
-                        widget.controller.clear();
-                        _showClearButton = false;
-
-                        bool isValid = widget.logincontroller!.validateEmail();
-                        widget.logincontroller!.isEmailValidated.value =
-                            isValid;
-
-                        if (isValid) {
-                          widget.logincontroller!
-                              .isNextPressed(false); // Reset Next button
-                        } else {
-                          widget.logincontroller!.isNextPressed(false);
-                        }
-                        //  widget.logincontroller!.isPasswordValid(false);
-                      });
-                    },
                   )
                 : null,
+
             disabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(
                 color: AppColors.grayLight,
@@ -128,7 +150,10 @@ class _TextInputLoginState extends State<TextInputLogin> {
             setState(() {
               _isFocused = true;
             });
-
+            if (widget.focusNode != null) {
+              // Request focus for the field
+              FocusScope.of(context).requestFocus(widget.focusNode);
+            }
             // Request focus for the password field when tapping
           },
           focusNode: widget.focusNode,
@@ -166,24 +191,29 @@ class _TextInputLoginState extends State<TextInputLogin> {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          SvgPicture.asset(
-            isPasswordVisible
-                ? Assets.icons.eye
-                : Assets.icons
-                    .eyeSlash, // Use different icons based on the password visibility
-            color: isPasswordVisible ? AppColors.primary : AppColors.grayLight,
-            width: AppSizes.icon_size_6,
-          ),
-          SizedBox(
-            width: AppSizes.mp_w_2,
-          ),
-          Text(
-            isPasswordVisible
-                ? "Show"
-                : "Hidden", // Change the text based on the password visibility
-            style: AppTextStyles.captionBold.copyWith(
+          Flexible(
+            child: SvgPicture.asset(
+              isPasswordVisible
+                  ? Assets.icons.eye
+                  : Assets.icons
+                      .eyeSlash, // Use different icons based on the password visibility
               color:
                   isPasswordVisible ? AppColors.primary : AppColors.grayLight,
+              width: AppSizes.icon_size_6,
+            ),
+          ),
+          SizedBox(
+            width: AppSizes.mp_w_1,
+          ),
+          Flexible(
+            child: Text(
+              isPasswordVisible
+                  ? "Show"
+                  : "Hidden", // Change the text based on the password visibility
+              style: AppTextStyles.captionBold.copyWith(
+                color:
+                    isPasswordVisible ? AppColors.primary : AppColors.grayLight,
+              ),
             ),
           ),
         ],

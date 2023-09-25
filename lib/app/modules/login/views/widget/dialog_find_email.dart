@@ -54,6 +54,7 @@ class DialogFindEmail extends StatelessWidget {
               height: AppSizes.mp_v_2,
             ),
             ButtonPrimaryFill(
+              isterms: false,
               buttonSizeType: ButtonSizeType.LARGE,
               isDisabled: false,
               text: "Go to mobile authentication",

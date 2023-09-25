@@ -1,13 +1,10 @@
 import 'package:bellboy/app/common/widgets/buttons/button_gray_scale_outline.dart';
 import 'package:bellboy/app/common/widgets/buttons/button_primary_fill.dart';
-import 'package:bellboy/app/common/widgets/buttons/button_primary_fill_login.dart';
 import 'package:bellboy/app/common/widgets/forms/phone_number_input.dart';
-import 'package:bellboy/app/common/widgets/forms/text_input_login.dart';
 import 'package:bellboy/app/common/widgets/navigation/top_nav_close_text.dart';
 import 'package:bellboy/app/config/theme/app_colors.dart';
 import 'package:bellboy/app/config/theme/app_sizes.dart';
 import 'package:bellboy/app/config/theme/app_text_styles.dart';
-import 'package:bellboy/app/modules/login/views/widget/dialog_find_email.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -224,6 +221,7 @@ class MobileVerificationView extends GetView<MobileVerificationController> {
                                     const SizedBox(height: 16),
                                     Center(
                                       child: ButtonPrimaryFill(
+                                        isterms: false,
                                         buttonSizeType: ButtonSizeType.MEDIUM,
                                         onTap: () {
                                           Navigator.of(context).pop();
@@ -253,6 +251,7 @@ class MobileVerificationView extends GetView<MobileVerificationController> {
                     ],
                   ),
                   Obx(() => ButtonPrimaryFill(
+                        isterms: false,
                         buttonSizeType: ButtonSizeType.LARGE,
                         isDisabled:
                             controller.isPhoneValid.value ? false : true,

@@ -86,6 +86,7 @@ class FindPasswordView extends GetView<FindPasswordController> {
               child: Column(
                 children: [
                   Obx(() => ButtonPrimaryFill(
+                        isterms: false,
                         buttonSizeType: ButtonSizeType.LARGE,
                         isDisabled:
                             controller.isEmailValidated.value ? false : true,

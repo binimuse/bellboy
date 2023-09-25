@@ -1,10 +1,11 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:bellboy/app/common/widgets/app_icon_button.dart';
 import 'package:bellboy/app/common/widgets/buttons/button_primary_fill.dart';
 import 'package:bellboy/app/common/widgets/forms/check_box.dart';
 import 'package:bellboy/app/common/widgets/navigation/top_nav_back_icon.dart';
 import 'package:bellboy/app/config/theme/app_colors.dart';
 import 'package:bellboy/app/config/theme/app_sizes.dart';
-import 'package:bellboy/app/modules/signup/controllers/signup_controller.dart';
 import 'package:bellboy/app/routes/app_pages.dart';
 import 'package:bellboy/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,7 @@ import 'package:get/get.dart';
 import '../../../../config/theme/app_text_styles.dart';
 
 class TermsView extends StatefulWidget {
-  TermsView({Key? key}) : super(key: key);
+  const TermsView({Key? key}) : super(key: key);
 
   @override
   _TermsViewState createState() => _TermsViewState();
@@ -113,19 +114,12 @@ class _TermsViewState extends State<TermsView> {
                                 },
                                 text: "I agree with all terms",
                               ),
-
-                              const Expanded(child: SizedBox()),
-                              AppSvgButton(
-                                imagePath: Assets.icons.chevronRight,
-                                iconColor: AppColors.grayDefault,
-                                onPressed: () {},
-                                size: AppSizes.icon_size_6,
-                              ),
                             ],
                           ),
                           Padding(
                             padding: EdgeInsets.symmetric(
-                                vertical: AppSizes.mp_v_1 / 2),
+                                vertical: AppSizes.mp_v_1 / 2,
+                                horizontal: AppSizes.mp_w_4),
                             child: Divider(
                               color: AppColors.grayLighter,
                               thickness: 1,
@@ -144,11 +138,17 @@ class _TermsViewState extends State<TermsView> {
                                     toggleTerm(index);
                                   },
                                   text: index == 0
-                                      ? "Terms of Use"
-                                      : "Privacy Notice",
+                                      ? "I agree with the Terms of Use"
+                                      : "I agree with the Privacy Policy",
                                 ),
                                 const Expanded(child: SizedBox()),
-                                // ...
+                                const Expanded(child: SizedBox()),
+                                AppSvgButton(
+                                  imagePath: Assets.icons.chevronRight,
+                                  iconColor: AppColors.grayDefault,
+                                  onPressed: () {},
+                                  size: AppSizes.icon_size_6,
+                                ),
                               ],
                             ),
                         ],
@@ -163,6 +163,7 @@ class _TermsViewState extends State<TermsView> {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: AppSizes.mp_w_4),
                     child: ButtonPrimaryFill(
+                      isterms: true,
                       buttonSizeType: ButtonSizeType.LARGE,
                       isDisabled: !allTermsChecked
                           .value, // Disable the button if not all terms are checked

@@ -1,6 +1,4 @@
 import 'package:bellboy/app/common/widgets/buttons/button_gray_scale_outline.dart';
-import 'package:bellboy/app/common/widgets/buttons/button_white_fill.dart';
-import 'package:bellboy/app/common/widgets/buttons/custom_normal_button.dart';
 import 'package:bellboy/app/config/theme/app_assets.dart';
 import 'package:bellboy/app/config/theme/app_colors.dart';
 import 'package:bellboy/app/config/theme/app_sizes.dart';
@@ -112,9 +110,9 @@ class Failedallthequiz extends GetView<QuizController> {
                 style: AppTextStyles.displayTwoBold),
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(16.0),
             child: Text(
-                "Sadly, you've run out of three chances.Please study a little more and take the test again in a month",
+                "Sadly, you've run out of three chances. Please study a little more and take the test again in a month",
                 textAlign: TextAlign.center,
                 style: AppTextStyles.bodySmallRegular),
           ),
@@ -130,7 +128,7 @@ class Failedallthequiz extends GetView<QuizController> {
         children: [
           ButtonGrayScaleOutline(
             text: 'Check the problem',
-            buttonSizeType: ButtonSizeType.LARGE,
+            buttonSizeType: ButtonSizeType.SMALL,
             onTap: () {},
             isDisabled: false,
           ),
@@ -155,13 +153,15 @@ class Failedallthequiz extends GetView<QuizController> {
     return Align(
       alignment: Alignment.center,
       child: Padding(
-        padding: const EdgeInsets.only(top: 8.0, right: 16.0),
-        child: ClipOval(
+        padding: const EdgeInsets.all(8.0),
+        child: ClipRRect(
+          borderRadius:
+              BorderRadius.circular(15.0), // Adjust the radius as needed
           child: Container(
-            color: AppColors.grayLighter,
+            color: AppColors.grayLighter.withOpacity(0.3),
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              ' ${controller.questionNumber}/${controller.questions.value.length}',
+              '  ${controller.questionNumber}/${controller.questions.value.length}  ',
               style: AppTextStyles.bodySmallBold
                   .copyWith(color: AppColors.grayDefault),
             ),

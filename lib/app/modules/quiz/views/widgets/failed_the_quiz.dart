@@ -1,19 +1,19 @@
 import 'package:bellboy/app/common/widgets/buttons/button_gray_scale_outline.dart';
-
+import 'package:bellboy/app/common/widgets/buttons/custom_normal_button.dart';
 import 'package:bellboy/app/config/theme/app_assets.dart';
 import 'package:bellboy/app/config/theme/app_colors.dart';
 import 'package:bellboy/app/config/theme/app_sizes.dart';
 import 'package:bellboy/app/config/theme/app_text_styles.dart';
+import 'package:bellboy/app/modules/quiz/views/widgets/pass_the_quiz.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../../common/widgets/buttons/button_primary_fill.dart';
 import '../../controllers/quiz_controller.dart';
-import 'reviewquiz.dart';
 
-class Passthequiz extends GetView<QuizController> {
-  const Passthequiz({Key? key}) : super(key: key);
+class Failedthequiz extends GetView<QuizController> {
+  const Failedthequiz({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class Passthequiz extends GetView<QuizController> {
             child: Column(
               children: [
                 SizedBox(
-                  height: AppSizes.mp_v_6,
+                  height: AppSizes.mp_v_4,
                 ),
 
                 ///BUILD HEADER
@@ -46,6 +46,7 @@ class Passthequiz extends GetView<QuizController> {
                 ),
                 ////BUILD ACTION BUTTONS
                 buildActionButtons2(),
+                buildActionButtons(),
 
                 const Expanded(
                   child: SizedBox(),
@@ -107,16 +108,43 @@ class Passthequiz extends GetView<QuizController> {
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text("Congratulations, Rider!",
+            child: Text("You need to study",
                 textAlign: TextAlign.center,
-                style: AppTextStyles.displayTwoBold),
+                style: AppTextStyles.displayTwoBold
+                    .copyWith(fontSize: AppSizes.font_24)),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-                "You just passed our verification. You can use the app after the administrator's authentication. Just wait for reference.",
+                "Unfortunately, I didn't meet the score. \nPlease try again after studying.",
                 textAlign: TextAlign.center,
                 style: AppTextStyles.bodySmallRegular),
+          ),
+        ],
+      ),
+    );
+  }
+
+  buildActionButtons() {
+    return Padding(
+      padding: EdgeInsets.all(12.sp),
+      child: Column(
+        children: [
+          CustomNormalButton(
+            text: 'Try again 1/3',
+            textStyle: AppTextStyles.bodyLargeBold.copyWith(
+              color: AppColors.whiteOff,
+            ),
+            textcolor: AppColors.whiteOff,
+            buttoncolor: AppColors.primary,
+            borderRadius: AppSizes.radius_8,
+            padding: EdgeInsets.symmetric(
+              vertical: AppSizes.mp_v_2,
+              horizontal: AppSizes.mp_w_6,
+            ),
+            onPressed: () {
+              Get.to(const Passthequiz());
+            },
           ),
         ],
       ),
@@ -130,10 +158,8 @@ class Passthequiz extends GetView<QuizController> {
         children: [
           ButtonGrayScaleOutline(
             text: 'Check the problem',
-            buttonSizeType: ButtonSizeType.MEDIUM,
-            onTap: () {
-              Get.to(const Reviewthequiz());
-            },
+            buttonSizeType: ButtonSizeType.SMALL,
+            onTap: () {},
             isDisabled: false,
           ),
         ],
@@ -145,10 +171,10 @@ class Passthequiz extends GetView<QuizController> {
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Text("80",
+        child: Text("20",
             textAlign: TextAlign.center,
             style: AppTextStyles.bodyLargeRegular.copyWith(
-                fontSize: AppSizes.font_64, color: AppColors.primary)),
+                fontSize: AppSizes.font_64, color: AppColors.grayDefault)),
       ),
     );
   }
@@ -157,15 +183,17 @@ class Passthequiz extends GetView<QuizController> {
     return Align(
       alignment: Alignment.center,
       child: Padding(
-        padding: const EdgeInsets.only(top: 8.0, right: 16.0),
-        child: ClipOval(
+        padding: const EdgeInsets.all(8.0),
+        child: ClipRRect(
+          borderRadius:
+              BorderRadius.circular(15.0), // Adjust the radius as needed
           child: Container(
-            color: AppColors.primaryLighter,
+            color: AppColors.grayLighter.withOpacity(0.3),
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              ' ${controller.questionNumber}/${controller.questions.value.length}',
+              '  ${controller.questionNumber}/${controller.questions.value.length}  ',
               style: AppTextStyles.bodySmallBold
-                  .copyWith(color: AppColors.primary),
+                  .copyWith(color: AppColors.grayDefault),
             ),
           ),
         ),
@@ -179,7 +207,7 @@ class Passthequiz extends GetView<QuizController> {
         horizontal: AppSizes.mp_w_4,
       ),
       child: Image.asset(
-        'assets/images/pass.png',
+        'assets/images/fail.png',
         fit: BoxFit.contain,
       ),
     );

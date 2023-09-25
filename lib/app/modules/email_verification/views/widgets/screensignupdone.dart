@@ -3,7 +3,6 @@ import 'package:bellboy/app/config/theme/app_sizes.dart';
 import 'package:bellboy/app/config/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../gen/assets.gen.dart';
 import '../../../../config/theme/app_assets.dart';
 
 class ScreenSignUpDone extends StatelessWidget {

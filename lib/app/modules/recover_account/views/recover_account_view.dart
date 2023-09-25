@@ -1,3 +1,4 @@
+import 'package:bellboy/app/config/theme/app_assets.dart';
 import 'package:bellboy/app/config/theme/app_colors.dart';
 import 'package:bellboy/app/config/theme/app_sizes.dart';
 import 'package:bellboy/app/config/theme/app_text_styles.dart';
@@ -32,10 +33,11 @@ class RecoverAccountView extends GetView<RecoverAccountController> {
                       height: AppSizes.icon_size_24,
                       child: Stack(
                         children: [
-                          SvgPicture.asset(
-                            Assets.icons.twoUser,
-                            width: double.infinity,
-                            height: double.infinity,
+                          Image.asset(
+                            AppAssets.recoveraccount2,
+                            width: AppSizes.icon_size_24,
+                            height: AppSizes.icon_size_24,
+                            fit: BoxFit.contain,
                           ),
                           Align(
                             alignment: Alignment.bottomRight,
@@ -43,8 +45,7 @@ class RecoverAccountView extends GetView<RecoverAccountController> {
                               radius: AppSizes.radius_8 * 2.7,
                               backgroundColor: AppColors.primary,
                               child: SvgPicture.asset(
-                                Assets.icons.reload,
-                                color: AppColors.whiteOff,
+                                Assets.icons.recoverloading,
                               ),
                             ),
                           ),
@@ -73,6 +74,7 @@ class RecoverAccountView extends GetView<RecoverAccountController> {
               ButtonPrimaryFill(
                 buttonSizeType: ButtonSizeType.LARGE,
                 isDisabled: false,
+                isterms: true,
                 text: "Recover my account",
                 onTap: () {},
               ),

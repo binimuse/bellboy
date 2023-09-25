@@ -1,4 +1,3 @@
-import 'package:bellboy/app/common/widgets/buttons/button_primary_fill.dart';
 import 'package:bellboy/app/common/widgets/buttons/button_primary_fill_login.dart';
 import 'package:bellboy/app/common/widgets/forms/text_input_signup.dart';
 
@@ -13,26 +12,21 @@ import 'package:sizer/sizer.dart';
 
 import '../../../common/widgets/forms/text_input_login.dart';
 import '../../../config/theme/app_sizes.dart';
-import '../../../routes/app_pages.dart';
 import '../controllers/signup_controller.dart';
-import 'widget/username.dart';
+import 'widget/user_name.dart';
 
 class SignupView extends GetView<SignupController> {
   const SignupView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    SchedulerBinding.instance.addPostFrameCallback((_) {
-      FocusScope.of(context).requestFocus(controller.emailFocusNode);
-    });
-
     return WillPopScope(
       onWillPop: () async {
         Get.back();
         return false;
       },
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
+        //resizeToAvoidBottomInset: false,
         body: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,146 +36,162 @@ class SignupView extends GetView<SignupController> {
                 rightText: '',
                 useHomeIcon: false,
               ),
-              SizedBox(height: 2.h),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 4.w),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Sign up",
-                      textAlign: TextAlign.start,
-                      style: AppTextStyles.displayOneBold,
-                    ),
-                    SizedBox(height: 2.h),
-                    Obx(
-                      () => SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            TextInputSignup(
-                              hint: 'Email',
-                              controller: controller.emailController,
-                              focusNode: controller.emailFocusNode,
-                              signupController: controller,
-                              onChanged: (value) {
-                                // Validate email on type
-                                bool isValid = controller.validateEmail();
-                                controller.isEmailValidated.value = isValid;
-
-                                // Check if email is valid and update UI accordingly
-                                if (isValid) {
-                                  controller.isNextPressed(
-                                      false); // Reset Next button
-                                }
-                              },
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'Please enter your email';
-                                }
-                                if (!controller.isEmailValidated.value) {
-                                  return 'Invalid email';
-                                }
-                                return null;
-                              },
-                            ),
-                            SizedBox(height: 1.h),
-
-                            // Show Password field only when Next is pressed
-                            if (controller.isNextPressed.value)
-
-                              // Inside the password field widget
-                              TextInputLogin(
-                                autofocus: false,
-                                hint: 'Password',
-                                isPassword: true,
-                                onChanged: (value) {
-                                  // Validate password on type
-                                  bool isValid = controller
-                                      .validatePassword(); // Pass the value to validatePassword
-                                  controller.isPasswordValid.value = isValid;
-
-                                  // Check if the password is valid and display the appropriate text
-                                  if (isValid) {
-                                    controller.isNextPressed(
-                                        true); // Set to true but don't hide password field
-                                  }
-                                },
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return 'Please enter your Password';
-                                  }
-                                  if (!controller.isPasswordValid.value) {
-                                    return 'Password must be at least 8 characters';
-                                  }
-                                  return null;
-                                },
-                                controller: controller.passwordController,
-                              ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: SingleChildScrollView(
+              SingleChildScrollView(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 6.w),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Text(
+                        "Sign up",
+                        textAlign: TextAlign.start,
+                        style: AppTextStyles.displayOneBold,
+                      ),
+                      SizedBox(height: 2.h),
                       Obx(
-                        () => SizedBox(
-                          height: controller.isNextPressed.value ? 0.0 : 100,
+                        () => Form(
+                          child: Column(
+                            children: [
+                              buildEmailinput(),
+                              SizedBox(height: 1.h),
+
+                              // Show Password field only when Next is pressed
+                              if (controller.isNextPressed.value)
+                                buildPasswordinput()
+                            ],
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: AppSizes.mp_w_4,
-                          vertical: AppSizes.mp_v_2,
-                        ),
-                        child: Column(
-                          children: [
-                            SizedBox(height: 2.h),
-                            Obx(
-                              () => ButtonPrimaryFillLogin(
-                                buttonSizeType: ButtonSizeTypeLogin.LARGE,
-                                isDisabled:
-                                    !controller.isEmailValidated.value ||
-                                        (controller.isEmailValidated.value &&
-                                            !controller.isNextPressed.value),
-                                text: controller.isEmailValidated.value
-                                    ? controller.isNextPressed.value
-                                        ? controller.isPasswordValid.value
-                                            ? "Next"
-                                            : "Enter password"
-                                        : "Next"
-                                    : 'Enter your e-mail address',
-                                onTap: () {
-                                  if (!controller.isEmailValidated.value) {
-                                    controller.isEmailValidated.value = false;
-                                    FocusScope.of(context).requestFocus(
-                                        controller.passwordFocusNode);
-                                  } else if (!controller.isNextPressed.value) {
-                                    controller.isNextPressed(true);
-                                    // Change the button text to "Enter password"
-                                  } else {
-                                    // Handle final next logic
-                                    Get.to(const SignUpUserName());
-                                  }
-                                },
-                              ),
-                            ),
-                            SizedBox(height: 2.h),
-                          ],
-                        ),
-                      ),
+                      )
                     ],
                   ),
                 ),
+              ),
+              const Expanded(child: SizedBox()),
+              Column(
+                children: [
+                  Obx(
+                    () => SizedBox(
+                      height: controller.isNextPressed.value ? 0.0 : 90,
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: AppSizes.mp_w_4,
+                      vertical: AppSizes.mp_v_2,
+                    ),
+                    child: Column(
+                      children: [
+                        SizedBox(height: 2.h),
+                        Obx(
+                          () => Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: buildButton(context)),
+                        ),
+                        SizedBox(height: 2.h),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  buildEmailinput() {
+    return TextInputSignup(
+      hint: 'Email',
+      autofocus: true,
+      controller: controller.emailController,
+      focusNode: controller.emailFocusNode,
+      signupController: controller,
+      onChanged: (value) {
+        // Validate email on type
+        bool isValid = controller.validateEmail();
+        controller.isEmailValidated.value = isValid;
+
+        // Check if email is valid and update UI accordingly
+        if (isValid) {
+          controller.isNextPressed(false); // Reset Next button
+        }
+      },
+      validator: (value) {
+        if (value!.isEmpty) {
+          return 'Please enter your email';
+        }
+        if (!controller.isEmailValidated.value) {
+          return 'Invalid email';
+        }
+        return null;
+      },
+    );
+  }
+
+  buildPasswordinput() {
+    return TextInputSignup(
+      hint: 'Password',
+      moreInstructions: const [
+        "Minimum 8 letters,",
+        "English + number + special character",
+      ],
+      isPassword: true,
+      onChanged: (value) {
+        // Validate password on type
+        bool isValid = controller.validatePassword();
+        controller.isPasswordValid.value = isValid;
+
+        // Check if the password is valid and display the appropriate text
+        if (isValid) {
+          controller
+              .isNextPressed(true); // Set to true but don't hide password field
+        }
+      },
+      validator: (value) {
+        if (value!.isEmpty) {
+          return 'Please enter your Password';
+        }
+        if (!controller.isPasswordValid.value) {
+          return 'Password must be at least 8 characters';
+        }
+        return null;
+      },
+      controller: controller.passwordController,
+      autofocus: controller
+          .isNextPressed.value, // Set autofocus to true when Next is pressed
+      focusNode: controller.passwordFocusNode, // Pass the password focus node
+    );
+  }
+
+  buildButton(BuildContext context) {
+    return ButtonPrimaryFillLogin(
+      buttonSizeType: ButtonSizeTypeLogin.LARGE,
+      isDisabled: !controller.isEmailValidated.value ||
+          (controller.isEmailValidated.value &&
+              !controller.isNextPressed.value),
+      text: controller.isEmailValidated.value
+          ? controller.isNextPressed.value
+              ? controller.isPasswordValid.value
+                  ? "Next"
+                  : "Enter password"
+              : "Next"
+          : 'Enter your e-mail address',
+      onTap: () {
+        if (controller.isEmailValidated.value &&
+            !controller.isNextPressed.value) {
+          controller.isNextPressed(true);
+          Future.delayed(const Duration(milliseconds: 100), () {
+            FocusScope.of(context).requestFocus(controller.passwordFocusNode);
+          });
+        } else if (!controller.isNextPressed.value) {
+          controller.isNextPressed(true);
+          // Change the button text to "Enter password"
+        } else {
+          // Handle final next logic
+          Get.to(SignUpUserName());
+        }
+      },
     );
   }
 }

@@ -12,6 +12,9 @@ import 'package:flutter/widgets.dart';
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/alarmsvg.svg
+  String get alarmsvg => 'assets/icons/alarmsvg.svg';
+
   /// File path: assets/icons/arrowleft.svg
   String get arrowleft => 'assets/icons/arrowleft.svg';
 
@@ -390,6 +393,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/recommend.svg
   String get recommend => 'assets/icons/recommend.svg';
 
+  /// File path: assets/icons/recoverloading.svg
+  String get recoverloading => 'assets/icons/recoverloading.svg';
+
   /// File path: assets/icons/rectangle_1.svg
   String get rectangle1 => 'assets/icons/rectangle_1.svg';
 
@@ -602,6 +608,7 @@ class $AssetsIconsGen {
 
   /// List of all assets
   List<String> get values => [
+        alarmsvg,
         arrowleft,
         batteryLow,
         bell,
@@ -728,6 +735,7 @@ class $AssetsIconsGen {
         questionmark,
         receiveMail,
         recommend,
+        recoverloading,
         rectangle1,
         refresh,
         refresh2,
@@ -804,6 +812,20 @@ class $AssetsIconsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/AU.png
+  AssetGenImage get au => const AssetGenImage('assets/images/AU.png');
+
+  /// File path: assets/images/fail.png
+  AssetGenImage get fail => const AssetGenImage('assets/images/fail.png');
+
+  /// File path: assets/images/img_finish_login.png
+  AssetGenImage get imgFinishLogin =>
+      const AssetGenImage('assets/images/img_finish_login.png');
+
+  /// File path: assets/images/img_sent_email.png
+  AssetGenImage get imgSentEmail =>
+      const AssetGenImage('assets/images/img_sent_email.png');
+
   /// File path: assets/images/onbording1.png
   AssetGenImage get onbording1 =>
       const AssetGenImage('assets/images/onbording1.png');
@@ -812,12 +834,29 @@ class $AssetsImagesGen {
   AssetGenImage get onbording2 =>
       const AssetGenImage('assets/images/onbording2.png');
 
+  /// File path: assets/images/pass.png
+  AssetGenImage get pass => const AssetGenImage('assets/images/pass.png');
+
   /// File path: assets/images/quizimage.png
   AssetGenImage get quizimage =>
       const AssetGenImage('assets/images/quizimage.png');
 
+  /// File path: assets/images/recoveraccount.png
+  AssetGenImage get recoveraccount =>
+      const AssetGenImage('assets/images/recoveraccount.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [onbording1, onbording2, quizimage];
+  List<AssetGenImage> get values => [
+        au,
+        fail,
+        imgFinishLogin,
+        imgSentEmail,
+        onbording1,
+        onbording2,
+        pass,
+        quizimage,
+        recoveraccount
+      ];
 }
 
 class $AssetsLogosGen {

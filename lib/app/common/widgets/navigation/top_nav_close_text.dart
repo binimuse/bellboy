@@ -45,7 +45,7 @@ class TopNavCloseText extends StatelessWidget {
                         onPressed: () {},
                         size: AppSizes.icon_size_8 * 0.9,
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               ],
             ),
           ),

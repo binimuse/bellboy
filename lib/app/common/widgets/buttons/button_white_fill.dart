@@ -38,9 +38,9 @@ class ButtonWhiteFill extends StatelessWidget {
             vertical: buttonSizeType == ButtonSizeType.LARGE
                 ? AppSizes.mp_v_2 * 0.9
                 : buttonSizeType == ButtonSizeType.MEDIUM
-                    ? AppSizes.mp_v_1 * 1.5
-                    : AppSizes.mp_v_1 * 0.8,
-            horizontal: AppSizes.mp_w_1,
+                    ? AppSizes.mp_v_1 * 1.0
+                    : AppSizes.mp_v_1 * 0.1,
+            horizontal: AppSizes.mp_w_1 * 0.1,
           ),
           child: Text(
             text,

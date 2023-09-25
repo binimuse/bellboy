@@ -76,7 +76,9 @@ class OnBordingView extends GetView<OnBordingController> {
 
                 ///BUILD TITLE AND SUB TITLE
                 buildTitlAndSubTitle(context),
-
+                SizedBox(
+                  height: 2.h,
+                ),
                 ////BUILD ACTION BUTTONS
                 buildActionButtons(),
 

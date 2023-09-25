@@ -1,9 +1,10 @@
 // ignore_for_file: invalid_use_of_protected_member
 
+import 'package:bellboy/app/common/widgets/app_toasts.dart';
 import 'package:bellboy/app/common/widgets/buttons/button_primary_fill.dart';
 import 'package:bellboy/app/config/theme/app_colors.dart';
 import 'package:bellboy/app/config/theme/app_text_styles.dart';
-import 'package:bellboy/app/modules/quiz/views/widgets/passthequiz.dart';
+import 'package:bellboy/app/modules/quiz/views/widgets/pass_the_quiz.dart';
 import 'package:bellboy/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -12,7 +13,7 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../controllers/quiz_controller.dart';
-import 'failedthequiz.dart';
+import 'failed_the_quiz.dart';
 
 class QuationsView extends GetView<QuizController> {
   QuationsView({Key? key}) : super(key: key);
@@ -29,8 +30,11 @@ class QuationsView extends GetView<QuizController> {
                 LinearProgressIndicator(
                   color: AppColors.primary,
                   backgroundColor: AppColors.grayLighter,
-                  value: controller.currentIndex.value /
-                      controller.questions.value.length,
+                  value: controller.selectedAnswerIndex.value == -1
+                      ? controller.currentIndex.value /
+                          controller.questions.value.length
+                      : (controller.currentIndex.value + 1) /
+                          controller.questions.value.length,
                 ),
                 Padding(
                   padding: const EdgeInsets.all(16),
@@ -45,6 +49,7 @@ class QuationsView extends GetView<QuizController> {
                       getAnswerOptions(),
                       const SizedBox(height: 16),
                       ButtonPrimaryFill(
+                        isterms: false,
                         buttonSizeType: ButtonSizeType.LARGE,
                         isDisabled: controller.selectedAnswerIndex.value == -1,
                         text: () {
@@ -59,19 +64,25 @@ class QuationsView extends GetView<QuizController> {
                           }
                         }(),
                         onTap: () {
-                          controller.answerQuestion(
-                              controller.selectedAnswerIndex.value);
-                          final currentQuestionIndex =
-                              controller.questionNumber;
-                          final totalQuestions = controller.questions.length;
-
-                          if (currentQuestionIndex < totalQuestions) {
-                            controller.nextQuestion();
-                            controller.questionNumber++;
+                          if (controller.selectedAnswerIndex.value == -1) {
+                            AppToasts.showError(
+                                "select an answer before proceeding   ");
                           } else {
-                            // Last question, quiz complete
-                            // Perform any necessary actions or navigate to a different screen
-                            Get.to(const Passthequiz());
+                            // An answer has been selected, proceed to the next question.
+                            controller.answerQuestion(
+                                controller.selectedAnswerIndex.value);
+                            final currentQuestionIndex =
+                                controller.questionNumber;
+                            final totalQuestions = controller.questions.length;
+
+                            if (currentQuestionIndex < totalQuestions) {
+                              controller.nextQuestion();
+                              controller.questionNumber++;
+                            } else {
+                              // Last question, quiz complete
+                              // Perform any necessary actions or navigate to a different screen
+                              Get.to(const Failedthequiz());
+                            }
                           }
                         },
                       )
@@ -83,8 +94,10 @@ class QuationsView extends GetView<QuizController> {
           )
         : Container(
             color: Colors.white,
-            child: const Center(
-              child: CircularProgressIndicator(),
+            child: Center(
+              child: CircularProgressIndicator(
+                color: AppColors.primary,
+              ),
             ),
           ));
   }

@@ -4,39 +4,59 @@ import 'package:bellboy/app/config/theme/app_text_styles.dart';
 import 'package:bellboy/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_bounce/flutter_bounce.dart';
 
-class TextInput extends StatefulWidget {
-  const TextInput(
-      {Key? key, required this.hint, this.isPassword, this.moreInstructions})
-      : super(key: key);
+class TextInputAll extends StatefulWidget {
+  const TextInputAll({
+    Key? key,
+    required this.hint,
+    this.isPassword,
+    this.moreInstructions,
+    required this.controller,
+    this.autoFocus,
+    this.focusNode,
+    this.onChanged, // Added onChanged callback
+  }) : super(key: key);
 
   final String hint;
   final bool? isPassword;
   final List<String>? moreInstructions;
+  final TextEditingController controller;
+  final bool? autoFocus;
+  final FocusNode? focusNode;
+  final void Function(String)? onChanged; // Callback when the text changes
 
   @override
-  State<TextInput> createState() => _TextInputLoginState();
+  State<TextInputAll> createState() => _TextInputLoginState();
 }
 
-class _TextInputLoginState extends State<TextInput> {
-  final TextEditingController _textEditingController = TextEditingController();
+class _TextInputLoginState extends State<TextInputAll> {
   bool _showClearButton = false;
   bool _isFocused = false;
 
   @override
   void initState() {
     super.initState();
-    _textEditingController.addListener(() {
+    widget.controller.addListener(() {
       setState(() {
-        _showClearButton = _textEditingController.text.isNotEmpty;
+        _showClearButton = widget.controller.text.isNotEmpty;
       });
     });
+
+    if (widget.focusNode != null) {
+      widget.focusNode!.addListener(_onFocusChange);
+    }
   }
 
   @override
   void dispose() {
-    _textEditingController.dispose();
+    widget.controller.dispose();
+    widget.focusNode!.removeListener(_onFocusChange);
     super.dispose();
+  }
+
+  void _onFocusChange() {
+    setState(() {});
   }
 
   @override
@@ -44,31 +64,57 @@ class _TextInputLoginState extends State<TextInput> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        TextField(
-          controller: _textEditingController,
-          style: AppTextStyles.titleBold.copyWith(color: AppColors.blackLight),
+        TextFormField(
+          controller: widget.controller,
+          autofocus: widget.autoFocus ?? false,
+          style: AppTextStyles.titleBold.copyWith(
+            color: AppColors.blackLight,
+            fontSize:
+                checkIsPassword() ? AppSizes.font_14 * 0.9 : AppSizes.font_16,
+          ),
           obscureText: checkIsPassword(),
-          obscuringCharacter: '●',
+          obscuringCharacter: '⬤',
+          //obscuringCharacter: '\u2022', // Customize the obscuring character
           decoration: InputDecoration(
-            labelText: widget.hint,
+            contentPadding: EdgeInsets.only(
+              bottom: checkIsPassword()
+                  ? AppSizes.mp_v_1 * 1.2
+                  : AppSizes.mp_v_1 / 2,
+              top: AppSizes.mp_v_1 / 2,
+            ),
+            labelText: _isFocused ? widget.hint : null,
             hintText: _isFocused ? null : widget.hint,
             hintStyle:
                 AppTextStyles.titleBold.copyWith(color: AppColors.grayLighter),
             labelStyle:
                 AppTextStyles.captionBold.copyWith(color: AppColors.grayLight),
-            floatingLabelBehavior: FloatingLabelBehavior.always,
+            floatingLabelBehavior: FloatingLabelBehavior.auto,
+            suffixIconConstraints: BoxConstraints(
+              maxWidth: AppSizes.icon_size_10,
+              maxHeight: AppSizes.icon_size_10,
+            ),
             suffixIcon: _showClearButton
-                ? IconButton(
-                    icon: SvgPicture.asset(
-                      Assets.icons.cancel,
-                      color: AppColors.grayLight,
-                    ),
+                ? Bounce(
+                    // padding: EdgeInsets.zero,
                     onPressed: () {
                       setState(() {
-                        _textEditingController.clear();
+                        widget.controller.clear();
                         _showClearButton = false;
+                        _isFocused = false;
                       });
                     },
+                    duration: const Duration(milliseconds: 120),
+                    // padding: EdgeInsets.zero,
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                        top: AppSizes.mp_v_1,
+                      ),
+                      child: SvgPicture.asset(
+                        Assets.icons.cancel,
+                        color: AppColors.grayLight,
+                        fit: BoxFit.contain,
+                      ),
+                    ),
                   )
                 : null,
             disabledBorder: UnderlineInputBorder(
@@ -96,18 +142,15 @@ class _TextInputLoginState extends State<TextInput> {
             setState(() {
               _isFocused = value.isNotEmpty;
             });
+            if (widget.onChanged != null) {
+              widget.onChanged!(value); // Call the onChanged callback
+            }
           },
           onTap: () {
             setState(() {
               _isFocused = true;
             });
           },
-          onSubmitted: (value) {
-            setState(() {
-              _isFocused = false;
-            });
-          },
-          //focusNode: FocusNode(),
         ),
 
         ///
@@ -154,6 +197,10 @@ class _TextInputLoginState extends State<TextInput> {
   buildHideUnhideButton() {
     return MaterialButton(
       onPressed: () {},
+      padding: EdgeInsets.only(
+        left: AppSizes.mp_w_2,
+        right: AppSizes.mp_w_1 / 2,
+      ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -163,7 +210,7 @@ class _TextInputLoginState extends State<TextInput> {
             width: AppSizes.icon_size_6,
           ),
           SizedBox(
-            width: AppSizes.mp_w_2,
+            width: AppSizes.mp_w_1,
           ),
           Text(
             "Hidden",
@@ -187,7 +234,7 @@ class _TextInputLoginState extends State<TextInput> {
             (index) => Text(
               widget.moreInstructions!.elementAt(index),
               style: AppTextStyles.captionRegular.copyWith(
-                color: AppColors.grayDark,
+                color: AppColors.grayDefault,
               ),
             ),
           ),
