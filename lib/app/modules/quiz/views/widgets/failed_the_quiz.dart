@@ -191,7 +191,7 @@ class Failedthequiz extends GetView<QuizController> {
             color: AppColors.grayLighter.withOpacity(0.3),
             padding: const EdgeInsets.all(4.0),
             child: Text(
-              '  ${controller.questionNumber}/${controller.questions.value.length}  ',
+              '  ${controller.questionNumber}/${controller.questions.length}  ',
               style: AppTextStyles.bodySmallBold
                   .copyWith(color: AppColors.grayDefault),
             ),

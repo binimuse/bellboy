@@ -166,7 +166,7 @@ class Passthequiz extends GetView<QuizController> {
             color: AppColors.primary.withOpacity(0.2),
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              '  ${controller.questionNumber}/${controller.questions.value.length}  ',
+              '  ${controller.questionNumber}/${controller.questions.length}  ',
               style: AppTextStyles.bodySmallBold
                   .copyWith(color: AppColors.primary),
             ),

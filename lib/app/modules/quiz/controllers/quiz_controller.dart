@@ -34,7 +34,7 @@ class QuizController extends GetxController {
     selectedAnswerIndex.value = -1;
 
     // Check if all questions have been answered
-    if (currentIndex.value >= questions.value.length) {
+    if (currentIndex.value >= questions.length) {
       // All questions have been answered, perform any necessary actions
       // or navigate to a different screen
       return;

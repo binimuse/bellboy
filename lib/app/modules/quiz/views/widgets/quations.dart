@@ -1,10 +1,9 @@
-// ignore_for_file: invalid_use_of_protected_member
+// ignore_for_file: invalid_use_of_protected_member, must_be_immutable
 
 import 'package:bellboy/app/common/widgets/app_toasts.dart';
 import 'package:bellboy/app/common/widgets/buttons/button_primary_fill.dart';
 import 'package:bellboy/app/config/theme/app_colors.dart';
 import 'package:bellboy/app/config/theme/app_text_styles.dart';
-import 'package:bellboy/app/modules/quiz/views/widgets/pass_the_quiz.dart';
 import 'package:bellboy/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -138,7 +137,7 @@ class QuationsView extends GetView<QuizController> {
     if (currentIndex >= 0 && currentIndex < controller.questions.length) {
       final question = controller.questions[currentIndex];
       final imageUrl = question.image;
-      if (imageUrl != null && imageUrl.isNotEmpty) {
+      if (imageUrl.isNotEmpty) {
         return Container(
           width: double.infinity,
           height: 200, // Adjust the height as needed
