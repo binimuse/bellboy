@@ -48,7 +48,7 @@ class DialogFindEmail extends StatelessWidget {
               },
             ),
             SizedBox(
-              height: AppSizes.mp_v_2,
+              height: AppSizes.mp_v_1,
             ),
             ButtonPrimaryFill(
               isterms: false,

@@ -108,7 +108,7 @@ class ForgotAccountDone extends GetView<FindPasswordController> {
                 fit: BoxFit.contain,
               ),
               SizedBox(
-                height: AppSizes.mp_v_2,
+                height: AppSizes.mp_v_4,
               ),
               Text(
                 "Check your e-mail",
@@ -116,13 +116,13 @@ class ForgotAccountDone extends GetView<FindPasswordController> {
                 style: AppTextStyles.displayOneBold,
               ),
               SizedBox(
-                height: AppSizes.mp_v_2,
+                height: AppSizes.mp_v_1,
               ),
               Text(
                 "We sent your e-mail the password reset link. Please check your e-mail.",
                 textAlign: TextAlign.center,
                 style: AppTextStyles.bodySmallBold.copyWith(
-                    color: AppColors.grayDefault, fontSize: AppSizes.font_14),
+                    color: AppColors.grayDark, fontSize: AppSizes.font_14),
               ),
             ],
           ),

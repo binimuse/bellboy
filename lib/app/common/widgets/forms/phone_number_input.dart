@@ -61,8 +61,8 @@ class _PhoneNumberInputState extends State<PhoneNumberInput> {
           decoration: InputDecoration(
             // labelText: widget.hint,
             hintText: _isFocused ? null : widget.hint,
-            hintStyle:
-                AppTextStyles.titleBold.copyWith(color: AppColors.grayLighter),
+            hintStyle: AppTextStyles.titleBold.copyWith(
+                color: AppColors.grayLighter, fontSize: AppSizes.font_16),
             labelStyle:
                 AppTextStyles.captionBold.copyWith(color: AppColors.grayLight),
             floatingLabelBehavior: FloatingLabelBehavior.auto,

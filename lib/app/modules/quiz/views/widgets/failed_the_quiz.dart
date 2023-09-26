@@ -181,10 +181,10 @@ class Failedthequiz extends GetView<QuizController> {
       alignment: Alignment.center,
       child: ClipRRect(
         borderRadius:
-            BorderRadius.circular(20.0), // Adjust the radius as needed
+            BorderRadius.circular(60.0), // Adjust the radius as needed
         child: Container(
           color: AppColors.grayLighter.withOpacity(0.3),
-          padding: const EdgeInsets.all(4.0),
+          padding: const EdgeInsets.all(7.0),
           child: Text(
             '  ${controller.questionNumber}/${controller.questions.length}  ',
             style: AppTextStyles.bodySmallBold

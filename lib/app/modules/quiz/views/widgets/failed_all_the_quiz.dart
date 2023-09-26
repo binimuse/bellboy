@@ -151,7 +151,7 @@ class Failedallthequiz extends GetView<QuizController> {
       alignment: Alignment.center,
       child: ClipRRect(
         borderRadius:
-            BorderRadius.circular(15.0), // Adjust the radius as needed
+            BorderRadius.circular(60.0), // Adjust the radius as needed
         child: Container(
           color: AppColors.grayLighter.withOpacity(0.3),
           padding: const EdgeInsets.all(8.0),

@@ -31,7 +31,7 @@ class FindPasswordView extends GetView<FindPasswordController> {
               height: AppSizes.mp_v_2,
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: AppSizes.mp_w_4),
+              padding: EdgeInsets.symmetric(horizontal: AppSizes.mp_w_6),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -45,6 +45,7 @@ class FindPasswordView extends GetView<FindPasswordController> {
                   ),
                   TextInputLogin(
                     autofocus: true,
+                    
                     hint: 'Email',
                     controller: controller.emailController,
                     onChanged: (value) {
@@ -65,7 +66,7 @@ class FindPasswordView extends GetView<FindPasswordController> {
                     },
                   ),
                   SizedBox(
-                    height: AppSizes.mp_v_4,
+                    height: AppSizes.mp_v_2,
                   ),
                   Padding(
                     padding: EdgeInsets.only(right: AppSizes.mp_w_8 * 2),
@@ -82,7 +83,7 @@ class FindPasswordView extends GetView<FindPasswordController> {
               child: SizedBox(),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: AppSizes.mp_w_4),
+              padding: EdgeInsets.symmetric(horizontal: AppSizes.mp_w_6),
               child: Column(
                 children: [
                   Obx(() => ButtonPrimaryFill(

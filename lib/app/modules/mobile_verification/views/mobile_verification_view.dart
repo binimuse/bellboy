@@ -37,7 +37,7 @@ class MobileVerificationView extends GetView<MobileVerificationController> {
             ),
             SingleChildScrollView(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 6.w),
+                padding: EdgeInsets.symmetric(horizontal: 8.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -68,7 +68,7 @@ class MobileVerificationView extends GetView<MobileVerificationController> {
                               height: AppSizes.mp_v_1,
                             ),
                             SizedBox(
-                              width: 24.w,
+                              width: 29.w,
                               child: Divider(
                                 color: AppColors.grayLighter,
                                 thickness: 1,
@@ -93,15 +93,18 @@ class MobileVerificationView extends GetView<MobileVerificationController> {
                     SizedBox(
                       height: AppSizes.mp_v_1,
                     ),
-                    Align(
-                      alignment: Alignment.topRight,
-                      child: ButtonGrayScaleOutlineWithOutIcon(
-                        buttonSizeType: ButtonSizeType.SMALL,
-                        text: 'Resend',
-                        onTap: () {},
-                        isDisabled: false,
-                      ),
-                    ),
+                    Obx(() => controller.isPhoneValid.value &&
+                            controller.isNextPressed.value
+                        ? Align(
+                            alignment: Alignment.topRight,
+                            child: ButtonGrayScaleOutlineWithOutIcon(
+                              buttonSizeType: ButtonSizeType.SMALL,
+                              text: 'Resend',
+                              onTap: () {},
+                              isDisabled: false,
+                            ),
+                          )
+                        : const SizedBox()),
                   ],
                 ),
               ),
@@ -116,7 +119,9 @@ class MobileVerificationView extends GetView<MobileVerificationController> {
                     ? buildIdidntrecive(context)
                     : const SizedBox()),
                 Obx(() => Padding(
-                      padding: const EdgeInsets.all(6.0),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: AppSizes.mp_w_8,
+                      ),
                       child: ButtonPrimaryFill(
                         isterms: false,
                         buttonSizeType: ButtonSizeType.LARGE,
@@ -182,7 +187,7 @@ class MobileVerificationView extends GetView<MobileVerificationController> {
   buildPhonenumber() {
     return Expanded(
       child: PhoneNumberInput(
-        hint: 'Phone Number',
+        hint: 'Phone number',
         autofocus: true,
         controller: controller.phoneController,
         onChanged: (value) {
@@ -208,9 +213,9 @@ class MobileVerificationView extends GetView<MobileVerificationController> {
 
   buildOTpnumber() {
     return OTPTextField(
-      length: 5,
+      length: 6,
       width: 90.w,
-      fieldWidth: AppSizes.icon_size_16,
+      fieldWidth: AppSizes.icon_size_12,
       otpFieldStyle: OtpFieldStyle(
         borderColor: AppColors.grayDark,
         focusBorderColor: AppColors.grayDark,
@@ -219,12 +224,11 @@ class MobileVerificationView extends GetView<MobileVerificationController> {
         errorBorderColor: AppColors.danger,
       ),
       style: AppTextStyles.bodyLargeBold,
-      textFieldAlignment: MainAxisAlignment.spaceAround,
+      textFieldAlignment: MainAxisAlignment.spaceBetween,
       fieldStyle: FieldStyle.underline,
-      contentPadding: EdgeInsets.only(bottom: AppSizes.mp_v_2),
       onCompleted: (pin) {},
       onChanged: (pin) {
-        if (pin.length == 5) {
+        if (pin.length == 6) {
           controller.isOtpValid(true);
         } else {
           controller.isOtpValid(false);
@@ -239,18 +243,18 @@ class MobileVerificationView extends GetView<MobileVerificationController> {
       builder: (BuildContext context) {
         return Container(
           height: 40.h,
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Center(
                 child: Text(
                   'I didn’t receive a code',
-                  style: AppTextStyles.bodyLargeBold
+                  style: AppTextStyles.headlineBold
                       .copyWith(color: AppColors.black),
                 ),
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 10),
               Text(
                 'Check your phone number',
                 style: AppTextStyles.bodySmallBold

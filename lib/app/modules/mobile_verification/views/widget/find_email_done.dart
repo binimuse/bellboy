@@ -38,7 +38,7 @@ class ForgotEmailtDone extends GetView<MobileVerificationController> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "No matching\nE-mail found.",
+                "No matching e-mail address found.",
                 textAlign: TextAlign.center,
                 style: AppTextStyles.displayOneBold,
               ),
@@ -51,7 +51,7 @@ class ForgotEmailtDone extends GetView<MobileVerificationController> {
                   "Check your phone number again or contact bellboy.",
                   textAlign: TextAlign.center,
                   style: AppTextStyles.bodySmallBold.copyWith(
-                    color: AppColors.grayDefault,
+                    color: AppColors.grayDark,
                   ),
                 ),
               ),
@@ -71,8 +71,7 @@ class ForgotEmailtDone extends GetView<MobileVerificationController> {
                   Text(
                     "0430 027 934",
                     style: AppTextStyles.bodySmallBold.copyWith(
-                      color: AppColors.grayDark,
-                    ),
+                        color: AppColors.grayDark, fontSize: AppSizes.font_14),
                   ),
                 ],
               ),
@@ -144,7 +143,7 @@ class ForgotEmailtDone extends GetView<MobileVerificationController> {
                             textAlign: TextAlign.left,
                             style: AppTextStyles.titleBold.copyWith(
                               color: AppColors.primary,
-                              fontSize: AppSizes.font_14,
+                              fontSize: AppSizes.font_18,
                             ),
                             overflow: TextOverflow.fade,
                           ),

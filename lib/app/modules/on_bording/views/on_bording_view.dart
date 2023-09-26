@@ -37,7 +37,7 @@ class OnBordingView extends GetView<OnBordingController> {
             child: Column(
               children: [
                 SizedBox(
-                  height: AppSizes.mp_v_6,
+                  height: AppSizes.mp_v_4,
                 ),
 
                 ///BUILD HEADER

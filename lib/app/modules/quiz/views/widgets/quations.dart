@@ -290,7 +290,7 @@ class QuationsView extends GetView<QuizController> {
               // Last question, quiz complete
               // Perform any necessary actions or navigate to a different screen
               Get.to(const Passthequiz());
-            }
+                      }
           }
         },
       ),
