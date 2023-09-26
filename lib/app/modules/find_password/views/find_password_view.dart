@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../controllers/find_password_controller.dart';
-import 'widget/findaccountdone.dart';
+import 'widget/find_account_done.dart';
 
 class FindPasswordView extends GetView<FindPasswordController> {
   const FindPasswordView({Key? key}) : super(key: key);
@@ -90,7 +90,9 @@ class FindPasswordView extends GetView<FindPasswordController> {
                         buttonSizeType: ButtonSizeType.LARGE,
                         isDisabled:
                             controller.isEmailValidated.value ? false : true,
-                        text: "Enter your E-mail",
+                        text: !controller.isEmailValidated.value
+                            ? "Enter your e-mail address"
+                            : "Send password reset link",
                         onTap: () {
                           Get.to(const ForgotAccountDone());
                         },

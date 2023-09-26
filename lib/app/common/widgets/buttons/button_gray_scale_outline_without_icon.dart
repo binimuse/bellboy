@@ -1,17 +1,17 @@
-// ignore_for_file: constant_identifier_names
-
+import 'package:bellboy/app/common/widgets/app_icon_button.dart';
 import 'package:bellboy/app/config/theme/app_colors.dart';
 import 'package:bellboy/app/config/theme/app_sizes.dart';
 import 'package:bellboy/app/config/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
-class ButtonPrimaryFill extends StatelessWidget {
-  const ButtonPrimaryFill(
+import 'button_primary_fill.dart';
+
+class ButtonGrayScaleOutlineWithOutIcon extends StatelessWidget {
+  const ButtonGrayScaleOutlineWithOutIcon(
       {Key? key,
       required this.buttonSizeType,
       required this.text,
       required this.onTap,
-      required this.isterms,
       required this.isDisabled})
       : super(key: key);
 
@@ -19,7 +19,6 @@ class ButtonPrimaryFill extends StatelessWidget {
   final String text;
   final VoidCallback onTap;
   final bool isDisabled;
-  final bool isterms;
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +28,18 @@ class ButtonPrimaryFill extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           elevation: 0,
           shadowColor: AppColors.grayLight,
-          backgroundColor: isDisabled
-              ? AppColors.grayLighter
-              : isterms
-                  ? AppColors.black
-                  : AppColors.primary,
+          backgroundColor:
+              isDisabled ? AppColors.grayLighter : Colors.transparent,
+          // shape: RoundedRectangleBorder(
+          //   borderRadius: BorderRadius.circular(AppSizes.radius_8),
+          //
+          // ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppSizes.radius_8),
+            side: BorderSide(
+              color: AppColors.grayLight,
+              width: 2,
+            ),
           ),
         ),
         onPressed: onTap,
@@ -50,8 +54,7 @@ class ButtonPrimaryFill extends StatelessWidget {
           child: Text(
             text,
             style: AppTextStyles.bodyLargeBold.copyWith(
-              color: AppColors.whiteOff,
-              fontSize: AppSizes.font_14,
+              color: AppColors.grayDark,
             ),
           ),
         ),
@@ -59,5 +62,3 @@ class ButtonPrimaryFill extends StatelessWidget {
     );
   }
 }
-
-enum ButtonSizeType { LARGE, MEDIUM, SMALL }

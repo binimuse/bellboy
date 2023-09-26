@@ -6,6 +6,8 @@ class MobileVerificationController extends GetxController {
   final count = 0.obs;
 
   var isPhoneValid = false.obs;
+  var isNextPressed = false.obs;
+  var isOtpValid = false.obs;
   @override
   void onInit() {
     phoneController = TextEditingController();

@@ -205,7 +205,7 @@ class CardWidget extends StatelessWidget {
                     : Assets.icons.cancelbig,
                 color: isCorrect == true
                     ? AppColors.successDark
-                    : AppColors.danger,
+                    : AppColors.danger          ,
               ),
               onPressed: () {
                 Get.back();

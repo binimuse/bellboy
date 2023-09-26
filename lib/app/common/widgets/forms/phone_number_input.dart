@@ -1,8 +1,12 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:bellboy/app/config/theme/app_colors.dart';
+import 'package:bellboy/app/config/theme/app_sizes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bounce/flutter_bounce.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../../gen/assets.gen.dart';
 import '../../../config/theme/app_text_styles.dart';
 
 class PhoneNumberInput extends StatefulWidget {
@@ -47,6 +51,7 @@ class _PhoneNumberInputState extends State<PhoneNumberInput> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextFormField(
+          cursorColor: AppColors.primary,
           autofocus: widget.autofocus,
           controller: widget.controller,
           textInputAction: TextInputAction.next,
@@ -54,25 +59,40 @@ class _PhoneNumberInputState extends State<PhoneNumberInput> {
           style: AppTextStyles.titleBold.copyWith(color: AppColors.blackLight),
           validator: widget.validator,
           decoration: InputDecoration(
-            labelText: widget.hint,
+            // labelText: widget.hint,
             hintText: _isFocused ? null : widget.hint,
             hintStyle:
                 AppTextStyles.titleBold.copyWith(color: AppColors.grayLighter),
             labelStyle:
                 AppTextStyles.captionBold.copyWith(color: AppColors.grayLight),
-            floatingLabelBehavior: FloatingLabelBehavior.always,
+            floatingLabelBehavior: FloatingLabelBehavior.auto,
+            suffixIconConstraints: BoxConstraints(
+              maxWidth: AppSizes.icon_size_10,
+              maxHeight: AppSizes.icon_size_10,
+            ),
             suffixIcon: _showClearButton
-                ? IconButton(
-                    icon: Icon(
-                      Icons.clear,
-                      color: AppColors.grayLight,
-                    ),
+                ? Bounce(
+                    // padding: EdgeInsets.zero,
                     onPressed: () {
                       setState(() {
                         widget.controller.clear();
                         _showClearButton = false;
+
+                        //  widget.logincontroller!.isPasswordValid(false);
                       });
                     },
+                    duration: const Duration(milliseconds: 120),
+                    // padding: EdgeInsets.zero,
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                        top: AppSizes.mp_v_1,
+                      ),
+                      child: SvgPicture.asset(
+                        Assets.icons.cancel,
+                        color: AppColors.grayLight,
+                        fit: BoxFit.contain,
+                      ),
+                    ),
                   )
                 : null,
             disabledBorder: UnderlineInputBorder(

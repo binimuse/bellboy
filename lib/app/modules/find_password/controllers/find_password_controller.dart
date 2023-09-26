@@ -14,8 +14,12 @@ class FindPasswordController extends GetxController {
 
   var isEmailValidated = false.obs;
   bool validateEmail() {
-    final email = emailController.text;
-    if (email.isNotEmpty && email.contains('@') && email.contains('.')) {
+    final email = emailController.text.trim();
+
+    // Regular expression pattern for email validation
+    final emailRegex = RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');
+
+    if (email.isNotEmpty && emailRegex.hasMatch(email)) {
       isEmailValidated.value = true;
       return true;
     } else {

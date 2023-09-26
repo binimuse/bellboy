@@ -30,20 +30,17 @@ class DialogFindEmail extends StatelessWidget {
             SizedBox(
               height: AppSizes.mp_v_2,
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: AppSizes.mp_w_4),
-              child: Text(
-                "You can find your e-mail address by Mobile Authentication.",
-                textAlign: TextAlign.center,
-                style: AppTextStyles.bodySmallRegular
-                    .copyWith(color: AppColors.grayDefault),
-              ),
+            Text(
+              "You can find your e-mail address by Mobile Authentication.",
+              textAlign: TextAlign.center,
+              style: AppTextStyles.bodySmallRegular
+                  .copyWith(color: AppColors.grayDefault),
             ),
             SizedBox(
               height: AppSizes.mp_v_4,
             ),
             ButtonGrayScaleFill(
-              buttonSizeType: ButtonSizeType.LARGE,
+              buttonSizeType: ButtonSizeType.MEDIUM,
               isDisabled: false,
               text: "Discard",
               onTap: () {
@@ -55,7 +52,7 @@ class DialogFindEmail extends StatelessWidget {
             ),
             ButtonPrimaryFill(
               isterms: false,
-              buttonSizeType: ButtonSizeType.LARGE,
+              buttonSizeType: ButtonSizeType.MEDIUM,
               isDisabled: false,
               text: "Go to mobile authentication",
               onTap: () {

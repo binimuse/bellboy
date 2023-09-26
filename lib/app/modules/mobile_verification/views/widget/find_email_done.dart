@@ -1,24 +1,27 @@
 import 'package:bellboy/app/common/widgets/buttons/button_primary_fill.dart';
+import 'package:bellboy/app/common/widgets/buttons/button_white_fill.dart';
 import 'package:bellboy/app/config/theme/app_assets.dart';
 import 'package:bellboy/app/config/theme/app_colors.dart';
 import 'package:bellboy/app/config/theme/app_sizes.dart';
 import 'package:bellboy/app/config/theme/app_text_styles.dart';
+import 'package:bellboy/app/routes/app_pages.dart';
 import 'package:bellboy/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 
-import '../../controllers/find_password_controller.dart';
+import '../../controllers/mobile_verification_controller.dart';
 
-class ForgotAccountDone extends GetView<FindPasswordController> {
-  const ForgotAccountDone({Key? key}) : super(key: key);
+class ForgotEmailtDone extends GetView<MobileVerificationController> {
+  const ForgotEmailtDone({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: AppSizes.mp_w_6),
-          child: buildEmailDound(),
+          child: buildEmailNotFound(),
         ),
       ),
     );
@@ -48,7 +51,7 @@ class ForgotAccountDone extends GetView<FindPasswordController> {
                   "Check your phone number again or contact bellboy.",
                   textAlign: TextAlign.center,
                   style: AppTextStyles.bodySmallBold.copyWith(
-                    color: AppColors.grayDark,
+                    color: AppColors.grayDefault,
                   ),
                 ),
               ),
@@ -81,7 +84,9 @@ class ForgotAccountDone extends GetView<FindPasswordController> {
           buttonSizeType: ButtonSizeType.LARGE,
           isDisabled: false,
           text: "Go to log in",
-          onTap: () {},
+          onTap: () {
+            Get.toNamed(Routes.LOGIN);
+          },
         ),
         SizedBox(
           height: AppSizes.mp_v_4,
@@ -111,28 +116,62 @@ class ForgotAccountDone extends GetView<FindPasswordController> {
                 height: AppSizes.mp_v_2,
               ),
               Text(
-                "Check your e-mail",
+                "We found your e-mail!",
                 textAlign: TextAlign.center,
                 style: AppTextStyles.displayOneBold,
               ),
               SizedBox(
                 height: AppSizes.mp_v_2,
               ),
-              Text(
-                "We sent your e-mail the password reset link.Please check your e-mail.",
-                textAlign: TextAlign.center,
-                style: AppTextStyles.bodySmallBold
-                    .copyWith(color: AppColors.grayLight),
+              Material(
+                color: AppColors.primaryLighter,
+                borderRadius: BorderRadius.circular(AppSizes.radius_12),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: AppSizes.mp_w_4 * 1.2,
+                    vertical: AppSizes.mp_v_1,
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+                        width: 50.w, // Set a specific width
+                        height: 9.h, // Set a specific height
+                        child: Center(
+                          child: Text(
+                            "doubled@doubled.com",
+                            textAlign: TextAlign.left,
+                            style: AppTextStyles.titleBold.copyWith(
+                              color: AppColors.primary,
+                              fontSize: AppSizes.font_14,
+                            ),
+                            overflow: TextOverflow.fade,
+                          ),
+                        ),
+                      ),
+                      ButtonWhiteFill(
+                        buttonSizeType: ButtonSizeType.SMALL,
+                        text: 'Copy',
+                        onTap: () {},
+                        isDisabled: false,
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ],
           ),
         ),
-        // ButtonPrimaryFill(
-        //   buttonSizeType: ButtonSizeType.LARGE,
-        //   isDisabled: false,
-        //   text: "Go to log in",
-        //   onTap: () {},
-        // ),
+        ButtonPrimaryFill(
+          buttonSizeType: ButtonSizeType.LARGE,
+          isDisabled: false,
+          text: "Go to log in",
+          onTap: () {
+            Get.toNamed(Routes.LOGIN);
+          },
+          isterms: false,
+        ),
         SizedBox(
           height: AppSizes.mp_v_4,
         ),
