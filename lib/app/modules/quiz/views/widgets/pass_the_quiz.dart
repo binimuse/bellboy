@@ -29,7 +29,7 @@ class Passthequiz extends GetView<QuizController> {
             child: Column(
               children: [
                 SizedBox(
-                  height: AppSizes.mp_v_8,
+                  height: AppSizes.mp_v_10,
                 ),
 
                 ///BUILD HEADER
@@ -117,7 +117,8 @@ class Passthequiz extends GetView<QuizController> {
             child: Text(
                 "You just passed our verification. You can use the app after the administrator's authentication. Just wait for reference.",
                 textAlign: TextAlign.center,
-                style: AppTextStyles.bodyLargeRegular),
+                style: AppTextStyles.bodyLargeRegular
+                    .copyWith(fontSize: AppSizes.font_16)),
           ),
         ],
       ),
@@ -144,32 +145,26 @@ class Passthequiz extends GetView<QuizController> {
 
   buildScore() {
     return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text("80",
-            textAlign: TextAlign.center,
-            style: AppTextStyles.bodyLargeRegular.copyWith(
-                fontSize: AppSizes.font_64, color: AppColors.primary)),
-      ),
+      child: Text("80",
+          textAlign: TextAlign.center,
+          style: AppTextStyles.bodyLargeRegular
+              .copyWith(fontSize: AppSizes.font_64, color: AppColors.primary)),
     );
   }
 
   buildOverallscore() {
     return Align(
       alignment: Alignment.center,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ClipRRect(
-          borderRadius:
-              BorderRadius.circular(15.0), // Adjust the radius as needed
-          child: Container(
-            color: AppColors.primary.withOpacity(0.2),
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              '  ${controller.questionNumber}/${controller.questions.length}  ',
-              style: AppTextStyles.bodySmallBold
-                  .copyWith(color: AppColors.primary),
-            ),
+      child: ClipRRect(
+        borderRadius:
+            BorderRadius.circular(15.0), // Adjust the radius as needed
+        child: Container(
+          color: AppColors.primary.withOpacity(0.2),
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            '  ${controller.questionNumber}/${controller.questions.length}  ',
+            style:
+                AppTextStyles.bodySmallBold.copyWith(color: AppColors.primary),
           ),
         ),
       ),

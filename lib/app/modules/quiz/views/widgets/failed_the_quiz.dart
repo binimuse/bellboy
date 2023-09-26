@@ -29,7 +29,7 @@ class Failedthequiz extends GetView<QuizController> {
             child: Column(
               children: [
                 SizedBox(
-                  height: AppSizes.mp_v_8,
+                  height: AppSizes.mp_v_10,
                 ),
 
                 ///BUILD HEADER
@@ -169,32 +169,26 @@ class Failedthequiz extends GetView<QuizController> {
 
   buildScore() {
     return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(5.0),
-        child: Text("20",
-            textAlign: TextAlign.center,
-            style: AppTextStyles.bodyLargeRegular.copyWith(
-                fontSize: AppSizes.font_64, color: AppColors.grayDefault)),
-      ),
+      child: Text("20",
+          textAlign: TextAlign.center,
+          style: AppTextStyles.bodyLargeRegular.copyWith(
+              fontSize: AppSizes.font_64, color: AppColors.grayDefault)),
     );
   }
 
   buildOverallscore() {
     return Align(
       alignment: Alignment.center,
-      child: Padding(
-        padding: const EdgeInsets.all(2.0),
-        child: ClipRRect(
-          borderRadius:
-              BorderRadius.circular(20.0), // Adjust the radius as needed
-          child: Container(
-            color: AppColors.grayLighter.withOpacity(0.3),
-            padding: const EdgeInsets.all(4.0),
-            child: Text(
-              '  ${controller.questionNumber}/${controller.questions.length}  ',
-              style: AppTextStyles.bodySmallBold
-                  .copyWith(color: AppColors.grayDefault),
-            ),
+      child: ClipRRect(
+        borderRadius:
+            BorderRadius.circular(20.0), // Adjust the radius as needed
+        child: Container(
+          color: AppColors.grayLighter.withOpacity(0.3),
+          padding: const EdgeInsets.all(4.0),
+          child: Text(
+            '  ${controller.questionNumber}/${controller.questions.length}  ',
+            style: AppTextStyles.bodySmallBold
+                .copyWith(color: AppColors.grayDefault),
           ),
         ),
       ),

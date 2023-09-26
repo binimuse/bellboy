@@ -54,6 +54,7 @@ class _SignUpUserNameState extends State<SignUpUserName> {
                     TextInputAll(
                       controller: controller.fNameController,
                       hint: 'First name',
+                      showClearButton: false,
                       autoFocus: true,
                       onChanged: (value) {
                         bool isValid = controller.validateusername();
@@ -71,6 +72,7 @@ class _SignUpUserNameState extends State<SignUpUserName> {
                     TextInputAll(
                       controller: controller.lNameController,
                       hint: 'Last name',
+                      showClearButton: false,
                       onChanged: (value) {
                         setState(() {
                           bool isValid = controller.validateusername();

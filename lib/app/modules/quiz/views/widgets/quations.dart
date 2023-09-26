@@ -4,6 +4,7 @@ import 'package:bellboy/app/common/widgets/app_toasts.dart';
 import 'package:bellboy/app/common/widgets/buttons/button_primary_fill.dart';
 import 'package:bellboy/app/config/theme/app_colors.dart';
 import 'package:bellboy/app/config/theme/app_text_styles.dart';
+import 'package:bellboy/app/modules/quiz/views/widgets/pass_the_quiz.dart';
 import 'package:bellboy/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -12,6 +13,7 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../controllers/quiz_controller.dart';
+import 'failed_all_the_quiz.dart';
 import 'failed_the_quiz.dart';
 
 class QuationsView extends GetView<QuizController> {
@@ -24,70 +26,40 @@ class QuationsView extends GetView<QuizController> {
         ? Scaffold(
             appBar: getAppBar(),
             body: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                LinearProgressIndicator(
-                  color: AppColors.primary,
-                  backgroundColor: AppColors.grayLighter,
-                  value: controller.selectedAnswerIndex.value == -1
-                      ? controller.currentIndex.value /
-                          controller.questions.value.length
-                      : (controller.currentIndex.value + 1) /
-                          controller.questions.value.length,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      getNumber(),
-                      getQuestion(),
-                      SizedBox(height: 1.h),
-                      getimage(),
-                      SizedBox(height: 1.h),
-                      getAnswerOptions(),
-                      const SizedBox(height: 16),
-                      ButtonPrimaryFill(
-                        isterms: false,
-                        buttonSizeType: ButtonSizeType.LARGE,
-                        isDisabled: controller.selectedAnswerIndex.value == -1,
-                        text: () {
-                          final currentQuestionIndex =
-                              controller.questionNumber;
-                          final totalQuestions = controller.questions.length;
-
-                          if (currentQuestionIndex < totalQuestions) {
-                            return 'Next';
-                          } else {
-                            return 'Quiz complete';
-                          }
-                        }(),
-                        onTap: () {
-                          if (controller.selectedAnswerIndex.value == -1) {
-                            AppToasts.showError(
-                                "select an answer before proceeding   ");
-                          } else {
-                            // An answer has been selected, proceed to the next question.
-                            controller.answerQuestion(
-                                controller.selectedAnswerIndex.value);
-                            final currentQuestionIndex =
-                                controller.questionNumber;
-                            final totalQuestions = controller.questions.length;
-
-                            if (currentQuestionIndex < totalQuestions) {
-                              controller.nextQuestion();
-                              controller.questionNumber++;
-                            } else {
-                              // Last question, quiz complete
-                              // Perform any necessary actions or navigate to a different screen
-                              Get.to(const Failedthequiz());
-                            }
-                          }
-                        },
-                      )
-                    ],
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        LinearProgressIndicator(
+                          color: AppColors.primary,
+                          backgroundColor: AppColors.grayLighter,
+                          value: controller.selectedAnswerIndex.value == -1
+                              ? controller.currentIndex.value /
+                                  controller.questions.value.length
+                              : (controller.currentIndex.value + 1) /
+                                  controller.questions.value.length,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              getNumber(),
+                              getQuestion(),
+                              getimage(),
+                              SizedBox(height: 1.h),
+                              getAnswerOptions(),
+                              SizedBox(height: 1.h),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
+                buildButton(),
               ],
             ),
           )
@@ -195,7 +167,6 @@ class QuationsView extends GetView<QuizController> {
               onTap: () async {
                 controller.selectedAnswerIndex.value = index;
                 await Future.delayed(const Duration(milliseconds: 400));
-
                 controller.answerQuestion(index);
               },
               child: Container(
@@ -219,9 +190,12 @@ class QuationsView extends GetView<QuizController> {
                 child: Row(
                   children: [
                     Expanded(
-                      child: Text(answer,
-                          style: AppTextStyles.bodyLargeBold
-                              .copyWith(color: AppColors.black)),
+                      child: Text(
+                        answer,
+                        style: AppTextStyles.bodyLargeBold.copyWith(
+                          color: AppColors.black,
+                        ),
+                      ),
                     ),
                     Container(
                       width: 24,
@@ -229,8 +203,10 @@ class QuationsView extends GetView<QuizController> {
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         border: Border.all(
-                          color: Colors.transparent,
-                          width: selectedIndex == index ? 1.0 : 0.0,
+                          color: selectedIndex == index
+                              ? Colors.transparent
+                              : AppColors.grayDark.withOpacity(0.4),
+                          width: 1.0,
                         ),
                         color: selectedIndex == index
                             ? AppColors.primary
@@ -279,5 +255,45 @@ class QuationsView extends GetView<QuizController> {
     } else {
       return const SizedBox();
     }
+  }
+
+  buildButton() {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: ButtonPrimaryFill(
+        isterms: false,
+        buttonSizeType: ButtonSizeType.LARGE,
+        isDisabled: controller.selectedAnswerIndex.value == -1,
+        text: () {
+          final currentQuestionIndex = controller.questionNumber;
+          final totalQuestions = controller.questions.length;
+
+          if (currentQuestionIndex < totalQuestions) {
+            return 'Next';
+          } else {
+            return 'Quiz complete';
+          }
+        }(),
+        onTap: () {
+          if (controller.selectedAnswerIndex.value == -1) {
+            AppToasts.showError("select an answer before proceeding   ");
+          } else {
+            // An answer has been selected, proceed to the next question.
+            controller.answerQuestion(controller.selectedAnswerIndex.value);
+            final currentQuestionIndex = controller.questionNumber;
+            final totalQuestions = controller.questions.length;
+
+            if (currentQuestionIndex < totalQuestions) {
+              controller.nextQuestion();
+              controller.questionNumber++;
+            } else {
+              // Last question, quiz complete
+              // Perform any necessary actions or navigate to a different screen
+              Get.to(const Passthequiz());
+            }
+          }
+        },
+      ),
+    );
   }
 }

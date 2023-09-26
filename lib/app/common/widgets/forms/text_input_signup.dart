@@ -4,6 +4,7 @@ import 'package:bellboy/app/config/theme/app_text_styles.dart';
 import 'package:bellboy/app/modules/signup/controllers/signup_controller.dart';
 import 'package:bellboy/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class TextInputSignup extends StatefulWidget {
@@ -70,55 +71,69 @@ class _TextInputLoginState extends State<TextInputSignup> {
       children: [
         TextFormField(
           cursorColor: AppColors.primary,
-          autofocus: widget.autofocus,
           controller: widget.controller,
-          textInputAction:
-              widget.isPassword ? TextInputAction.done : TextInputAction.next,
-          style: AppTextStyles.titleBold.copyWith(color: AppColors.blackLight),
-          obscureText: checkIsPassword() && !isPasswordVisible, // Modified line
-          obscuringCharacter: '●',
-
-          validator: widget.validator,
+          autofocus: widget.autofocus ?? false,
+          style: AppTextStyles.titleBold.copyWith(
+            color: AppColors.blackLight,
+            fontSize:
+                checkIsPassword() ? AppSizes.font_14 * 0.9 : AppSizes.font_16,
+          ),
+          obscureText: checkIsPassword(),
+          obscuringCharacter: '⬤',
+          //obscuringCharacter: '\u2022', // Customize the obscuring character
           decoration: InputDecoration(
-            //  labelText: widget.hint,
+            contentPadding: EdgeInsets.only(
+              bottom: checkIsPassword()
+                  ? AppSizes.mp_v_1 * 1.2
+                  : AppSizes.mp_v_1 / 2,
+              top: AppSizes.mp_v_1 / 2,
+            ),
+            labelText: _isFocused ? widget.hint : null,
             hintText: _isFocused ? null : widget.hint,
             hintStyle:
                 AppTextStyles.titleBold.copyWith(color: AppColors.grayLighter),
             labelStyle:
                 AppTextStyles.captionBold.copyWith(color: AppColors.grayLight),
-            floatingLabelBehavior: FloatingLabelBehavior.always,
-            suffixIcon: _showClearButton && widget.focusNode!.hasFocus
-                ? Padding(
-                    padding: const EdgeInsets.only(
-                        top: 6), // adjust the value as needed
-                    child: IconButton(
-                      icon: SvgPicture.asset(
+            floatingLabelBehavior: FloatingLabelBehavior.auto,
+            suffixIconConstraints: BoxConstraints(
+              maxWidth: AppSizes.icon_size_10,
+              maxHeight: AppSizes.icon_size_10,
+            ),
+            suffixIcon: _showClearButton
+                ? Bounce(
+                    // padding: EdgeInsets.zero,
+                    onPressed: () {
+                      setState(() {
+                        widget.controller.clear();
+                        _showClearButton = false;
+
+                        bool isValid = widget.signupController!.validateEmail();
+                        widget.signupController!.isEmailValidated.value =
+                            isValid;
+
+                        if (isValid) {
+                          widget.signupController!
+                              .isNextPressed(false); // Reset Next button
+                        } else {
+                          widget.signupController!.isNextPressed(false);
+                        }
+                        //  widget.logincontroller!.isPasswordValid(false);
+                      });
+                    },
+                    duration: const Duration(milliseconds: 120),
+                    // padding: EdgeInsets.zero,
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                        top: AppSizes.mp_v_1,
+                      ),
+                      child: SvgPicture.asset(
                         Assets.icons.cancel,
                         color: AppColors.grayLight,
+                        fit: BoxFit.contain,
                       ),
-                      onPressed: () {
-                        setState(() {
-                          widget.controller.clear();
-                          _showClearButton = false;
-
-                          bool isValid =
-                              widget.signupController!.validateEmail();
-                          widget.signupController!.isEmailValidated.value =
-                              isValid;
-
-                          if (isValid) {
-                            widget.signupController!
-                                .isNextPressed(false); // Reset Next button
-                          } else {
-                            widget.signupController!.isNextPressed(false);
-                          }
-                          //  widget.logincontroller!.isPasswordValid(false);
-                        });
-                      },
                     ),
                   )
                 : null,
-
             disabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(
                 color: AppColors.grayLight,
@@ -220,6 +235,10 @@ class _TextInputLoginState extends State<TextInputSignup> {
 
   buildHideUnhideButton() {
     return MaterialButton(
+      padding: EdgeInsets.only(
+        left: AppSizes.mp_w_2,
+        right: AppSizes.mp_w_1 / 2,
+      ),
       onPressed: () {
         setState(() {
           isPasswordVisible =

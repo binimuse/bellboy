@@ -29,6 +29,7 @@ class Reviewthequiz extends GetView<QuizController> {
               title: card.title,
               image: card.image,
               text: card.text,
+              isCorrect: card.iscorrect,
             ),
           );
         },
@@ -79,11 +80,13 @@ class CardWidget extends StatelessWidget {
   final String title;
   final String image;
   final String text;
+  final bool isCorrect;
 
   const CardWidget({
     required this.title,
     required this.image,
     required this.text,
+    required this.isCorrect,
     Key? key,
   }) : super(key: key);
 
@@ -117,7 +120,8 @@ class CardWidget extends StatelessWidget {
   getNumber() {
     return Text(
       'Q${1}',
-      style: AppTextStyles.titleBold.copyWith(color: AppColors.success),
+      style: AppTextStyles.titleBold.copyWith(
+          color: isCorrect == true ? AppColors.success : AppColors.danger),
     );
   }
 
@@ -187,7 +191,8 @@ class CardWidget extends StatelessWidget {
   getAnswer2() {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.successLight,
+        color:
+            isCorrect == true ? AppColors.successLight : AppColors.dangerLight,
         borderRadius: BorderRadius.circular(8.0),
       ),
       child: IntrinsicHeight(
@@ -195,8 +200,12 @@ class CardWidget extends StatelessWidget {
           children: [
             IconButton(
               icon: SvgPicture.asset(
-                Assets.icons.doneRound,
-                color: AppColors.successDark,
+                isCorrect == true
+                    ? Assets.icons.doneRound
+                    : Assets.icons.cancelbig,
+                color: isCorrect == true
+                    ? AppColors.successDark
+                    : AppColors.danger,
               ),
               onPressed: () {
                 Get.back();
@@ -204,9 +213,13 @@ class CardWidget extends StatelessWidget {
             ),
             SizedBox(width: 2.0),
             Text(
-              "That's right.",
+              isCorrect == true
+                  ? "That's the right answer"
+                  : "That's the wrong answer",
               style: AppTextStyles.bodySmallBold.copyWith(
-                color: AppColors.successDark,
+                color: isCorrect == true
+                    ? AppColors.successDark
+                    : AppColors.warning,
               ),
             ),
           ],
@@ -220,25 +233,28 @@ class CardData {
   final String title;
   final String image;
   final String text;
+  final bool iscorrect;
 
   CardData({
     required this.title,
     required this.image,
     required this.text,
+    required this.iscorrect,
   });
 }
 
 final List<CardData> cardData = [
   CardData(
-    title: "Card 1",
-    image:
-        "https://cdn.pixabay.com/photo/2014/10/10/21/58/earth-483978_1280.png",
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  ),
+      title: "Card 1",
+      image:
+          "https://cdn.pixabay.com/photo/2014/10/10/21/58/earth-483978_1280.png",
+      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      iscorrect: true),
   CardData(
-    title: "Card 2",
-    image: "assets/images/image2.png",
-    text: "Nulla facilisi. Sed euismod, turpis quis tincidunt ultrices.",
-  ),
+      title: "Card 2",
+      image:
+          "https://cdn.pixabay.com/photo/2014/10/10/21/58/earth-483978_1280.png",
+      text: "Nulla facilisi. Sed euismod, turpis quis tincidunt ultrices.",
+      iscorrect: false),
   // Add more card data as needed
 ];

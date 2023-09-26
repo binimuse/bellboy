@@ -54,7 +54,8 @@ class LoginView extends GetView<LoginController> {
                               SizedBox(height: 1.h),
 
                               // Show Password field only when Next is pressed
-                              if (controller.isNextPressed.value)
+                              if (controller.isNextPressed.value ||
+                                  controller.passwordController.text.isNotEmpty)
                                 buildPasswordinput()
                             ],
                           ),
@@ -69,7 +70,10 @@ class LoginView extends GetView<LoginController> {
                 children: [
                   Obx(
                     () => SizedBox(
-                      height: controller.isNextPressed.value ? 0.0 : 90,
+                      height: controller.isNextPressed.value ||
+                              controller.passwordController.text.isNotEmpty
+                          ? 0.0
+                          : 90,
                     ),
                   ),
                   Padding(

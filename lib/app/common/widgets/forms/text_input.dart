@@ -15,11 +15,13 @@ class TextInputAll extends StatefulWidget {
     required this.controller,
     this.autoFocus,
     this.focusNode,
+    required this.showClearButton,
     this.onChanged, // Added onChanged callback
   }) : super(key: key);
 
   final String hint;
   final bool? isPassword;
+  final bool showClearButton;
   final List<String>? moreInstructions;
   final TextEditingController controller;
   final bool? autoFocus;
@@ -31,17 +33,16 @@ class TextInputAll extends StatefulWidget {
 }
 
 class _TextInputLoginState extends State<TextInputAll> {
-  bool _showClearButton = false;
   bool _isFocused = false;
 
   @override
   void initState() {
     super.initState();
-    widget.controller.addListener(() {
-      setState(() {
-        _showClearButton = widget.controller.text.isNotEmpty;
-      });
-    });
+    // widget.controller.addListener(() {
+    //   setState(() {
+    //     widget.showClearButton = widget.controller.text.isNotEmpty;
+    //   });
+    // });
 
     if (widget.focusNode != null) {
       widget.focusNode!.addListener(_onFocusChange);
@@ -94,13 +95,13 @@ class _TextInputLoginState extends State<TextInputAll> {
               maxWidth: AppSizes.icon_size_10,
               maxHeight: AppSizes.icon_size_10,
             ),
-            suffixIcon: _showClearButton
+            suffixIcon: widget.showClearButton
                 ? Bounce(
                     // padding: EdgeInsets.zero,
                     onPressed: () {
                       setState(() {
                         widget.controller.clear();
-                        _showClearButton = false;
+
                         _isFocused = false;
                       });
                     },

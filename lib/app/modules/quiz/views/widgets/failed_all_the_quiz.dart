@@ -27,7 +27,7 @@ class Failedallthequiz extends GetView<QuizController> {
             child: Column(
               children: [
                 SizedBox(
-                  height: AppSizes.mp_v_6,
+                  height: AppSizes.mp_v_10,
                 ),
 
                 ///BUILD HEADER
@@ -107,7 +107,7 @@ class Failedallthequiz extends GetView<QuizController> {
             padding: const EdgeInsets.all(8.0),
             child: Text("Please try again in a month",
                 textAlign: TextAlign.center,
-                style: AppTextStyles.displayTwoBold),
+                style: AppTextStyles.displayOneBold),
           ),
           Padding(
             padding: const EdgeInsets.all(16.0),
@@ -139,32 +139,26 @@ class Failedallthequiz extends GetView<QuizController> {
 
   buildScore() {
     return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text("10",
-            textAlign: TextAlign.center,
-            style: AppTextStyles.bodyLargeRegular.copyWith(
-                fontSize: AppSizes.font_64, color: AppColors.grayDefault)),
-      ),
+      child: Text("10",
+          textAlign: TextAlign.center,
+          style: AppTextStyles.bodyLargeRegular.copyWith(
+              fontSize: AppSizes.font_64, color: AppColors.grayDefault)),
     );
   }
 
   buildOverallscore() {
     return Align(
       alignment: Alignment.center,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ClipRRect(
-          borderRadius:
-              BorderRadius.circular(15.0), // Adjust the radius as needed
-          child: Container(
-            color: AppColors.grayLighter.withOpacity(0.3),
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              '  ${controller.questionNumber}/${controller.questions.length}  ',
-              style: AppTextStyles.bodySmallBold
-                  .copyWith(color: AppColors.grayDefault),
-            ),
+      child: ClipRRect(
+        borderRadius:
+            BorderRadius.circular(15.0), // Adjust the radius as needed
+        child: Container(
+          color: AppColors.grayLighter.withOpacity(0.3),
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            '  ${controller.questionNumber}/${controller.questions.length}  ',
+            style: AppTextStyles.bodySmallBold
+                .copyWith(color: AppColors.grayDefault),
           ),
         ),
       ),
