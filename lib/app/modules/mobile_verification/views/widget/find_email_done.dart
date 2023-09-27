@@ -21,7 +21,7 @@ class ForgotEmailtDone extends GetView<MobileVerificationController> {
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: AppSizes.mp_w_6),
-          child: buildEmailNotFound(),
+          child: buildEmailDound(),
         ),
       ),
     );

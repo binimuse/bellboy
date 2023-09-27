@@ -255,8 +255,8 @@ class MobileVerificationView extends GetView<MobileVerificationController> {
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(20.0),
-              topRight: Radius.circular(20.0),
+              topLeft: Radius.circular(24.0),
+              topRight: Radius.circular(24.0),
             ),
             color: AppColors.whiteOff, // Add desired background color
           ),
