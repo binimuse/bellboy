@@ -45,7 +45,7 @@ class FindPasswordView extends GetView<FindPasswordController> {
                   ),
                   TextInputLogin(
                     autofocus: true,
-                    
+                    focusNode: controller.passwordFocusNode,
                     hint: 'Email',
                     controller: controller.emailController,
                     onChanged: (value) {

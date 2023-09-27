@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 class FindPasswordController extends GetxController {
   late TextEditingController emailController = TextEditingController();
-
+  final passwordFocusNode = FocusNode();
   final count = 0.obs;
   @override
   void onInit() {

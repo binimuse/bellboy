@@ -8,11 +8,10 @@ import 'package:bellboy/app/config/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:sizer/sizer.dart';
 
 import '../controllers/mobile_verification_controller.dart';
-import 'package:otp_text_field/otp_text_field.dart';
-import 'package:otp_text_field/style.dart';
 
 import 'widget/find_email_done.dart';
 
@@ -38,74 +37,77 @@ class MobileVerificationView extends GetView<MobileVerificationController> {
             SingleChildScrollView(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8.w),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Mobile verification",
-                      textAlign: TextAlign.start,
-                      style: AppTextStyles.displayOneBold,
-                    ),
-                    SizedBox(
-                      height: AppSizes.mp_v_1,
-                    ),
-                    Text(
-                      "Before ordering, we need your phone number.",
-                      textAlign: TextAlign.start,
-                      style: AppTextStyles.bodySmallRegular
-                          .copyWith(color: AppColors.grayDark),
-                    ),
-                    SizedBox(
-                      height: AppSizes.mp_v_2,
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Column(
-                          children: [
-                            buildCountryCode(),
-                            SizedBox(
-                              height: AppSizes.mp_v_1,
-                            ),
-                            SizedBox(
-                              width: 29.w,
-                              child: Divider(
-                                color: AppColors.grayLighter,
-                                thickness: 1,
-                                height: 1,
+                child: Form(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Mobile verification",
+                        textAlign: TextAlign.start,
+                        style: AppTextStyles.displayOneBold,
+                      ),
+                      SizedBox(
+                        height: AppSizes.mp_v_1,
+                      ),
+                      Text(
+                        "Before ordering, we need your phone number.",
+                        textAlign: TextAlign.start,
+                        style: AppTextStyles.bodySmallRegular
+                            .copyWith(color: AppColors.grayDark),
+                      ),
+                      SizedBox(
+                        height: AppSizes.mp_v_2,
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Column(
+                            children: [
+                              buildCountryCode(),
+                              SizedBox(
+                                height: AppSizes.mp_v_1,
                               ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          width: AppSizes.mp_w_4,
-                        ),
-                        buildPhonenumber(),
-                      ],
-                    ),
-                    SizedBox(
-                      height: AppSizes.mp_v_1,
-                    ),
-                    Obx(() => controller.isPhoneValid.value &&
-                            controller.isNextPressed.value
-                        ? buildOTpnumber()
-                        : const SizedBox()),
-                    SizedBox(
-                      height: AppSizes.mp_v_1,
-                    ),
-                    Obx(() => controller.isPhoneValid.value &&
-                            controller.isNextPressed.value
-                        ? Align(
-                            alignment: Alignment.topRight,
-                            child: ButtonGrayScaleOutlineWithOutIcon(
-                              buttonSizeType: ButtonSizeType.SMALL,
-                              text: 'Resend',
-                              onTap: () {},
-                              isDisabled: false,
-                            ),
-                          )
-                        : const SizedBox()),
-                  ],
+                              SizedBox(
+                                width: 34.w,
+                                child: Divider(
+                                  color: AppColors.grayLighter,
+                                  thickness: 1,
+                                  height: 1,
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            width: AppSizes.mp_w_4,
+                          ),
+                          buildPhonenumber(),
+                        ],
+                      ),
+                      SizedBox(
+                        height: AppSizes.mp_v_1,
+                      ),
+                      Obx(() => controller.isPhoneValid.value &&
+                              controller.isNextPressed.value
+                          ? buildOTPNumber(context)
+                          : const SizedBox()),
+                      SizedBox(
+                        height: AppSizes.mp_v_1,
+                      ),
+                      Obx(() => controller.isPhoneValid.value &&
+                              controller.isNextPressed.value &&
+                              !controller.isOtpValid.value
+                          ? Align(
+                              alignment: Alignment.topRight,
+                              child: ButtonGrayScaleOutlineWithOutIcon(
+                                buttonSizeType: ButtonSizeType.SMALL,
+                                text: 'Resend',
+                                onTap: () {},
+                                isDisabled: true,
+                              ),
+                            )
+                          : SizedBox()),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -115,7 +117,8 @@ class MobileVerificationView extends GetView<MobileVerificationController> {
             Column(
               children: [
                 Obx(() => controller.isPhoneValid.value &&
-                        controller.isNextPressed.value
+                        controller.isNextPressed.value &&
+                        !controller.isOtpValid.value
                     ? buildIdidntrecive(context)
                     : const SizedBox()),
                 Obx(() => Padding(
@@ -140,6 +143,8 @@ class MobileVerificationView extends GetView<MobileVerificationController> {
                             // Logic for when the "Enter your phone number" button is pressed
                           } else if (!controller.isNextPressed.value) {
                             controller.isNextPressed(true);
+                            FocusScope.of(context)
+                                .requestFocus(controller.otpFocusNode);
                             // Logic for when the "Next" button is pressed
                           } else if (!controller.isOtpValid.value) {
                             // Logic for when the "Enter 6-digit code" button is pressed
@@ -150,7 +155,7 @@ class MobileVerificationView extends GetView<MobileVerificationController> {
                         },
                       ),
                     )),
-                SizedBox(height: 2.h),
+                SizedBox(height: 1.h),
               ],
             ),
           ],
@@ -186,46 +191,46 @@ class MobileVerificationView extends GetView<MobileVerificationController> {
 
   buildPhonenumber() {
     return Expanded(
-      child: PhoneNumberInput(
-        hint: 'Phone number',
-        autofocus: true,
-        controller: controller.phoneController,
-        onChanged: (value) {
-          // Validate password on type
-          bool isValid =
-              controller.validatPhone(); // Pass the value to validatePassword
-          controller.isPhoneValid.value = isValid;
+        child: PhoneNumberInput(
+      hint: 'Phone number',
+      focusNode: controller.phoneFocusNode,
+      autofocus: true,
+      controller: controller.phoneController,
+      onChanged: (value) {
+        // Validate password on type
+        bool isValid =
+            controller.validatPhone(); // Pass the value to validatePassword
+        controller.isPhoneValid.value = isValid;
 
-          // Check if the password is valid and display the appropriate text
-        },
-        validator: (value) {
-          if (value!.isEmpty) {
-            return 'Please enter your Password';
-          }
-          if (!controller.isPhoneValid.value) {
-            return 'Password must be at least 8 characters';
-          }
-          return null;
-        },
-      ),
-    );
+        // Check if the password is valid and display the appropriate text
+      },
+      validator: (value) {
+        if (value!.isEmpty) {
+          return 'Please enter your Password';
+        }
+        if (!controller.isPhoneValid.value) {
+          return 'Password must be at least 8 characters';
+        }
+        return null;
+      },
+    ));
   }
 
-  buildOTpnumber() {
-    return OTPTextField(
+  buildOTPNumber(BuildContext context) {
+    return PinCodeTextField(
+      focusNode: controller.otpFocusNode,
       length: 6,
-      width: 90.w,
-      fieldWidth: AppSizes.icon_size_12,
-      otpFieldStyle: OtpFieldStyle(
-        borderColor: AppColors.grayDark,
-        focusBorderColor: AppColors.grayDark,
-        disabledBorderColor: AppColors.grayLight,
-        enabledBorderColor: AppColors.grayLight,
-        errorBorderColor: AppColors.danger,
+      autoDisposeControllers: false,
+      controller: controller.otpController,
+      keyboardType: TextInputType.number,
+      cursorColor: AppColors.primary,
+      animationType: AnimationType.none,
+      animationDuration: Duration.zero,
+      pinTheme: PinTheme(
+        activeColor: AppColors.grayDark,
+        inactiveColor: AppColors.grayLight,
+        selectedColor: AppColors.grayDark,
       ),
-      style: AppTextStyles.bodyLargeBold,
-      textFieldAlignment: MainAxisAlignment.spaceBetween,
-      fieldStyle: FieldStyle.underline,
       onCompleted: (pin) {},
       onChanged: (pin) {
         if (pin.length == 6) {
@@ -234,6 +239,7 @@ class MobileVerificationView extends GetView<MobileVerificationController> {
           controller.isOtpValid(false);
         }
       },
+      appContext: context,
     );
   }
 

@@ -132,6 +132,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/crop.svg
   String get crop => 'assets/icons/crop.svg';
 
+  /// File path: assets/icons/customercenter.svg
+  String get customercenter => 'assets/icons/customercenter.svg';
+
   /// File path: assets/icons/customerservice.svg
   String get customerservice => 'assets/icons/customerservice.svg';
 
@@ -648,6 +651,7 @@ class $AssetsIconsGen {
         copy,
         coupon,
         crop,
+        customercenter,
         customerservice,
         dangerCircle,
         dangerTriangle,

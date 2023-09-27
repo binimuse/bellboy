@@ -16,7 +16,7 @@ class TextInputLogin extends StatefulWidget {
     this.logincontroller,
     this.validator,
     required this.autofocus,
-    this.focusNode,
+    required this.focusNode,
     this.onChanged, // Added onChanged callback
   }) : super(key: key);
 
@@ -26,7 +26,7 @@ class TextInputLogin extends StatefulWidget {
   final TextEditingController controller;
   final LoginController? logincontroller;
   final String? Function(String?)? validator;
-  final FocusNode? focusNode;
+  final FocusNode focusNode;
   final void Function(String)? onChanged; // Callback when the text changes
 
   @override
@@ -48,7 +48,7 @@ class _TextInputLoginState extends State<TextInputLogin> {
     });
 
     if (widget.focusNode != null) {
-      widget.focusNode!.addListener(_onFocusChange);
+      widget.focusNode.addListener(_onFocusChange);
     }
   }
 
@@ -58,7 +58,7 @@ class _TextInputLoginState extends State<TextInputLogin> {
 
   @override
   void dispose() {
-    widget.focusNode!.removeListener(_onFocusChange);
+    widget.focusNode.removeListener(_onFocusChange);
     super.dispose();
   }
 
@@ -97,9 +97,8 @@ class _TextInputLoginState extends State<TextInputLogin> {
               maxWidth: AppSizes.icon_size_10,
               maxHeight: AppSizes.icon_size_10,
             ),
-            suffixIcon: _showClearButton
+            suffixIcon: widget.focusNode.hasFocus && _showClearButton
                 ? Bounce(
-                    // padding: EdgeInsets.zero,
                     onPressed: () {
                       widget.controller.clear();
                       setState(() {
@@ -108,7 +107,6 @@ class _TextInputLoginState extends State<TextInputLogin> {
                       });
                     },
                     duration: const Duration(milliseconds: 120),
-                    // padding: EdgeInsets.zero,
                     child: Padding(
                       padding: EdgeInsets.only(
                         top: AppSizes.mp_v_1,

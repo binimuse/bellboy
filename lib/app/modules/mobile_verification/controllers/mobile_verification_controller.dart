@@ -4,13 +4,20 @@ import 'package:get/get.dart';
 class MobileVerificationController extends GetxController {
   late TextEditingController phoneController = TextEditingController();
   final count = 0.obs;
-
+  final phoneFocusNode = FocusNode();
+  FocusNode otpFocusNode = FocusNode();
+  TextEditingController otpController = TextEditingController();
+  List<TextEditingController> otpControllers =
+      List.generate(6, (index) => TextEditingController());
   var isPhoneValid = false.obs;
   var isNextPressed = false.obs;
   var isOtpValid = false.obs;
+  var isjustForinit = false.obs;
   @override
   void onInit() {
     phoneController = TextEditingController();
+    otpController = TextEditingController();
+    isjustForinit(true);
     super.onInit();
   }
 

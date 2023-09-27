@@ -289,8 +289,10 @@ class QuationsView extends GetView<QuizController> {
             } else {
               // Last question, quiz complete
               // Perform any necessary actions or navigate to a different screen
+              Get.to(const Failedthequiz());
               Get.to(const Passthequiz());
-                      }
+              Get.to(const Failedallthequiz());
+            }
           }
         },
       ),

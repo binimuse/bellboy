@@ -29,23 +29,22 @@ class QuizView extends GetView<QuizController> {
 
           Padding(
             padding: EdgeInsets.symmetric(
-              horizontal: AppSizes.mp_w_2,
+              horizontal: AppSizes.mp_w_1,
             ),
             child: Column(
               children: [
-                SizedBox(
-                  height: AppSizes.mp_v_6,
-                ),
-
                 ///BUILD HEADER
 
                 Container(
                   margin: EdgeInsets.symmetric(
                     horizontal: AppSizes.mp_w_4,
+                    vertical: AppSizes.mp_v_1,
                   ),
                   child: Image.asset(
                     'assets/images/quizimage.png',
                     fit: BoxFit.contain,
+                    height: 50.h,
+                    width: 50.h,
                   ),
                 ),
 
@@ -96,7 +95,7 @@ class QuizView extends GetView<QuizController> {
 
   sliderItem({required String imaUrl}) {
     return Padding(
-      padding: const EdgeInsets.all(12.0),
+      padding: const EdgeInsets.all(8.0),
       child: Image.asset(
         imaUrl,
         fit: BoxFit.cover,
@@ -113,7 +112,7 @@ class QuizView extends GetView<QuizController> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           SizedBox(
-            height: AppSizes.mp_v_2,
+            height: AppSizes.mp_v_1,
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -136,7 +135,7 @@ class QuizView extends GetView<QuizController> {
 
   buildActionButtons() {
     return Padding(
-      padding: EdgeInsets.all(12.sp),
+      padding: EdgeInsets.all(8.sp),
       child: Column(
         children: [
           CustomNormalButton(
@@ -152,7 +151,6 @@ class QuizView extends GetView<QuizController> {
               horizontal: AppSizes.mp_w_6,
             ),
             onPressed: () {
-              
               Get.to(QuationsView());
             },
           ),

@@ -45,7 +45,7 @@ class LoginView extends GetView<LoginController> {
                         textAlign: TextAlign.start,
                         style: AppTextStyles.displayOneBold,
                       ),
-                      SizedBox(height: 2.h),
+                      SizedBox(height: 1.h),
                       Obx(
                         () => Form(
                           child: Column(
@@ -73,13 +73,12 @@ class LoginView extends GetView<LoginController> {
                       height: controller.isNextPressed.value ||
                               controller.passwordController.text.isNotEmpty
                           ? 0.0
-                          : 90,
+                          : 5.h,
                     ),
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(
                       horizontal: AppSizes.mp_w_4,
-                      vertical: AppSizes.mp_v_2,
                     ),
                     child: Column(
                       children: [
@@ -98,13 +97,13 @@ class LoginView extends GetView<LoginController> {
                             buildFindPassswordButton(),
                           ],
                         ),
-                        SizedBox(height: 2.h),
+                        // SizedBox(height: 1.h),
                         Obx(
                           () => Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: buildButton(context)),
                         ),
-                        SizedBox(height: 2.h),
+                        SizedBox(height: 1.h),
                       ],
                     ),
                   ),
@@ -186,7 +185,7 @@ class LoginView extends GetView<LoginController> {
         );
       },
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 2.h),
+        padding: EdgeInsets.symmetric(vertical: 1.h),
         child: Center(
           child: Text(
             "Find email",
@@ -204,7 +203,7 @@ class LoginView extends GetView<LoginController> {
         Get.toNamed(Routes.FIND_PASSWORD);
       },
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 2.h),
+        padding: EdgeInsets.symmetric(vertical: 1.h),
         child: Center(
           child: Text(
             "Find password",
@@ -218,7 +217,7 @@ class LoginView extends GetView<LoginController> {
 
   buildButton(BuildContext context) {
     return ButtonPrimaryFillLogin(
-      buttonSizeType: ButtonSizeTypeLogin.LARGE,
+      buttonSizeType: ButtonSizeTypeLogin.MEDIUM,
       isDisabled: !controller.isEmailValidated.value ||
           (controller.isEmailValidated.value &&
               !controller.isNextPressed.value),
@@ -227,7 +226,9 @@ class LoginView extends GetView<LoginController> {
               ? controller.isPasswordValid.value
                   ? "Log in"
                   : "Enter password"
-              : "Next"
+              : controller.isPasswordValid.value
+                  ? "Log in"
+                  : "Next"
           : 'Enter your e-mail address',
       onTap: () {
         if (controller.isEmailValidated.value &&

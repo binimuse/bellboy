@@ -36,10 +36,15 @@ class ButtonGrayScaleOutlineWithOutIcon extends StatelessWidget {
           // ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppSizes.radius_8),
-            side: BorderSide(
-              color: AppColors.grayLight,
-              width: 2,
-            ),
+            side: !isDisabled
+                ? BorderSide(
+                    color: AppColors.grayLight,
+                    width: 1,
+                  )
+                : BorderSide(
+                    color: AppColors.grayLight,
+                    width: 0,
+                  ),
           ),
         ),
         onPressed: onTap,
@@ -54,7 +59,7 @@ class ButtonGrayScaleOutlineWithOutIcon extends StatelessWidget {
           child: Text(
             text,
             style: AppTextStyles.bodyLargeBold.copyWith(
-              color: AppColors.grayDark,
+              color: isDisabled ? AppColors.white70 : AppColors.grayDark,
             ),
           ),
         ),

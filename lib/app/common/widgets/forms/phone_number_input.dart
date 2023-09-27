@@ -16,14 +16,14 @@ class PhoneNumberInput extends StatefulWidget {
     required this.controller,
     required this.onChanged,
     this.validator,
-    this.focusNode,
+    required this.focusNode,
     this.autofocus = false,
   }) : super(key: key);
 
   final String hint;
   final TextEditingController controller;
   final String? Function(String?)? validator;
-  final FocusNode? focusNode;
+  final FocusNode focusNode;
   final void Function(String)? onChanged;
   final bool autofocus;
 
@@ -43,6 +43,20 @@ class _PhoneNumberInputState extends State<PhoneNumberInput> {
         _showClearButton = widget.controller.text.isNotEmpty;
       });
     });
+
+    if (widget.focusNode != null) {
+      widget.focusNode.addListener(_onFocusChange);
+    }
+  }
+
+  void _onFocusChange() {
+    setState(() {});
+  }
+
+  @override
+  void dispose() {
+    widget.focusNode.removeListener(_onFocusChange);
+    super.dispose();
   }
 
   @override
@@ -70,7 +84,7 @@ class _PhoneNumberInputState extends State<PhoneNumberInput> {
               maxWidth: AppSizes.icon_size_10,
               maxHeight: AppSizes.icon_size_10,
             ),
-            suffixIcon: _showClearButton
+            suffixIcon: widget.focusNode.hasFocus && _showClearButton
                 ? Bounce(
                     // padding: EdgeInsets.zero,
                     onPressed: () {
@@ -128,6 +142,11 @@ class _PhoneNumberInputState extends State<PhoneNumberInput> {
             setState(() {
               _isFocused = true;
             });
+
+            if (widget.focusNode != null) {
+              // Request focus for the field
+              FocusScope.of(context).requestFocus(widget.focusNode);
+            }
           },
           focusNode: widget.focusNode,
         ),

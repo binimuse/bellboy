@@ -14,6 +14,7 @@ class Failedallthequiz extends GetView<QuizController> {
   const Failedallthequiz({Key? key}) : super(key: key);
 
   @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -24,32 +25,37 @@ class Failedallthequiz extends GetView<QuizController> {
             padding: EdgeInsets.symmetric(
               horizontal: AppSizes.mp_w_2,
             ),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: AppSizes.mp_v_10,
-                ),
+            child: SingleChildScrollView(
+              // Add this
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: AppSizes.mp_v_10,
+                  ),
 
-                ///BUILD HEADER
-                buildScore(),
+                  ///BUILD HEADER
+                  buildScore(),
 
-                buildOverallscore(),
+                  buildOverallscore(),
 
-                buildImage(),
+                  buildImage(),
 
-                ///BUILD TITLE AND SUB TITLE
-                buildTitlAndSubTitle(context),
-                const Expanded(
-                  child: SizedBox(),
-                ),
-                ////BUILD ACTION BUTTONS
-                buildActionButtons2(),
+                  ///BUILD TITLE AND SUB TITLE
+                  buildTitlAndSubTitle(context),
 
-                const Expanded(
-                  child: SizedBox(),
-                ),
-              ],
-            ),
+                  SizedBox(
+                    height: 20, // Adjust this value as needed
+                  ),
+
+                  ////BUILD ACTION BUTTONS
+                  buildActionButtons2(),
+
+                  SizedBox(
+                    height: 20, // Adjust this value as needed
+                  ),
+                ],
+              ),
+            ), // And this
           ),
         ],
       ),

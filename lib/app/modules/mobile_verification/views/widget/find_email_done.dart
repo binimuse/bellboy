@@ -62,7 +62,7 @@ class ForgotEmailtDone extends GetView<MobileVerificationController> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SvgPicture.asset(
-                    Assets.icons.customerservice,
+                    Assets.icons.customercenter,
                     color: AppColors.grayLight,
                   ),
                   SizedBox(
@@ -135,15 +135,15 @@ class ForgotEmailtDone extends GetView<MobileVerificationController> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       SizedBox(
-                        width: 50.w, // Set a specific width
-                        height: 9.h, // Set a specific height
+                        width: 55.w, // Set a specific width
+
                         child: Center(
                           child: Text(
                             "doubled@doubled.com",
                             textAlign: TextAlign.left,
                             style: AppTextStyles.titleBold.copyWith(
                               color: AppColors.primary,
-                              fontSize: AppSizes.font_18,
+                              fontSize: AppSizes.font_16,
                             ),
                             overflow: TextOverflow.fade,
                           ),

@@ -99,7 +99,7 @@ class _TextInputLoginState extends State<TextInputSignup> {
               maxWidth: AppSizes.icon_size_10,
               maxHeight: AppSizes.icon_size_10,
             ),
-            suffixIcon: _showClearButton
+            suffixIcon: widget.focusNode!.hasFocus && _showClearButton
                 ? Bounce(
                     // padding: EdgeInsets.zero,
                     onPressed: () {
