@@ -246,45 +246,65 @@ class MobileVerificationView extends GetView<MobileVerificationController> {
   showbottomSheet(BuildContext context) {
     return showModalBottomSheet(
       context: context,
+      backgroundColor: Colors.transparent,
       builder: (BuildContext context) {
+        final screenWidth = MediaQuery.of(context).size.width;
         return Container(
-          height: 40.h,
+          width: screenWidth,
+          height: 40.0.h,
           padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(20.0),
+              topRight: Radius.circular(20.0),
+            ),
+            color: AppColors.whiteOff, // Add desired background color
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Center(
                 child: Text(
                   'I didn’t receive a code',
-                  style: AppTextStyles.headlineBold
-                      .copyWith(color: AppColors.black),
+                  style: AppTextStyles.headlineBold.copyWith(
+                    color: AppColors.black,
+                    fontSize: AppSizes.font_20,
+                  ),
                 ),
               ),
-              const SizedBox(height: 10),
+              SizedBox(height: 2.h),
               Text(
                 'Check your phone number',
-                style: AppTextStyles.bodySmallBold
-                    .copyWith(color: AppColors.black),
+                style: AppTextStyles.bodySmallBold.copyWith(
+                  color: AppColors.black,
+                  fontSize: AppSizes.font_14,
+                ),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 1.0.h),
               Text(
-                'Make sure that you entered your phone number correctly..',
-                style: AppTextStyles.bodySmallRegular
-                    .copyWith(color: AppColors.grayDefault),
+                'Make sure that you entered your phone number correctly.',
+                style: AppTextStyles.bodySmallRegular.copyWith(
+                  color: AppColors.grayDefault,
+                  fontSize: AppSizes.font_14,
+                ),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 2.0.h),
               Text(
                 'Check for spam or blocking',
-                style: AppTextStyles.bodySmallBold
-                    .copyWith(color: AppColors.black),
+                style: AppTextStyles.bodySmallBold.copyWith(
+                  color: AppColors.black,
+                  fontSize: AppSizes.font_14,
+                ),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 1.0.h),
               Text(
                 'Please unblock spam and try again.',
-                style: AppTextStyles.bodySmallRegular
-                    .copyWith(color: AppColors.grayDefault),
+                style: AppTextStyles.bodySmallRegular.copyWith(
+                  color: AppColors.grayDefault,
+                  fontSize: AppSizes.font_14,
+                ),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 2.0.h),
               Center(
                 child: ButtonPrimaryFill(
                   isterms: false,
@@ -296,6 +316,7 @@ class MobileVerificationView extends GetView<MobileVerificationController> {
                   text: 'Confirm',
                 ),
               ),
+              SizedBox(height: 2.0.h),
             ],
           ),
         );
