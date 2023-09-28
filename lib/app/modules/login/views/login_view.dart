@@ -216,23 +216,50 @@ class LoginView extends GetView<LoginController> {
   }
 
   buildButton(BuildContext context) {
+    final isEmailValidated = controller.isEmailValidated.value;
+    final isNextPressed = controller.isNextPressed.value;
+    final isPasswordValid = controller.isPasswordValid.value;
+    late Color buttonColors;
+
+    bool isDisabled = (!isEmailValidated && !isPasswordValid) ||
+        (isEmailValidated && !isNextPressed && !isPasswordValid);
+
+    String buttonText;
+    if (isEmailValidated) {
+      if (isNextPressed) {
+        if (isPasswordValid) {
+          buttonText = "Log in";
+          buttonColors = AppColors.primary;
+        } else {
+          buttonText = "Enter password";
+          buttonColors = AppColors.grayLight;
+        }
+      } else {
+        if (isPasswordValid) {
+          buttonText = "Log in";
+          buttonColors = AppColors.primary;
+        } else {
+          buttonText = "Next";
+          buttonColors = AppColors.black;
+        }
+      }
+    } else {
+      if (isPasswordValid) {
+        buttonText = "Log in";
+        buttonColors = AppColors.grayLight;
+      } else {
+        buttonText = "Enter your e-mail address";
+        buttonColors = AppColors.grayLight;
+      }
+    }
+
     return ButtonPrimaryFillLogin(
       buttonSizeType: ButtonSizeTypeLogin.MEDIUM,
-      isDisabled: !controller.isEmailValidated.value ||
-          (controller.isEmailValidated.value &&
-              !controller.isNextPressed.value),
-      text: controller.isEmailValidated.value
-          ? controller.isNextPressed.value
-              ? controller.isPasswordValid.value
-                  ? "Log in"
-                  : "Enter password"
-              : controller.isPasswordValid.value
-                  ? "Log in"
-                  : "Next"
-          : 'Enter your e-mail address',
+      isDisabled: isDisabled,
+      buttonColor: buttonColors,
+      text: buttonText,
       onTap: () {
-        if (controller.isEmailValidated.value &&
-            !controller.isNextPressed.value) {
+        if (isEmailValidated && !isNextPressed) {
           controller.isNextPressed(true);
           Future.delayed(const Duration(milliseconds: 100), () {
             FocusScope.of(context).requestFocus(controller.passwordFocusNode);

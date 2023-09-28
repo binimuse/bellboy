@@ -5,27 +5,44 @@ import 'package:bellboy/app/config/theme/app_sizes.dart';
 import 'package:bellboy/app/config/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
-class ButtonPrimaryFillLogin extends StatelessWidget {
-  const ButtonPrimaryFillLogin({
+class ButtonPrimaryFillSignup extends StatelessWidget {
+  const ButtonPrimaryFillSignup({
     Key? key,
     required this.buttonSizeType,
     required this.text,
     required this.onTap,
-    required this.buttonColor,
     required this.isDisabled,
   }) : super(key: key);
 
-  final ButtonSizeTypeLogin buttonSizeType;
+  final ButtonSizeTypeSignup buttonSizeType;
   final String text;
   final VoidCallback onTap;
-  final Color buttonColor;
   final bool isDisabled;
 
   @override
   Widget build(BuildContext context) {
+    Color buttonColor;
+
+    switch (text) {
+      case 'Enter your e-mail address':
+        buttonColor = AppColors.grayLight;
+        break;
+      case 'Next':
+        buttonColor = AppColors.black;
+        break;
+      case 'Enter password':
+        buttonColor = AppColors.grayLight;
+        break;
+      case 'Log in':
+        buttonColor = AppColors.primary;
+        break;
+      default:
+        buttonColor = AppColors.black; // Default background color
+    }
+
     return SizedBox(
       width:
-          buttonSizeType == ButtonSizeTypeLogin.SMALL ? null : double.infinity,
+          buttonSizeType == ButtonSizeTypeSignup.SMALL ? null : double.infinity,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           elevation: 0,
@@ -38,9 +55,9 @@ class ButtonPrimaryFillLogin extends StatelessWidget {
         onPressed: onTap,
         child: Padding(
           padding: EdgeInsets.symmetric(
-            vertical: buttonSizeType == ButtonSizeTypeLogin.LARGE
+            vertical: buttonSizeType == ButtonSizeTypeSignup.LARGE
                 ? AppSizes.mp_v_2 * 0.9
-                : buttonSizeType == ButtonSizeTypeLogin.MEDIUM
+                : buttonSizeType == ButtonSizeTypeSignup.MEDIUM
                     ? AppSizes.mp_v_1 * 1.5
                     : AppSizes.mp_v_1 / 2,
           ),
@@ -56,4 +73,4 @@ class ButtonPrimaryFillLogin extends StatelessWidget {
   }
 }
 
-enum ButtonSizeTypeLogin { LARGE, MEDIUM, SMALL }
+enum ButtonSizeTypeSignup { LARGE, MEDIUM, SMALL }

@@ -1,4 +1,5 @@
 import 'package:bellboy/app/common/widgets/buttons/button_primary_fill_login.dart';
+import 'package:bellboy/app/common/widgets/buttons/button_primary_fill_signup.dart';
 import 'package:bellboy/app/common/widgets/forms/text_input_signup.dart';
 
 import 'package:bellboy/app/common/widgets/navigation/top_nav_back_text.dart';
@@ -166,8 +167,8 @@ class SignupView extends GetView<SignupController> {
   }
 
   buildButton(BuildContext context) {
-    return ButtonPrimaryFillLogin(
-      buttonSizeType: ButtonSizeTypeLogin.LARGE,
+    return ButtonPrimaryFillSignup(
+      buttonSizeType: ButtonSizeTypeSignup.LARGE,
       isDisabled: !controller.isEmailValidated.value ||
           (controller.isEmailValidated.value &&
               !controller.isNextPressed.value),
