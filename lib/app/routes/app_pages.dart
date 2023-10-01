@@ -12,6 +12,8 @@ import '../modules/mobile_verification/bindings/mobile_verification_binding.dart
 import '../modules/mobile_verification/views/mobile_verification_view.dart';
 import '../modules/on_bording/bindings/on_bording_binding.dart';
 import '../modules/on_bording/views/on_bording_view.dart';
+import '../modules/pre_work_checklist/bindings/pre_work_checklist_binding.dart';
+import '../modules/pre_work_checklist/views/pre_work_checklist_view.dart';
 import '../modules/quiz/bindings/quiz_binding.dart';
 import '../modules/quiz/views/quiz_view.dart';
 import '../modules/recover_account/bindings/recover_account_binding.dart';
@@ -28,7 +30,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.SPLASH;
+  static const INITIAL = Routes.PRE_WORK_CHECKLIST;
 
   static final routes = [
     GetPage(
@@ -80,6 +82,11 @@ class AppPages {
       name: _Paths.MOBILE_VERIFICATION,
       page: () => const MobileVerificationView(),
       binding: MobileVerificationBinding(),
+    ),
+    GetPage(
+      name: _Paths.PRE_WORK_CHECKLIST,
+      page: () => const PreWorkChecklistView(),
+      binding: PreWorkChecklistBinding(),
     ),
   ];
 }
