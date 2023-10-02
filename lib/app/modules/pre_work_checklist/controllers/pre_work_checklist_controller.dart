@@ -1,4 +1,5 @@
 import 'package:bellboy/app/config/theme/app_assets.dart';
+import 'package:bellboy/gen/assets.gen.dart';
 import 'package:get/get.dart';
 
 import '../model/confirmation_model.dart';
@@ -7,13 +8,17 @@ import '../model/vehcle_type.dart';
 class PreWorkChecklistController extends GetxController {
   late RxInt currentQuestionIndex = 0.obs;
   late RxInt currentIndex = 0.obs;
+
   RxInt selectedIndex = RxInt(-1);
 
   RxList<VehicleType> vehicleTypes = List<VehicleType>.of([]).obs;
   final RxBool isVehicleTypeFetched = false.obs;
+  final RxBool isVehicleTypeselelctedcar = false.obs;
+  final RxBool isVehicleTypeselelctedmoto = false.obs;
+  final RxBool isVehicleTypeselelctedbic = false.obs;
 
   Future<List<VehicleType>> fetchVehicleTypes() async {
-    await Future.delayed(const Duration(seconds: 2)); // simulate network delay
+    // simulate network delay
 
     // This is the dummy data
     const data = [
@@ -41,25 +46,25 @@ class PreWorkChecklistController extends GetxController {
 
 //Car
   Future<List<ConfirmationModel>> fetchConfirmationModelCar() async {
-    await Future.delayed(const Duration(seconds: 2)); // simulate network delay
+    // simulate network delay
 
     // This is the dummy data
-    const data = [
+    List<Map<String, dynamic>> data = [
       {
         "name": "Cart",
-        "image": AppAssets.imageCar,
+        "image": Assets.icons.buy,
       },
       {
         "name": "Safety boots",
-        "image": AppAssets.imagemotorcycle,
+        "image": Assets.icons.shoes,
       },
       {
         "name": "Hi-vis Vest",
-        "image": AppAssets.imagebicyle,
+        "image": Assets.icons.vest,
       },
       {
         "name": "Cooler bag or box",
-        "image": AppAssets.imagebicyle,
+        "image": Assets.icons.icecrystal,
       },
     ];
 
@@ -68,28 +73,33 @@ class PreWorkChecklistController extends GetxController {
 
 //Motorcycle
   Future<List<ConfirmationModel>> fetchConfirmationModelMotorcycle() async {
-    await Future.delayed(const Duration(seconds: 2)); // simulate network delay
+    // simulate network delay
 
     // This is the dummy data
-    const data = [
+    List<Map<String, dynamic>> data = [
       {
         "name": "Safety boots",
-        "image": AppAssets.imageCar,
+        "image": Assets.icons.shoes,
       },
       {
-        "name": "Safety boots",
-        "image": AppAssets.imagemotorcycle,
+        "name": "Helmet",
+        "image": Assets.icons.helmet,
       },
       {
         "name": "Hi-vis Vest",
-        "image": AppAssets.imagebicyle,
+        "image": Assets.icons.vest,
       },
       {
         "name": "Cooler bag or box",
-        "image": AppAssets.imagebicyle,
+        "image": Assets.icons.icecrystal,
       },
     ];
 
     return data.map((item) => ConfirmationModel.fromJson(item)).toList();
   }
+
+  final Rx<ConfirmationModel?> selectedConfirmation =
+      Rx<ConfirmationModel?>(null);
+
+      
 }
