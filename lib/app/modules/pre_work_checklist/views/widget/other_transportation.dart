@@ -3,7 +3,6 @@ import 'package:bellboy/app/common/widgets/dialogs/dialog_center_common_widget.d
 import 'package:bellboy/app/config/theme/app_colors.dart';
 import 'package:bellboy/app/config/theme/app_sizes.dart';
 import 'package:bellboy/app/config/theme/app_text_styles.dart';
-import 'package:bellboy/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 
 class Dialogothertransportation extends StatelessWidget {

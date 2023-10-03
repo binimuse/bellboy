@@ -1,12 +1,15 @@
+/// This file contains the implementation of the PreWorkChecklistView widget.
+/// This widget displays a checklist for the user to complete before starting work.
+/// The user can select their vehicle type and additional cards will be displayed based on their selection.
+/// The widget also contains action buttons for the user to proceed with their work.
 // ignore_for_file: unrelated_type_equality_checks
 
 import 'package:bellboy/app/common/widgets/appbar/appbar.dart';
 import 'package:bellboy/app/common/widgets/buttons/custom_normal_button.dart';
+import 'package:bellboy/app/common/widgets/forms/check_box.dart';
 import 'package:bellboy/app/config/theme/app_colors.dart';
 import 'package:bellboy/app/config/theme/app_sizes.dart';
 import 'package:bellboy/app/config/theme/app_text_styles.dart';
-import 'package:bellboy/app/modules/pre_work_checklist/views/widget/dialog_expiration.dart';
-import 'package:bellboy/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -55,28 +58,34 @@ class PreWorkChecklistView extends GetView<PreWorkChecklistController> {
       padding: EdgeInsets.all(16.sp),
       child: Column(
         children: [
-          CustomNormalButton(
-            text: 'Get on',
-            textStyle: AppTextStyles.bodyLargeBold.copyWith(
-              color: AppColors.whiteOff,
-            ),
-            textcolor: AppColors.whiteOff,
-            buttoncolor: AppColors.grayLight,
-            borderRadius: AppSizes.radius_8,
-            padding: EdgeInsets.symmetric(
-              vertical: AppSizes.mp_v_2,
-              horizontal: AppSizes.mp_w_6,
-            ),
-            onPressed: () {
-              //dilaog
-              // Get.dialog(
-              //   const Dialogexpiration(),
-              //   barrierDismissible: true,
-              // );
+          Obx(() => CustomNormalButton(
+                text: 'Get on',
+                textStyle: AppTextStyles.bodyLargeBold.copyWith(
+                  color: AppColors.whiteOff,
+                ),
+                textcolor: AppColors.whiteOff,
+                buttoncolor: controller.areAllTermsSelected()
+                    ? AppColors.primary
+                    : AppColors.grayLight,
+                borderRadius: AppSizes.radius_8,
+                padding: EdgeInsets.symmetric(
+                  vertical: AppSizes.mp_v_2,
+                  horizontal: AppSizes.mp_w_6,
+                ),
+                onPressed: () {
+                  //dilaog
+                  // Get.dialog(
+                  //   const Dialogexpiration(),
+                  //   barrierDismissible: true,
+                  // );
 
-              //dilaog2
-            },
-          ),
+                  //dilaog2
+                  Get.dialog(
+                    const Dialogothertransportation(),
+                    barrierDismissible: true,
+                  );
+                },
+              )),
         ],
       ),
     );
@@ -272,73 +281,70 @@ class PreWorkChecklistView extends GetView<PreWorkChecklistController> {
                       itemBuilder: (context, index) {
                         final confirmation = confirmationList[index];
 
-                        return Container(
-                          margin: const EdgeInsets.symmetric(vertical: 8.0),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12.0),
-                            border: Border.all(
-                              color: AppColors.grayLight.withOpacity(0.9),
-                              width: 1.0,
-                            ),
-                            color: Colors.transparent,
-                          ),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    SvgPicture.asset(
-                                      confirmation.image,
-                                      color: AppColors.grayLight,
-                                    ),
-                                    SizedBox(width: 2.w),
-                                    Column(
+                        return Obx(() => Container(
+                              margin: const EdgeInsets.symmetric(vertical: 8.0),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12.0),
+                                border: Border.all(
+                                  color: AppColors.grayLight.withOpacity(0.9),
+                                  width: 1.0,
+                                ),
+                                color: !controller.isTermChecked(index)
+                                    ? Colors.transparent
+                                    : AppColors.primary.withOpacity(0.2),
+                              ),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: Row(
                                       crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text(
-                                          confirmation.name,
-                                          style: AppTextStyles.bodySmallBold
-                                              .copyWith(
-                                            color: AppColors.black,
-                                          ),
+                                        SvgPicture.asset(
+                                          confirmation.image,
+                                          color:
+                                              !controller.isTermChecked(index)
+                                                  ? AppColors.grayLight
+                                                  : AppColors.primary,
+                                        ),
+                                        SizedBox(width: 2.w),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              confirmation.name,
+                                              style: AppTextStyles.bodySmallBold
+                                                  .copyWith(
+                                                color: AppColors.black,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Container(
-                                  width: 24,
-                                  height: 24,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    border: Border.all(
-                                      color: AppColors.grayLight,
-                                      width: 1.0,
-                                    ),
-                                    color: Colors.transparent,
                                   ),
-                                  child: Center(
-                                    child: Icon(
-                                      Icons.check,
-                                      size: 10,
-                                      color: AppColors.grayLight,
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: MyCheckBox(
+                                      isInitSelected:
+                                          controller.isTermChecked(index),
+                                      checkBoxSize: CheckBoxSize.MEDIUM,
+                                      onChanged: (isChecked) {
+                                        controller.toggleTerm(index);
+                                      },
+                                      text: "",
                                     ),
-                                  ),
-                                ),
+                                  )
+                                ],
                               ),
-                            ],
-                          ),
-                        );
+                            ));
                       },
                     );
                   } else {

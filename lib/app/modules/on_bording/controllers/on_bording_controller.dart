@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+/// Controller for the on-boarding screen.
 class OnBordingController extends GetxController {
   final RxBool isLightTheme = false.obs;
 
@@ -10,6 +11,7 @@ class OnBordingController extends GetxController {
   var appversion = "".obs;
   var currentSlide = 0.obs;
 
+  /// List of titles for the on-boarding slides.
   List<String> titles = [
     'The business of my becoming the Boss',
     'Revenue generation every week'
@@ -24,6 +26,7 @@ class OnBordingController extends GetxController {
   late PageController pageController;
   int currentIndex = 0;
 
+  /// Function called when the current slide is changed.
   onChangedFunction(int index) {
     currentIndex = index;
   }

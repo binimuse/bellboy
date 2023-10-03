@@ -85,7 +85,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.PRE_WORK_CHECKLIST,
-      page: () => const PreWorkChecklistView(),
+      page: () => PreWorkChecklistView(),
       binding: PreWorkChecklistBinding(),
     ),
   ];

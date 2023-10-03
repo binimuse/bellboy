@@ -98,8 +98,23 @@ class PreWorkChecklistController extends GetxController {
     return data.map((item) => ConfirmationModel.fromJson(item)).toList();
   }
 
-  final Rx<ConfirmationModel?> selectedConfirmation =
-      Rx<ConfirmationModel?>(null);
+  final List<bool> termCheckedList = [false, false, false, false].obs;
 
-      
+  bool isTermChecked(int index) {
+    return termCheckedList[index];
+  }
+
+  void toggleTerm(int index) {
+    termCheckedList[index] = !termCheckedList[index];
+    update();
+  }
+
+  bool areAllTermsSelected() {
+    for (var isChecked in termCheckedList) {
+      if (!isChecked) {
+        return false;
+      }
+    }
+    return true;
+  }
 }

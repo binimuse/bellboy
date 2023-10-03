@@ -13,7 +13,7 @@ import 'package:sizer/sizer.dart';
 
 import '../controllers/mobile_verification_controller.dart';
 
-import 'widget/find_email_done.dart';
+import 'widget/forgot_email_done.dart';
 
 class MobileVerificationView extends GetView<MobileVerificationController> {
   const MobileVerificationView({Key? key}) : super(key: key);
@@ -105,7 +105,7 @@ class MobileVerificationView extends GetView<MobileVerificationController> {
                                 isDisabled: true,
                               ),
                             )
-                          : SizedBox()),
+                          : const SizedBox()),
                     ],
                   ),
                 ),
