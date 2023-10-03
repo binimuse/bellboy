@@ -5,6 +5,7 @@
 // ignore_for_file: unrelated_type_equality_checks
 
 import 'package:bellboy/app/common/widgets/appbar/appbar.dart';
+import 'package:bellboy/app/common/widgets/appdrawer/appdrawer.dart';
 import 'package:bellboy/app/common/widgets/buttons/custom_normal_button.dart';
 import 'package:bellboy/app/common/widgets/forms/check_box.dart';
 import 'package:bellboy/app/config/theme/app_colors.dart';
@@ -28,6 +29,7 @@ class PreWorkChecklistView extends GetView<PreWorkChecklistController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBars(),
+      drawer: const AppDrawer(),
       body: Column(
         mainAxisSize: MainAxisSize.min,
         children: [

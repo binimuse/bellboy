@@ -22,7 +22,7 @@ class CustomAppBars extends StatelessWidget implements PreferredSizeWidget {
         child: IconButton(
           icon: SvgPicture.asset(Assets.icons.menu),
           onPressed: () {
-            Get.back();
+            print("object");
           },
         ),
       ),

@@ -18,6 +18,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/arrowleft.svg
   String get arrowleft => 'assets/icons/arrowleft.svg';
 
+  /// File path: assets/icons/arrowright.svg
+  String get arrowright => 'assets/icons/arrowright.svg';
+
   /// File path: assets/icons/battery_low.svg
   String get batteryLow => 'assets/icons/battery_low.svg';
 
@@ -613,6 +616,7 @@ class $AssetsIconsGen {
   List<String> get values => [
         alarmsvg,
         arrowleft,
+        arrowright,
         batteryLow,
         bell,
         bicycle,
@@ -822,6 +826,17 @@ class $AssetsImagesGen {
   /// File path: assets/images/fail.png
   AssetGenImage get fail => const AssetGenImage('assets/images/fail.png');
 
+  /// File path: assets/images/img_Car.png
+  AssetGenImage get imgCar => const AssetGenImage('assets/images/img_Car.png');
+
+  /// File path: assets/images/img_Motorcycle.png
+  AssetGenImage get imgMotorcycle =>
+      const AssetGenImage('assets/images/img_Motorcycle.png');
+
+  /// File path: assets/images/img_bicyle.png
+  AssetGenImage get imgBicyle =>
+      const AssetGenImage('assets/images/img_bicyle.png');
+
   /// File path: assets/images/img_finish_login.png
   AssetGenImage get imgFinishLogin =>
       const AssetGenImage('assets/images/img_finish_login.png');
@@ -853,6 +868,9 @@ class $AssetsImagesGen {
   List<AssetGenImage> get values => [
         au,
         fail,
+        imgCar,
+        imgMotorcycle,
+        imgBicyle,
         imgFinishLogin,
         imgSentEmail,
         onbording1,
