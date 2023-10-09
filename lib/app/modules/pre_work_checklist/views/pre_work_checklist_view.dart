@@ -28,7 +28,12 @@ class PreWorkChecklistView extends GetView<PreWorkChecklistController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBars(),
+      key: controller.keyforall,
+      appBar: CustomAppBars(
+        onPressed: () {
+          controller.keyforall.currentState!.openDrawer();
+        },
+      ),
       drawer: const AppDrawer(),
       body: Column(
         mainAxisSize: MainAxisSize.min,

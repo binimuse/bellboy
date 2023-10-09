@@ -1,5 +1,6 @@
 import 'package:bellboy/app/config/theme/app_assets.dart';
 import 'package:bellboy/gen/assets.gen.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../model/confirmation_model.dart';
@@ -8,7 +9,7 @@ import '../model/vehcle_type.dart';
 class PreWorkChecklistController extends GetxController {
   late RxInt currentQuestionIndex = 0.obs;
   late RxInt currentIndex = 0.obs;
-
+  final GlobalKey<ScaffoldState> keyforall = GlobalKey<ScaffoldState>();
   RxInt selectedIndex = RxInt(-1);
 
   RxList<VehicleType> vehicleTypes = List<VehicleType>.of([]).obs;

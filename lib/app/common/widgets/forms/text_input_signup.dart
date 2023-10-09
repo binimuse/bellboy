@@ -78,7 +78,7 @@ class _TextInputLoginState extends State<TextInputSignup> {
             fontSize:
                 checkIsPassword() ? AppSizes.font_14 * 0.9 : AppSizes.font_16,
           ),
-          obscureText: checkIsPassword(),
+          obscureText: checkIsPassword() ? !isPasswordVisible : false,
           obscuringCharacter: '⬤',
           //obscuringCharacter: '\u2022', // Customize the obscuring character
           decoration: InputDecoration(
