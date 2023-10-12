@@ -5,8 +5,8 @@ import '../../../config/theme/app_colors.dart';
 import '../../../config/theme/app_sizes.dart';
 import 'button_primary_fill.dart';
 
-class ButtonPrimaryFill extends StatelessWidget {
-  const ButtonPrimaryFill(
+class ButtonPrimaryFillOutline extends StatelessWidget {
+  const ButtonPrimaryFillOutline(
       {Key? key,
       required this.buttonSizeType,
       required this.text,

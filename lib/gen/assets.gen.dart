@@ -282,6 +282,18 @@ class $AssetsIconsGen {
   /// File path: assets/icons/list.svg
   String get list => 'assets/icons/list.svg';
 
+  /// File path: assets/icons/listcircle.svg
+  String get listcircle => 'assets/icons/listcircle.svg';
+
+  /// File path: assets/icons/listcircleasap.svg
+  String get listcircleasap => 'assets/icons/listcircleasap.svg';
+
+  /// File path: assets/icons/listcircleother.svg
+  String get listcircleother => 'assets/icons/listcircleother.svg';
+
+  /// File path: assets/icons/listcirclesolid.svg
+  String get listcirclesolid => 'assets/icons/listcirclesolid.svg';
+
   /// File path: assets/icons/location.svg
   String get location => 'assets/icons/location.svg';
 
@@ -704,6 +716,10 @@ class $AssetsIconsGen {
         lightban,
         link,
         list,
+        listcircle,
+        listcircleasap,
+        listcircleother,
+        listcirclesolid,
         location,
         lock,
         mapoutline,
@@ -837,6 +853,10 @@ class $AssetsImagesGen {
   AssetGenImage get imgBicyle =>
       const AssetGenImage('assets/images/img_bicyle.png');
 
+  /// File path: assets/images/img_empty box.png
+  AssetGenImage get imgEmptyBox =>
+      const AssetGenImage('assets/images/img_empty box.png');
+
   /// File path: assets/images/img_finish_login.png
   AssetGenImage get imgFinishLogin =>
       const AssetGenImage('assets/images/img_finish_login.png');
@@ -864,6 +884,13 @@ class $AssetsImagesGen {
   AssetGenImage get recoveraccount =>
       const AssetGenImage('assets/images/recoveraccount.png');
 
+  /// File path: assets/images/suspended.png
+  AssetGenImage get suspended =>
+      const AssetGenImage('assets/images/suspended.png');
+
+  /// File path: assets/images/vector.png
+  AssetGenImage get vector => const AssetGenImage('assets/images/vector.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
         au,
@@ -871,13 +898,16 @@ class $AssetsImagesGen {
         imgCar,
         imgMotorcycle,
         imgBicyle,
+        imgEmptyBox,
         imgFinishLogin,
         imgSentEmail,
         onbording1,
         onbording2,
         pass,
         quizimage,
-        recoveraccount
+        recoveraccount,
+        suspended,
+        vector
       ];
 }
 

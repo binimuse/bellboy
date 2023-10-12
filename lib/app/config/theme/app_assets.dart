@@ -14,4 +14,7 @@ class AppAssets {
   static const String imageCar = "assets/images/img_Car.png";
   static const String imagebicyle = "assets/images/img_bicyle.png";
   static const String imagemotorcycle = "assets/images/img_Motorcycle.png";
+
+  //order
+  static const String imageEmptyBox = "assets/images/img_empty box.png";
 }

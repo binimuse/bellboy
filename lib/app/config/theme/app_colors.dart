@@ -48,8 +48,8 @@ class AppColors {
   static Color dangerLight = const Color(0xffffeaea);
 
   //WARNING
-  static Color warning = const Color(0xffe76565);
-  static Color warningDefault = const Color(0xffa92e2e);
+  static Color warning = const Color(0xffFFD02C);
+  static Color warningDefault = Color.fromARGB(255, 250, 217, 97);
   static Color warningLight = const Color(0xffffeaea);
 
   //SUCCESS
