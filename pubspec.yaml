@@ -43,6 +43,8 @@ dependencies:
   connectivity: ^3.0.6
   pin_code_fields: ^7.3.0
   flutter_bounce: ^1.1.0
+  google_maps_flutter: ^2.5.0
+  widget_to_marker: ^1.0.4
 
 
 

@@ -6,17 +6,20 @@ import 'package:bellboy/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 
 class TopNavCloseText extends StatelessWidget {
-  const TopNavCloseText(
-      {Key? key,
-      required this.centerTitle,
-      required this.rightText,
-      required this.useHomeIcon})
-      : super(key: key);
+  const TopNavCloseText({
+    Key? key,
+    required this.centerTitle,
+    required this.rightText,
+    required this.useHomeIcon,
+    this.useCloseIcon,
+    this.rightTextStyle,
+  }) : super(key: key);
 
   final String centerTitle;
   final String rightText;
   final bool useHomeIcon;
-
+  final bool? useCloseIcon;
+  final TextStyle? rightTextStyle;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -31,11 +34,21 @@ class TopNavCloseText extends StatelessWidget {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                AppSvgButton(
-                  imagePath: Assets.icons.close,
-                  onPressed: () {},
-                  size: AppSizes.icon_size_8 * 0.9,
-                ),
+                useCloseIcon != null
+                    ? !useCloseIcon!
+                        ? const SizedBox()
+                        : AppSvgButton(
+                            imagePath: Assets.icons.close,
+                            onPressed: () {},
+                            size: AppSizes.icon_size_8 * 0.9,
+                            iconColor: AppColors.blackLight,
+                          )
+                    : AppSvgButton(
+                        imagePath: Assets.icons.close,
+                        onPressed: () {},
+                        size: AppSizes.icon_size_8 * 0.9,
+                        iconColor: AppColors.blackLight,
+                      ),
                 SizedBox(
                   width: AppSizes.mp_w_1,
                 ),
@@ -44,6 +57,7 @@ class TopNavCloseText extends StatelessWidget {
                         imagePath: Assets.icons.home,
                         onPressed: () {},
                         size: AppSizes.icon_size_8 * 0.9,
+                        iconColor: AppColors.blackLight,
                       )
                     : const SizedBox(),
               ],
@@ -57,13 +71,26 @@ class TopNavCloseText extends StatelessWidget {
           ),
           Align(
             alignment: Alignment.centerRight,
-            child: Text(
-              rightText,
-              style: AppTextStyles.titleBold.copyWith(color: AppColors.primary),
+            child: MaterialButton(
+              onPressed: () {},
+              child: Text(
+                rightText,
+                style: isRightTextStyle()
+                    ? rightTextStyle!
+                    : AppTextStyles.titleBold
+                        .copyWith(color: AppColors.primary),
+              ),
             ),
           ),
         ],
       ),
     );
+  }
+
+  isRightTextStyle() {
+    if (rightTextStyle != null) {
+      return true;
+    }
+    return false;
   }
 }

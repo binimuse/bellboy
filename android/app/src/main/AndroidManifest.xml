@@ -8,6 +8,9 @@
         android:label="bellboy"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
+
+        <meta-data android:name="com.google.android.geo.API_KEY"
+        android:value="AIzaSyD4v3LtOA688uUDrlbyrsqtB53HdiKTnik"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

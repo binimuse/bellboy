@@ -4,10 +4,12 @@ import 'package:bellboy/app/config/theme/app_assets.dart';
 import 'package:bellboy/app/config/theme/app_colors.dart';
 import 'package:bellboy/app/config/theme/app_sizes.dart';
 import 'package:bellboy/app/config/theme/app_text_styles.dart';
+import 'package:bellboy/app/modules/order_list/views/widget/mapView.dart';
 import 'package:bellboy/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 import '../buttons/button_gray_scale_outline_order.dart';
@@ -59,7 +61,9 @@ class CustomAppBars extends StatelessWidget implements PreferredSizeWidget {
                     IconButton(
                       icon: SvgPicture.asset(Assets.icons.mapoutline),
                       color: AppColors.grayDefault,
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.to(ScreenRealTimeLocation());
+                      },
                     ),
                   ],
                 ),
