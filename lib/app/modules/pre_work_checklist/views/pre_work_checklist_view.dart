@@ -17,6 +17,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../find_password/views/widget/suspended.dart';
 import '../controllers/pre_work_checklist_controller.dart';
 import '../model/confirmation_model.dart';
 import '../model/vehcle_type.dart';
@@ -28,7 +29,13 @@ class PreWorkChecklistView extends GetView<PreWorkChecklistController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBars(),
+      key: controller.keyforall,
+      appBar: CustomAppBars(
+        onPressed: () {
+          controller.keyforall.currentState!.openDrawer();
+        },
+        isOrderpage: false,
+      ),
       drawer: const AppDrawer(),
       body: Column(
         mainAxisSize: MainAxisSize.min,
@@ -99,7 +106,14 @@ class PreWorkChecklistView extends GetView<PreWorkChecklistController> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('How do you work today? ', style: AppTextStyles.headlineBold),
+          GestureDetector(
+              onTap: () {
+                Get.to(
+                  SuspendedFrame(),
+                );
+              },
+              child: Text('How do you work today? ',
+                  style: AppTextStyles.headlineBold)),
           SizedBox(height: 2.h),
           FutureBuilder<List<VehicleType>>(
             future: controller.fetchVehicleTypes(),

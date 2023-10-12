@@ -1,4 +1,3 @@
-import 'package:bellboy/app/common/widgets/app_icon_button.dart';
 import 'package:bellboy/app/config/theme/app_colors.dart';
 import 'package:bellboy/app/config/theme/app_sizes.dart';
 import 'package:bellboy/app/config/theme/app_text_styles.dart';
@@ -6,8 +5,8 @@ import 'package:flutter/material.dart';
 
 import 'button_primary_fill.dart';
 
-class ButtonGrayScaleOutlineWithOutIcon extends StatelessWidget {
-  const ButtonGrayScaleOutlineWithOutIcon(
+class ButtonGrayScaleOutlineOrder extends StatelessWidget {
+  const ButtonGrayScaleOutlineOrder(
       {Key? key,
       required this.buttonSizeType,
       required this.text,
@@ -29,7 +28,7 @@ class ButtonGrayScaleOutlineWithOutIcon extends StatelessWidget {
           elevation: 0,
           shadowColor: AppColors.grayLight,
           backgroundColor:
-              isDisabled ? AppColors.grayLighter : Colors.transparent,
+              isDisabled ? Colors.transparent : AppColors.primaryLighter,
           // shape: RoundedRectangleBorder(
           //   borderRadius: BorderRadius.circular(AppSizes.radius_8),
           //
@@ -38,12 +37,12 @@ class ButtonGrayScaleOutlineWithOutIcon extends StatelessWidget {
             borderRadius: BorderRadius.circular(AppSizes.radius_8),
             side: !isDisabled
                 ? BorderSide(
-                    color: AppColors.grayLight,
+                    color: AppColors.primary,
                     width: 1,
                   )
                 : BorderSide(
                     color: AppColors.grayLight,
-                    width: 0,
+                    width: 1,
                   ),
           ),
         ),
@@ -59,7 +58,7 @@ class ButtonGrayScaleOutlineWithOutIcon extends StatelessWidget {
           child: Text(
             text,
             style: AppTextStyles.bodyLargeBold.copyWith(
-              color: isDisabled ? AppColors.white70 : AppColors.grayLight,
+              color: isDisabled ? AppColors.grayLight : AppColors.primary,
             ),
           ),
         ),

@@ -1,14 +1,14 @@
 // ignore_for_file: must_be_immutable, unnecessary_null_comparison
 
 import 'package:bellboy/app/config/theme/app_colors.dart';
-import 'package:bellboy/app/config/theme/app_sizes.dart';
 import 'package:bellboy/app/config/theme/app_text_styles.dart';
 import 'package:bellboy/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:slider_button/slider_button.dart';
 
 import 'package:sizer/sizer.dart';
+
+import '../buttons/slider_button.dart';
 
 class AppDrawer extends StatefulWidget {
   const AppDrawer({Key? key}) : super(key: key);
@@ -162,31 +162,20 @@ class _AppDrawerState extends State<AppDrawer> {
   }
 
   Widget buildSliderbutton() {
-    return SliderButton(
-      action: () {
-        ///Do something here
-        Navigator.of(context).pop();
-      },
-      alignLabel: Alignment.center,
-      label: Text(
-        "Get off",
-        style: AppTextStyles.displayOneBold.copyWith(
-          fontSize: AppSizes.font_16,
-        ),
-        textAlign: TextAlign.center,
-      ),
-      icon: SvgPicture.asset(
-        Assets.icons.arrowright,
-      ),
-
+    return CustomSliderButton(
       ///Change All the color and size from here.
-      width: 90.w,
+      width: 70.w,
       radius: 10,
       buttonSize: 50,
+      dismissible: true,
       buttonColor: AppColors.whiteOff,
       backgroundColor: AppColors.black,
       highlightedColor: Colors.white,
-      baseColor: AppColors.primary,
+      alignLabel: Alignment.center,
+      label: 'Get off',
+      icon: Assets.icons.arrowright,
+
+      baseColor: AppColors.primary, onPressed: () {},
     );
   }
 }

@@ -17,6 +17,7 @@ abstract class Routes {
   static const FIND_PASSWORD = _Paths.FIND_PASSWORD;
   static const MOBILE_VERIFICATION = _Paths.MOBILE_VERIFICATION;
   static const PRE_WORK_CHECKLIST = _Paths.PRE_WORK_CHECKLIST;
+  static const ORDER_LIST = _Paths.ORDER_LIST;
 }
 
 abstract class _Paths {
@@ -33,4 +34,5 @@ abstract class _Paths {
   static const FIND_PASSWORD = '/find-password';
   static const MOBILE_VERIFICATION = '/mobile-verification';
   static const PRE_WORK_CHECKLIST = '/pre-work-checklist';
+  static const ORDER_LIST = '/order-list';
 }
