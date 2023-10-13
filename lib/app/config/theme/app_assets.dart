@@ -17,4 +17,5 @@ class AppAssets {
 
   //order
   static const String imageEmptyBox = "assets/images/img_empty box.png";
+  static const String mylocation = "assets/images/mylocation.png";
 }

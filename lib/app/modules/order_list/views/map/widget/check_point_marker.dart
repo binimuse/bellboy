@@ -1,19 +1,18 @@
 import 'package:bellboy/app/common/widgets/layer_data/models/enums.dart';
 import 'package:bellboy/app/config/theme/app_colors.dart';
 import 'package:bellboy/app/config/theme/app_sizes.dart';
-import 'package:bellboy/app/config/theme/app_text_styles.dart';
 import 'package:bellboy/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class RiderCheckPointMarker extends StatelessWidget {
-  const RiderCheckPointMarker({
+class CheckPointMarker extends StatelessWidget {
+  const CheckPointMarker({
     super.key,
-    required this.riderLocationCheckPointStatus,
+    required this.locationCheckPointStatus,
     required this.checkPointNumber,
   });
 
-  final RiderLocationCheckPointStatus riderLocationCheckPointStatus;
+  final LocationCheckPointStatus locationCheckPointStatus;
   final String checkPointNumber;
 
   @override
@@ -48,29 +47,24 @@ class RiderCheckPointMarker extends StatelessWidget {
   }
 
   getLocationPinColor() {
-    if (riderLocationCheckPointStatus == RiderLocationCheckPointStatus.ACTIVE) {
+    if (locationCheckPointStatus == LocationCheckPointStatus.TODAY) {
       return AppColors.primary;
-    } else if (riderLocationCheckPointStatus ==
-        RiderLocationCheckPointStatus.PENDING) {
+    } else if (locationCheckPointStatus == LocationCheckPointStatus.PRIMARY) {
       return AppColors.accent;
-    } else if (riderLocationCheckPointStatus ==
-        RiderLocationCheckPointStatus.COMPLETED) {
+    } else if (locationCheckPointStatus == LocationCheckPointStatus.OTHERDAY) {
       return AppColors.success;
-    } else if (riderLocationCheckPointStatus ==
-        RiderLocationCheckPointStatus.LAST_CHECK_POINT) {
+    } else if (locationCheckPointStatus == LocationCheckPointStatus.ASAP) {
       return AppColors.danger;
     }
     return AppColors.primary;
   }
 
   getCompletedIcon() {
-    if (riderLocationCheckPointStatus == RiderLocationCheckPointStatus.ACTIVE) {
+    if (locationCheckPointStatus == LocationCheckPointStatus.PRIMARY) {
       return const SizedBox();
-    } else if (riderLocationCheckPointStatus ==
-        RiderLocationCheckPointStatus.PENDING) {
+    } else if (locationCheckPointStatus == LocationCheckPointStatus.OTHERDAY) {
       return const SizedBox();
-    } else if (riderLocationCheckPointStatus ==
-        RiderLocationCheckPointStatus.COMPLETED) {
+    } else if (locationCheckPointStatus == LocationCheckPointStatus.ASAP) {
       return Positioned(
         left: 0,
         top: 0,

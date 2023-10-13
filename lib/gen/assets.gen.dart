@@ -339,6 +339,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/motorcycle.svg
   String get motorcycle => 'assets/icons/motorcycle.svg';
 
+  /// File path: assets/icons/myLocation.svg
+  String get myLocation => 'assets/icons/myLocation.svg';
+
   /// File path: assets/icons/navigationarrow.svg
   String get navigationarrow => 'assets/icons/navigationarrow.svg';
 
@@ -735,6 +738,7 @@ class $AssetsIconsGen {
         more2,
         morecircle,
         motorcycle,
+        myLocation,
         navigationarrow,
         off,
         on,

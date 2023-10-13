@@ -13,8 +13,8 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:widget_to_marker/widget_to_marker.dart';
 
-import 'widget/rider_check_point_marker.dart';
-import 'widget/rider_current_location_marker.dart';
+import 'widget/check_point_marker.dart';
+import 'widget/current_location_marker.dart';
 
 class MapView extends StatefulWidget {
   const MapView({Key? key}) : super(key: key);
@@ -26,7 +26,7 @@ class MapView extends StatefulWidget {
 class _ScreenRealTimeLocationState extends State<MapView> {
   final Completer<GoogleMapController> _controller =
       Completer<GoogleMapController>();
-  late GoogleMapController _mapController;
+
   static const CameraPosition _kGooglePlex = CameraPosition(
     target: LatLng(9.030997, 38.748962),
     zoom: 14,
@@ -41,9 +41,8 @@ class _ScreenRealTimeLocationState extends State<MapView> {
       Marker(
         markerId: const MarkerId("1"),
         position: const LatLng(9.050959034031933, 38.744761824707986),
-        icon: await const RiderCheckPointMarker(
-          riderLocationCheckPointStatus:
-              RiderLocationCheckPointStatus.COMPLETED,
+        icon: await const CheckPointMarker(
+          locationCheckPointStatus: LocationCheckPointStatus.ASAP,
           checkPointNumber: "1",
         ).toBitmapDescriptor(),
       ),
@@ -53,9 +52,8 @@ class _ScreenRealTimeLocationState extends State<MapView> {
       Marker(
         markerId: const MarkerId("2"),
         position: const LatLng(9.043994490620204, 38.748997730537944),
-        icon: await const RiderCheckPointMarker(
-          riderLocationCheckPointStatus:
-              RiderLocationCheckPointStatus.COMPLETED,
+        icon: await const CheckPointMarker(
+          locationCheckPointStatus: LocationCheckPointStatus.PRIMARY,
           checkPointNumber: "2",
         ).toBitmapDescriptor(),
       ),
@@ -65,8 +63,8 @@ class _ScreenRealTimeLocationState extends State<MapView> {
       Marker(
         markerId: const MarkerId("3"),
         position: const LatLng(9.03118044977825, 38.738217553988726),
-        icon: await const RiderCheckPointMarker(
-          riderLocationCheckPointStatus: RiderLocationCheckPointStatus.ACTIVE,
+        icon: await const CheckPointMarker(
+          locationCheckPointStatus: LocationCheckPointStatus.OTHERDAY,
           checkPointNumber: "3",
         ).toBitmapDescriptor(),
       ),
@@ -76,8 +74,8 @@ class _ScreenRealTimeLocationState extends State<MapView> {
       Marker(
         markerId: const MarkerId("4"),
         position: const LatLng(9.021134765027485, 38.748725833580835),
-        icon: await const RiderCheckPointMarker(
-          riderLocationCheckPointStatus: RiderLocationCheckPointStatus.PENDING,
+        icon: await const CheckPointMarker(
+          locationCheckPointStatus: LocationCheckPointStatus.TODAY,
           checkPointNumber: "4",
         ).toBitmapDescriptor(),
       ),
@@ -87,8 +85,8 @@ class _ScreenRealTimeLocationState extends State<MapView> {
       Marker(
         markerId: const MarkerId("5"),
         position: const LatLng(9.008494480553173, 38.743958724707674),
-        icon: await const RiderCheckPointMarker(
-          riderLocationCheckPointStatus: RiderLocationCheckPointStatus.PENDING,
+        icon: await const CheckPointMarker(
+          locationCheckPointStatus: LocationCheckPointStatus.TODAY,
           checkPointNumber: "5",
         ).toBitmapDescriptor(),
       ),
@@ -98,19 +96,18 @@ class _ScreenRealTimeLocationState extends State<MapView> {
       Marker(
         markerId: const MarkerId("5"),
         position: const LatLng(9.035653256641449, 38.7579873382014),
-        icon: await const RiderCheckPointMarker(
-          riderLocationCheckPointStatus:
-              RiderLocationCheckPointStatus.LAST_CHECK_POINT,
+        icon: await const CheckPointMarker(
+          locationCheckPointStatus: LocationCheckPointStatus.OTHERDAY,
           checkPointNumber: "5",
         ).toBitmapDescriptor(),
       ),
     );
-
+//my location
     markers.add(
       Marker(
         markerId: const MarkerId("6"),
         position: const LatLng(9.012969935596415, 38.75285307892485),
-        icon: await const RiderCurrentLocationMarker().toBitmapDescriptor(),
+        icon: await const CurrentLocationMarker().toBitmapDescriptor(),
       ),
     );
 
@@ -143,18 +140,16 @@ class _ScreenRealTimeLocationState extends State<MapView> {
       body: SafeArea(
         child: Stack(
           children: [
-            Expanded(
-              child: GoogleMap(
-                mapType: MapType.normal,
-                initialCameraPosition: _kGooglePlex,
-                markers: markers,
-                myLocationEnabled: true,
-                myLocationButtonEnabled: false,
-                zoomControlsEnabled: false,
-                onMapCreated: (GoogleMapController controller) {
-                  _controller.complete(controller);
-                },
-              ),
+            GoogleMap(
+              mapType: MapType.normal,
+              initialCameraPosition: _kGooglePlex,
+              markers: markers,
+              myLocationEnabled: false,
+              myLocationButtonEnabled: false,
+              zoomControlsEnabled: false,
+              onMapCreated: (GoogleMapController controller) {
+                _controller.complete(controller);
+              },
             ),
             Positioned(
               bottom: 16.0,
@@ -169,21 +164,7 @@ class _ScreenRealTimeLocationState extends State<MapView> {
                       borderRadius: BorderRadius.all(Radius.circular(8.0)),
                     ),
                     backgroundColor: AppColors.whiteOff,
-                    onPressed: () {
-                      if (_controller != null) {
-                        // Get the user's current location
-                        _getCurrentLocation().then((LatLng location) {
-                          // Create a CameraPosition and animate the map camera to the user's location
-                          CameraPosition newPosition = CameraPosition(
-                            target:
-                                LatLng(location.latitude, location.longitude),
-                            zoom: 15.0,
-                          );
-                          _mapController.animateCamera(
-                              CameraUpdate.newCameraPosition(newPosition));
-                        });
-                      }
-                    },
+                    onPressed: () {},
                     child: SvgPicture.asset(
                       Assets.icons.gps,
                       fit: BoxFit.cover,
@@ -198,6 +179,4 @@ class _ScreenRealTimeLocationState extends State<MapView> {
       ),
     ));
   }
-
-  _getCurrentLocation() {}
 }
