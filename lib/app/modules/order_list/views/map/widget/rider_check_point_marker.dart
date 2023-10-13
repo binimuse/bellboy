@@ -24,39 +24,21 @@ class RiderCheckPointMarker extends StatelessWidget {
       child: Stack(
         children: [
           Align(
-            alignment: Alignment.topCenter,
-            child: SvgPicture.asset(
-              Assets.icons.location,
-              fit: BoxFit.cover,
-              height: AppSizes.icon_size_12 * 1.2,
-              width: AppSizes.icon_size_12 * 1.2,
-              color: getLocationPinColor(),
+            alignment: Alignment.center,
+            child: Container(
+              width: AppSizes.icon_size_8 * 1.2,
+              height: AppSizes.icon_size_8 * 1.2,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: getLocationPinColor(),
+              ),
             ),
           ),
           Align(
-            alignment: Alignment.topCenter,
-            child: Container(
-              width: AppSizes.icon_size_6 * 1.4,
-              height: AppSizes.icon_size_6 * 1.4,
-              margin: EdgeInsets.only(top: AppSizes.mp_v_1 * 0.5),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(100.0),
-                color: AppColors.whiteOff,
-              ),
-              child: Center(
-                child: riderLocationCheckPointStatus ==
-                        RiderLocationCheckPointStatus.LAST_CHECK_POINT
-                    ? SvgPicture.asset(
-                        Assets.icons.flagrounded,
-                        color: AppColors.black,
-                      )
-                    : Text(
-                        checkPointNumber,
-                        style: AppTextStyles.bodyLargeBold.copyWith(
-                          color: getCenterTextColor(),
-                        ),
-                      ),
-              ),
+            alignment: Alignment.center,
+            child: SvgPicture.asset(
+              Assets.icons.delivering,
+              color: AppColors.whiteOff,
             ),
           ),
           getCompletedIcon(),
@@ -70,42 +52,27 @@ class RiderCheckPointMarker extends StatelessWidget {
       return AppColors.primary;
     } else if (riderLocationCheckPointStatus ==
         RiderLocationCheckPointStatus.PENDING) {
-      return AppColors.black;
+      return AppColors.accent;
     } else if (riderLocationCheckPointStatus ==
         RiderLocationCheckPointStatus.COMPLETED) {
-      return AppColors.grayLight;
+      return AppColors.success;
     } else if (riderLocationCheckPointStatus ==
         RiderLocationCheckPointStatus.LAST_CHECK_POINT) {
-      return AppColors.black;
-    }
-  }
-
-  getCenterTextColor() {
-    if (riderLocationCheckPointStatus == RiderLocationCheckPointStatus.ACTIVE) {
-      return AppColors.primary;
-    } else if (riderLocationCheckPointStatus ==
-        RiderLocationCheckPointStatus.PENDING) {
-      return AppColors.black;
-    } else if (riderLocationCheckPointStatus ==
-        RiderLocationCheckPointStatus.COMPLETED) {
-      return AppColors.grayLight;
-    } else if (riderLocationCheckPointStatus ==
-        RiderLocationCheckPointStatus.LAST_CHECK_POINT) {
-      return AppColors.grayLight;
+      return AppColors.danger;
     }
     return AppColors.primary;
   }
 
   getCompletedIcon() {
     if (riderLocationCheckPointStatus == RiderLocationCheckPointStatus.ACTIVE) {
-      return SizedBox();
+      return const SizedBox();
     } else if (riderLocationCheckPointStatus ==
         RiderLocationCheckPointStatus.PENDING) {
-      return SizedBox();
+      return const SizedBox();
     } else if (riderLocationCheckPointStatus ==
         RiderLocationCheckPointStatus.COMPLETED) {
       return Positioned(
-        right: 0,
+        left: 0,
         top: 0,
         child: SizedBox(
           width: AppSizes.icon_size_6,
@@ -115,20 +82,19 @@ class RiderCheckPointMarker extends StatelessWidget {
               Align(
                 alignment: Alignment.center,
                 child: CircleAvatar(
-                  radius: AppSizes.icon_size_2,
-                  backgroundColor: AppColors.whiteOff,
+                  radius: AppSizes.icon_size_6,
+                  backgroundColor: AppColors.blackLight,
                 ),
               ),
-              Icon(
-                Icons.check_circle,
-                color: AppColors.success,
-                size: AppSizes.icon_size_6,
-              ),
+              SvgPicture.asset(
+                Assets.icons.dollar,
+                color: AppColors.whiteOff,
+              )
             ],
           ),
         ),
       );
     }
-    return SizedBox();
+    return const SizedBox();
   }
 }

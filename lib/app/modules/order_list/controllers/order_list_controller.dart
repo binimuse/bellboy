@@ -6,7 +6,9 @@ import 'package:get/get.dart';
 class OrderListController extends GetxController
     with SingleGetTickerProviderMixin {
   final GlobalKey<ScaffoldState> keyforall = GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> keyforallmap = GlobalKey<ScaffoldState>();
   late TabController tabController;
+  var isMapView = false.obs;
   @override
   void onInit() {
     super.onInit();

@@ -1,6 +1,6 @@
-import 'package:bellboy/app/config/theme/app_sizes.dart';
 import 'package:bellboy/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class RiderCurrentLocationMarker extends StatelessWidget {
   const RiderCurrentLocationMarker({
@@ -9,11 +9,6 @@ class RiderCurrentLocationMarker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image(
-      fit: BoxFit.cover,
-      image: AssetImage(Assets.icons.location),
-      height: AppSizes.icon_size_28,
-      width: AppSizes.icon_size_28,
-    );
+    return SvgPicture.asset(Assets.icons.location);
   }
 }

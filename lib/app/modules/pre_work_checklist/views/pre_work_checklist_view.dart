@@ -35,6 +35,7 @@ class PreWorkChecklistView extends GetView<PreWorkChecklistController> {
           controller.keyforall.currentState!.openDrawer();
         },
         isOrderpage: false,
+        onMapIconPressed: () {},
       ),
       drawer: const AppDrawer(),
       body: Column(

@@ -2,6 +2,7 @@ import 'package:bellboy/app/config/theme/app_assets.dart';
 import 'package:bellboy/app/config/theme/app_colors.dart';
 import 'package:bellboy/app/config/theme/app_sizes.dart';
 import 'package:bellboy/app/config/theme/app_text_styles.dart';
+import 'package:bellboy/app/modules/order_list/views/map/mapView.dart';
 import 'package:bellboy/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -17,17 +18,26 @@ class OrderListView extends GetView<OrderListController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: controller.keyforall,
-      appBar: CustomAppBars(
-        onPressed: () {
-          controller.keyforall.currentState!.openDrawer();
-        },
-        isOrderpage: true,
-      ),
-      drawer: const AppDrawer(),
-      body: buildTab(),
-    );
+    return Obx(() => Scaffold(
+          key: controller.keyforall,
+          appBar: CustomAppBars(
+            onPressed: () {
+              controller.keyforall.currentState!.openDrawer();
+            },
+            isOrderpage: true,
+            onMapIconPressed: () {
+              // Navigate to the MapView screen when the mapview icon is pressed
+
+              toggleMapView();
+            },
+          ),
+          drawer: const AppDrawer(),
+          body: buildTab(),
+        ));
+  }
+
+  void toggleMapView() {
+    controller.isMapView.toggle();
   }
 
   Widget buildTab() {
@@ -79,10 +89,10 @@ class OrderListView extends GetView<OrderListController> {
         ),
         body: TabBarView(
           children: [
-            buildTodayOrder(),
             //  buildNoorder(),
-            const Icon(Icons.directions_transit),
-            const Icon(Icons.directions_bike),
+            controller.isMapView.isTrue ? const MapView() : buildTodayOrder(),
+            const SizedBox(),
+            const SizedBox()
           ],
         ),
       ),
@@ -332,7 +342,7 @@ class OrderListView extends GetView<OrderListController> {
                               )
                             ],
                           ),
-                          SizedBox(width: 5),
+                          const SizedBox(width: 5),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
