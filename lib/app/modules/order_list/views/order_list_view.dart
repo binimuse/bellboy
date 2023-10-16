@@ -88,6 +88,7 @@ class OrderListView extends GetView<OrderListController> {
           ),
         ),
         body: TabBarView(
+          physics: const NeverScrollableScrollPhysics(),
           children: [
             //  buildNoorder(),
             controller.isMapView.isTrue ? const MapView() : buildTodayOrder(),

@@ -169,7 +169,7 @@ class _ScreenRealTimeLocationState extends State<MapView> {
             markers: markers,
             myLocationEnabled: false,
             myLocationButtonEnabled: false,
-            zoomControlsEnabled: true,
+            zoomControlsEnabled: false,
             zoomGesturesEnabled: true,
 
             cameraTargetBounds:
@@ -179,16 +179,18 @@ class _ScreenRealTimeLocationState extends State<MapView> {
               _controller.complete(controller);
             },
             onCameraMove: (CameraPosition position) {
+              if (position.zoom >= 14) {
+                isZoomLevel200 = true;
+              } else {
+                isZoomLevel200 = false;
+              }
+
+              currentZoom = position.zoom;
+
               setState(() {
                 initMarkers();
-                if (position.zoom >= 14) {
-                  isZoomLevel200 = true;
-                } else {
-                  isZoomLevel200 = false;
-                }
-
-                currentZoom = position.zoom;
               });
+
               // Update the current zoom level
             },
           ),
@@ -229,7 +231,7 @@ class _ScreenRealTimeLocationState extends State<MapView> {
           ),
           Positioned(
             bottom: 16.0,
-            right: 60.0,
+            right: 30.0,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8.0),
               child: SizedBox(
