@@ -1,12 +1,13 @@
 import 'package:bellboy/app/common/widgets/layer_data/models/enums.dart';
 import 'package:bellboy/app/config/theme/app_colors.dart';
 import 'package:bellboy/app/config/theme/app_sizes.dart';
+import 'package:bellboy/app/config/theme/app_text_styles.dart';
 import 'package:bellboy/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class CheckPointMarker extends StatelessWidget {
-  const CheckPointMarker({
+class CheckPointMarkerText extends StatelessWidget {
+  const CheckPointMarkerText({
     super.key,
     required this.locationCheckPointStatus,
     required this.checkPointNumber,
@@ -19,25 +20,34 @@ class CheckPointMarker extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: AppSizes.icon_size_12 * 1.2,
-      width: AppSizes.icon_size_12 * 1.2,
+      width: AppSizes.icon_size_28,
       child: Stack(
         children: [
-          Align(
+          Container(
+            height: AppSizes.icon_size_10,
             alignment: Alignment.center,
-            child: Container(
-              width: AppSizes.icon_size_8 * 1.2,
-              height: AppSizes.icon_size_8 * 1.2,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: getLocationPinColor(),
-              ),
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(10),
+                  bottomRight:
+                      Radius.circular(10)), // Adjust the radius as needed
+              color: locationCheckPointStatus == LocationCheckPointStatus.TODAY
+                  ? AppColors.success
+                  : locationCheckPointStatus == LocationCheckPointStatus.ASAP
+                      ? AppColors.danger
+                      : AppColors.accentLight,
             ),
-          ),
-          Align(
-            alignment: Alignment.center,
-            child: SvgPicture.asset(
-              Assets.icons.delivering,
-              color: AppColors.whiteOff,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                locationCheckPointStatus == LocationCheckPointStatus.TODAY
+                    ? "Today"
+                    : locationCheckPointStatus == LocationCheckPointStatus.ASAP
+                        ? "ASAP"
+                        : "~ PM 12:30",
+                style: AppTextStyles.captionBold.copyWith(
+                    fontSize: AppSizes.font_12, color: AppColors.whiteOff),
+              ),
             ),
           ),
           getCompletedIcon(),
@@ -50,9 +60,9 @@ class CheckPointMarker extends StatelessWidget {
     if (locationCheckPointStatus == LocationCheckPointStatus.TODAY) {
       return AppColors.primary;
     } else if (locationCheckPointStatus == LocationCheckPointStatus.PRIMARY) {
-      return AppColors.primary;
-    } else if (locationCheckPointStatus == LocationCheckPointStatus.OTHERDAY) {
       return AppColors.accent;
+    } else if (locationCheckPointStatus == LocationCheckPointStatus.OTHERDAY) {
+      return AppColors.success;
     } else if (locationCheckPointStatus == LocationCheckPointStatus.ASAP) {
       return AppColors.danger;
     }

@@ -8,7 +8,9 @@ class OrderListController extends GetxController
   final GlobalKey<ScaffoldState> keyforall = GlobalKey<ScaffoldState>();
   final GlobalKey<ScaffoldState> keyforallmap = GlobalKey<ScaffoldState>();
   late TabController tabController;
+
   var isMapView = false.obs;
+  var isZoomLevel200 = false.obs;
   @override
   void onInit() {
     super.onInit();
