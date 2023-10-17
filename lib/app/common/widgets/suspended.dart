@@ -8,7 +8,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../controllers/find_password_controller.dart';
+import '../../modules/find_password/controllers/find_password_controller.dart';
 
 class SuspendedFrame extends GetView<FindPasswordController> {
   const SuspendedFrame({Key? key}) : super(key: key);
@@ -17,7 +17,7 @@ class SuspendedFrame extends GetView<FindPasswordController> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: AppSizes.mp_w_6),
+          padding: EdgeInsets.symmetric(horizontal: AppSizes.mp_w_3),
           child: buildEmailNotFound(),
         ),
       ),
@@ -35,11 +35,11 @@ class SuspendedFrame extends GetView<FindPasswordController> {
         Align(
           alignment: Alignment.topCenter,
           child: Padding(
-            padding: EdgeInsets.only(top: AppSizes.mp_v_4),
+            padding: EdgeInsets.only(top: AppSizes.mp_v_2),
             child: Image.asset(
               AppAssets.logo, // Replace with the path to your logo asset
               width: 100, // Adjust the width according to your logo size
-              height: 50, // Adjust the height according to your logo size
+              height: 40, // Adjust the height according to your logo size
             ),
           ),
         ),

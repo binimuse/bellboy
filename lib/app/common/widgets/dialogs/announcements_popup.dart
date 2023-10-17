@@ -84,7 +84,7 @@ class _AnnouncementsPopupState extends State<AnnouncementsPopup> {
               height: AppSizes.mp_v_1,
             ),
             Text(
-              '(sat)16-12-22',
+              '(Sat)16-12-22',
               style: AppTextStyles.bodySmallRegular.copyWith(
                 color: AppColors.grayLight,
               ),

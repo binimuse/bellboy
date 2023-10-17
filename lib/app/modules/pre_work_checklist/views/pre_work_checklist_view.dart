@@ -1,13 +1,8 @@
-/// This file contains the implementation of the PreWorkChecklistView widget.
-/// This widget displays a checklist for the user to complete before starting work.
-/// The user can select their vehicle type and additional cards will be displayed based on their selection.
-/// The widget also contains action buttons for the user to proceed with their work.
-// ignore_for_file: unrelated_type_equality_checks
-
 import 'package:bellboy/app/common/widgets/appbar/appbar.dart';
 import 'package:bellboy/app/common/widgets/appdrawer/appdrawer.dart';
 import 'package:bellboy/app/common/widgets/buttons/custom_normal_button.dart';
 import 'package:bellboy/app/common/widgets/forms/check_box.dart';
+
 import 'package:bellboy/app/config/theme/app_colors.dart';
 import 'package:bellboy/app/config/theme/app_sizes.dart';
 import 'package:bellboy/app/config/theme/app_text_styles.dart';
@@ -17,11 +12,10 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../find_password/views/widget/suspended.dart';
+import '../../../common/widgets/suspended.dart';
 import '../controllers/pre_work_checklist_controller.dart';
 import '../model/confirmation_model.dart';
 import '../model/vehcle_type.dart';
-import 'widget/other_transportation.dart';
 
 class PreWorkChecklistView extends GetView<PreWorkChecklistController> {
   const PreWorkChecklistView({Key? key}) : super(key: key);
@@ -85,15 +79,17 @@ class PreWorkChecklistView extends GetView<PreWorkChecklistController> {
                 onPressed: () {
                   //dilaog
                   // Get.dialog(
-                  //   const Dialogexpiration(),
+                  //   const AnnouncementsPopup(),
                   //   barrierDismissible: true,
                   // );
 
+                  Get.to(const SuspendedFrame());
+
                   //dilaog2
-                  Get.dialog(
-                    const Dialogothertransportation(),
-                    barrierDismissible: true,
-                  );
+                  // Get.dialog(
+                  //   const Dialogothertransportation(),
+                  //   barrierDismissible: true,
+                  // );
                 },
               )),
         ],
@@ -110,7 +106,7 @@ class PreWorkChecklistView extends GetView<PreWorkChecklistController> {
           GestureDetector(
               onTap: () {
                 Get.to(
-                  SuspendedFrame(),
+                  const SuspendedFrame(),
                 );
               },
               child: Text('How do you work today? ',

@@ -3,10 +3,12 @@ import 'package:bellboy/app/common/widgets/dialogs/dialog_center_common_widget.d
 import 'package:bellboy/app/config/theme/app_colors.dart';
 import 'package:bellboy/app/config/theme/app_sizes.dart';
 import 'package:bellboy/app/config/theme/app_text_styles.dart';
+import 'package:bellboy/app/utils/keyboard.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class Dialogexpiration extends StatelessWidget {
-  const Dialogexpiration({super.key});
+class AppUpdate extends StatelessWidget {
+  const AppUpdate({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class Dialogexpiration extends StatelessWidget {
               height: AppSizes.mp_v_4,
             ),
             Text(
-              'Insurance Expired',
+              'Update version',
               textAlign: TextAlign.center,
               style: AppTextStyles.headlineBold,
             ),
@@ -28,7 +30,7 @@ class Dialogexpiration extends StatelessWidget {
               height: AppSizes.mp_v_2,
             ),
             Text(
-              "Insurance expiration of the vehicle is within 30 days. Please follow the path below to update your insurance.[My page > My profile > Expiration date > Update]",
+              "Navigate to the App Store for version updates.",
               textAlign: TextAlign.center,
               style: AppTextStyles.bodySmallRegular
                   .copyWith(color: AppColors.grayDefault),
@@ -38,11 +40,12 @@ class Dialogexpiration extends StatelessWidget {
             ),
             ButtonPrimaryFill(
               isterms: false,
-              buttonSizeType: ButtonSizeType.MEDIUM,
+              buttonSizeType: ButtonSizeType.LARGE,
               isDisabled: false,
-              text: "Confirm",
+              text: "Move",
               onTap: () {
-                Navigator.of(context).pop();
+                KeyboardUtil.hideKeyboard(context);
+                Get.back();
               },
             ),
             SizedBox(
