@@ -8,15 +8,13 @@ import 'package:bellboy/app/config/theme/app_colors.dart';
 import 'package:bellboy/app/config/theme/app_sizes.dart';
 import 'package:bellboy/app/config/theme/app_text_styles.dart';
 import 'package:bellboy/gen/assets.gen.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:widget_to_marker/widget_to_marker.dart';
 
+import 'widget/asap/asap_marker.dart';
 import 'widget/check_point_marker.dart';
 import 'widget/check_point_marker_text.dart';
 import 'widget/current_location_marker.dart';
@@ -47,114 +45,127 @@ class _ScreenRealTimeLocationState extends State<MapView> {
 
   var isZoomLevel200 = false;
 
-  initMarkers() async {
-    markers = {};
+  // Define marker icons for different zoom levels for ASAP
+  late BitmapDescriptor asapIcon;
+  late BitmapDescriptor asapzoomedIcon;
 
-    markers.add(
-      Marker(
-        markerId: const MarkerId("1"),
-        position: const LatLng(9.050959034031933, 38.744761824707986),
-        icon: await const CheckPointMarker(
-          locationCheckPointStatus: LocationCheckPointStatus.ASAP,
-          checkPointNumber: "1",
-        ).toBitmapDescriptor(),
-      ),
-    );
+  // Define marker icons for different zoom levels for TODAY
+  late BitmapDescriptor todayIcon;
+  late BitmapDescriptor todayzoomedIcon;
 
-    markers.add(
-      Marker(
-        markerId: const MarkerId("2"),
-        position: const LatLng(9.043994490620204, 38.748997730537944),
-        icon: await const CheckPointMarker(
-          locationCheckPointStatus: LocationCheckPointStatus.PRIMARY,
-          checkPointNumber: "2",
-        ).toBitmapDescriptor(),
-      ),
-    );
+  // Define marker icons for different zoom levels for OtherDay
+  late BitmapDescriptor otherDayIcon;
+  late BitmapDescriptor otherDayzoomedIcon;
 
-    isZoomLevel200
-        ? markers.add(
-            Marker(
-              markerId: const MarkerId("3"),
-              position: const LatLng(9.03118044977825, 38.738217553988726),
-              icon: await const CheckPointMarkerText(
-                locationCheckPointStatus: LocationCheckPointStatus.OTHERDAY,
-                checkPointNumber: "3",
-              ).toBitmapDescriptor(),
-            ),
-          )
-        : markers.add(
-            Marker(
-              markerId: const MarkerId("3"),
-              position: const LatLng(9.03118044977825, 38.738217553988726),
-              icon: await const CheckPointMarker(
-                locationCheckPointStatus: LocationCheckPointStatus.OTHERDAY,
-                checkPointNumber: "3",
-              ).toBitmapDescriptor(),
-            ),
-          );
+  // Define marker icons for different zoom levels for Primary
+  late BitmapDescriptor primaryIcon;
+  late BitmapDescriptor primaryzoomedIcon;
 
-    markers.add(
-      Marker(
-        markerId: const MarkerId("4"),
-        position: const LatLng(9.021134765027485, 38.748725833580835),
-        icon: await const CheckPointMarker(
-          locationCheckPointStatus: LocationCheckPointStatus.TODAY,
-          checkPointNumber: "4",
-        ).toBitmapDescriptor(),
-      ),
-    );
-
-    markers.add(
-      Marker(
-        markerId: const MarkerId("5"),
-        position: const LatLng(9.008494480553173, 38.743958724707674),
-        icon: await const CheckPointMarker(
-          locationCheckPointStatus: LocationCheckPointStatus.TODAY,
-          checkPointNumber: "5",
-        ).toBitmapDescriptor(),
-      ),
-    );
-
-    markers.add(
-      Marker(
-        markerId: const MarkerId("5"),
-        position: const LatLng(9.035653256641449, 38.7579873382014),
-        icon: await const CheckPointMarker(
-          locationCheckPointStatus: LocationCheckPointStatus.OTHERDAY,
-          checkPointNumber: "5",
-        ).toBitmapDescriptor(),
-      ),
-    );
-//my location
-    markers.add(
-      Marker(
-        markerId: const MarkerId("6"),
-        position: const LatLng(9.012969935596415, 38.75285307892485),
-        icon: await const CurrentLocationMarker().toBitmapDescriptor(),
-      ),
-    );
-
-    setState(() {});
-  }
+  Timer? markerUpdateTimer;
 
   @override
   void initState() {
-    initMarkers();
-
-    Future.delayed(
-      const Duration(milliseconds: 1000),
-      () {
-        // showDialog(
-        //   context: context,
-        //   builder: (context) {
-        //     return const DialogDeliveryCompleted();
-        //   },
-        // );
-      },
-    );
-
+    // Load marker icons when the widget is initialized
+    loadMarkerIcons();
     super.initState();
+  }
+
+  Future<void> loadMarkerIcons() async {
+    //ASAP
+    asapIcon = await const ASAPMarker(
+      extraMoney: true,
+      isageLimit: true,
+    ).toBitmapDescriptor();
+
+    asapzoomedIcon = await const CheckPointMarkerText(
+      locationCheckPointStatus: LocationCheckPointStatus.ASAP,
+      checkPointNumber: "3",
+    ).toBitmapDescriptor();
+
+    //TODAY
+    todayIcon = await const CheckPointMarker(
+      locationCheckPointStatus: LocationCheckPointStatus.TODAY,
+      checkPointNumber: "4",
+    ).toBitmapDescriptor();
+
+    todayzoomedIcon = await const CheckPointMarkerText(
+      locationCheckPointStatus: LocationCheckPointStatus.TODAY,
+      checkPointNumber: "4",
+    ).toBitmapDescriptor();
+
+    //OtherDay
+    otherDayIcon = await const CheckPointMarker(
+      locationCheckPointStatus: LocationCheckPointStatus.OTHERDAY,
+      checkPointNumber: "5",
+    ).toBitmapDescriptor();
+
+    otherDayzoomedIcon = await const CheckPointMarkerText(
+      locationCheckPointStatus: LocationCheckPointStatus.OTHERDAY,
+      checkPointNumber: "5",
+    ).toBitmapDescriptor();
+
+    //Primary
+    primaryIcon = await const CheckPointMarker(
+      locationCheckPointStatus: LocationCheckPointStatus.PRIMARY,
+      checkPointNumber: "2",
+    ).toBitmapDescriptor();
+
+    primaryzoomedIcon = await const CheckPointMarkerText(
+      locationCheckPointStatus: LocationCheckPointStatus.PRIMARY,
+      checkPointNumber: "2",
+    ).toBitmapDescriptor();
+
+    // Call updateMarkers here to set the initial markers
+    updateMarkers();
+  }
+
+  void updateMarkers() async {
+    markers = {};
+
+    const LatLng marker2Position =
+        LatLng(9.043994490620204, 38.748997730537944);
+    const LatLng marker3Position = LatLng(9.03118044977825, 38.738217553988726);
+    const LatLng marker4Position =
+        LatLng(9.021134765027485, 38.748725833580835);
+    const LatLng marker5Position = LatLng(9.035653256641449, 38.7579873382014);
+    const LatLng marker6Position = LatLng(9.012969935596415, 38.75285307892485);
+
+    final Marker marker2 = Marker(
+      markerId: const MarkerId("2"),
+      position: marker2Position,
+      icon: isZoomLevel200 ? primaryzoomedIcon : primaryIcon,
+    );
+    markers.add(marker2);
+
+    final Marker marker3 = Marker(
+      markerId: const MarkerId("3"),
+      position: marker3Position,
+      icon: isZoomLevel200 ? asapzoomedIcon : asapIcon,
+    );
+    markers.add(marker3);
+
+    final Marker marker4 = Marker(
+      markerId: const MarkerId("4"),
+      position: marker4Position,
+      icon: isZoomLevel200 ? todayzoomedIcon : todayIcon,
+    );
+    markers.add(marker4);
+
+    final Marker marker5 = Marker(
+      markerId: const MarkerId("5"),
+      position: marker5Position,
+      icon: isZoomLevel200 ? otherDayzoomedIcon : otherDayIcon,
+    );
+    markers.add(marker5);
+
+    final Marker marker6 = Marker(
+      markerId: const MarkerId("6"),
+      position: marker6Position,
+      icon: await const CurrentLocationMarker().toBitmapDescriptor(),
+    );
+    markers.add(marker6);
+
+    setState(() {});
   }
 
   @override
@@ -171,7 +182,6 @@ class _ScreenRealTimeLocationState extends State<MapView> {
             myLocationButtonEnabled: false,
             zoomControlsEnabled: false,
             zoomGesturesEnabled: true,
-
             cameraTargetBounds:
                 CameraTargetBounds.unbounded, // Allow camera movement anywhere
 
@@ -179,19 +189,22 @@ class _ScreenRealTimeLocationState extends State<MapView> {
               _controller.complete(controller);
             },
             onCameraMove: (CameraPosition position) {
-              if (position.zoom >= 14) {
-                isZoomLevel200 = true;
-              } else {
-                isZoomLevel200 = false;
-              }
+              // Cancel any previous timer
+              markerUpdateTimer?.cancel();
 
-              currentZoom = position.zoom;
-
-              setState(() {
-                initMarkers();
+              markerUpdateTimer = Timer(const Duration(milliseconds: 100), () {
+                if (position.zoom >= 13) {
+                  setState(() {
+                    isZoomLevel200 = true;
+                    updateMarkers();
+                  });
+                } else {
+                  setState(() {
+                    isZoomLevel200 = false;
+                    updateMarkers();
+                  });
+                }
               });
-
-              // Update the current zoom level
             },
           ),
           Positioned(
@@ -215,7 +228,7 @@ class _ScreenRealTimeLocationState extends State<MapView> {
                           Assets.icons.dollarcircleline,
                           fit: BoxFit.cover,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 5.0,
                         ),
                         Text(

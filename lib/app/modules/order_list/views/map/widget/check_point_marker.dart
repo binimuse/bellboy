@@ -48,7 +48,7 @@ class CheckPointMarker extends StatelessWidget {
 
   getLocationPinColor() {
     if (locationCheckPointStatus == LocationCheckPointStatus.TODAY) {
-      return AppColors.primary;
+      return AppColors.success;
     } else if (locationCheckPointStatus == LocationCheckPointStatus.PRIMARY) {
       return AppColors.primary;
     } else if (locationCheckPointStatus == LocationCheckPointStatus.OTHERDAY) {

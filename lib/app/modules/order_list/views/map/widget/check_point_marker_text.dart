@@ -35,7 +35,10 @@ class CheckPointMarkerText extends StatelessWidget {
                   ? AppColors.success
                   : locationCheckPointStatus == LocationCheckPointStatus.ASAP
                       ? AppColors.danger
-                      : AppColors.accentLight,
+                      : locationCheckPointStatus ==
+                              LocationCheckPointStatus.OTHERDAY
+                          ? AppColors.accent
+                          : AppColors.primary,
             ),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -58,11 +61,11 @@ class CheckPointMarkerText extends StatelessWidget {
 
   getLocationPinColor() {
     if (locationCheckPointStatus == LocationCheckPointStatus.TODAY) {
-      return AppColors.primary;
-    } else if (locationCheckPointStatus == LocationCheckPointStatus.PRIMARY) {
-      return AppColors.accent;
-    } else if (locationCheckPointStatus == LocationCheckPointStatus.OTHERDAY) {
       return AppColors.success;
+    } else if (locationCheckPointStatus == LocationCheckPointStatus.PRIMARY) {
+      return AppColors.primary;
+    } else if (locationCheckPointStatus == LocationCheckPointStatus.OTHERDAY) {
+      return AppColors.accent;
     } else if (locationCheckPointStatus == LocationCheckPointStatus.ASAP) {
       return AppColors.danger;
     }
