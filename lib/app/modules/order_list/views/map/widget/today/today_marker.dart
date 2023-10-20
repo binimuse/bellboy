@@ -4,8 +4,8 @@ import 'package:bellboy/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class ASAPMarker extends StatelessWidget {
-  const ASAPMarker({
+class TodayMarker extends StatelessWidget {
+  const TodayMarker({
     super.key,
     required this.extraMoney,
     required this.isageLimit,
@@ -24,9 +24,9 @@ class ASAPMarker extends StatelessWidget {
               : AppSizes.icon_size_10 * 1.2,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(22.0),
-            color: AppColors.danger,
+            color: AppColors.success,
             border: Border.all(
-              color: AppColors.dangerLight,
+              color: AppColors.successLight,
               width: 2.0,
             ),
           ),

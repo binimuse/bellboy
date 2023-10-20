@@ -70,7 +70,7 @@ class _TextInputLoginState extends State<TextInputLogin> {
         TextFormField(
           cursorColor: AppColors.primary,
           controller: widget.controller,
-          autofocus: widget.autofocus ?? false,
+          autofocus: widget.autofocus,
           style: AppTextStyles.titleBold.copyWith(
             color: AppColors.blackLight,
             fontSize:

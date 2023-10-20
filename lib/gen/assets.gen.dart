@@ -294,6 +294,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/listcirclesolid.svg
   String get listcirclesolid => 'assets/icons/listcirclesolid.svg';
 
+  /// File path: assets/icons/listcircletwo.svg
+  String get listcircletwo => 'assets/icons/listcircletwo.svg';
+
   /// File path: assets/icons/location.svg
   String get location => 'assets/icons/location.svg';
 
@@ -339,9 +342,6 @@ class $AssetsIconsGen {
   /// File path: assets/icons/motorcycle.svg
   String get motorcycle => 'assets/icons/motorcycle.svg';
 
-  /// File path: assets/icons/myLocation.svg
-  String get myLocation => 'assets/icons/myLocation.svg';
-
   /// File path: assets/icons/navigationarrow.svg
   String get navigationarrow => 'assets/icons/navigationarrow.svg';
 
@@ -380,6 +380,9 @@ class $AssetsIconsGen {
 
   /// File path: assets/icons/pin.svg
   String get pin => 'assets/icons/pin.svg';
+
+  /// File path: assets/icons/pin_rotate.svg
+  String get pinRotate => 'assets/icons/pin_rotate.svg';
 
   /// File path: assets/icons/plus.svg
   String get plus => 'assets/icons/plus.svg';
@@ -723,6 +726,7 @@ class $AssetsIconsGen {
         listcircleasap,
         listcircleother,
         listcirclesolid,
+        listcircletwo,
         location,
         lock,
         mapoutline,
@@ -738,7 +742,6 @@ class $AssetsIconsGen {
         more2,
         morecircle,
         motorcycle,
-        myLocation,
         navigationarrow,
         off,
         on,
@@ -752,6 +755,7 @@ class $AssetsIconsGen {
         paperUpload,
         pay,
         pin,
+        pinRotate,
         plus,
         plusRound,
         plusRoundSmall,
@@ -869,6 +873,10 @@ class $AssetsImagesGen {
   AssetGenImage get imgSentEmail =>
       const AssetGenImage('assets/images/img_sent_email.png');
 
+  /// File path: assets/images/mylocation.png
+  AssetGenImage get mylocation =>
+      const AssetGenImage('assets/images/mylocation.png');
+
   /// File path: assets/images/onbording1.png
   AssetGenImage get onbording1 =>
       const AssetGenImage('assets/images/onbording1.png');
@@ -905,6 +913,7 @@ class $AssetsImagesGen {
         imgEmptyBox,
         imgFinishLogin,
         imgSentEmail,
+        mylocation,
         onbording1,
         onbording2,
         pass,

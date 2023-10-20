@@ -3,10 +3,10 @@
 import 'dart:async';
 
 import 'package:bellboy/app/common/widgets/app_common_annotated_region.dart';
-import 'package:bellboy/app/common/widgets/layer_data/models/enums.dart';
 import 'package:bellboy/app/config/theme/app_colors.dart';
 import 'package:bellboy/app/config/theme/app_sizes.dart';
 import 'package:bellboy/app/config/theme/app_text_styles.dart';
+import 'package:bellboy/app/modules/order_list/views/map/widget/otherday/otherday_text.dart';
 import 'package:bellboy/gen/assets.gen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -14,10 +14,16 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:widget_to_marker/widget_to_marker.dart';
 
+import 'widget/2hours/twohours_marker.dart';
+import 'widget/2hours/twohours_text.dart';
 import 'widget/asap/asap_marker.dart';
-import 'widget/check_point_marker.dart';
-import 'widget/check_point_marker_text.dart';
-import 'widget/current_location_marker.dart';
+
+import 'widget/asap/asap_text.dart';
+
+import 'widget/mylocation/current_location_marker.dart';
+import 'widget/otherday/otherday_marker.dart';
+import 'widget/today/today_marker.dart';
+import 'widget/today/today_text.dart';
 
 class MapView extends StatefulWidget {
   const MapView({Key? key}) : super(key: key);
@@ -77,42 +83,42 @@ class _ScreenRealTimeLocationState extends State<MapView> {
       isageLimit: true,
     ).toBitmapDescriptor();
 
-    asapzoomedIcon = await const CheckPointMarkerText(
-      locationCheckPointStatus: LocationCheckPointStatus.ASAP,
-      checkPointNumber: "3",
+    asapzoomedIcon = await const ASAPText(
+      extraMoney: true,
+      isAgeLimit: true,
     ).toBitmapDescriptor();
 
     //TODAY
-    todayIcon = await const CheckPointMarker(
-      locationCheckPointStatus: LocationCheckPointStatus.TODAY,
-      checkPointNumber: "4",
+    todayIcon = await const TodayMarker(
+      extraMoney: false,
+      isageLimit: false,
     ).toBitmapDescriptor();
 
-    todayzoomedIcon = await const CheckPointMarkerText(
-      locationCheckPointStatus: LocationCheckPointStatus.TODAY,
-      checkPointNumber: "4",
+    todayzoomedIcon = await const TodayText(
+      extraMoney: false,
+      isAgeLimit: false,
     ).toBitmapDescriptor();
 
     //OtherDay
-    otherDayIcon = await const CheckPointMarker(
-      locationCheckPointStatus: LocationCheckPointStatus.OTHERDAY,
-      checkPointNumber: "5",
+    otherDayIcon = await const OtherDayMarker(
+      extraMoney: false,
+      isageLimit: false,
     ).toBitmapDescriptor();
 
-    otherDayzoomedIcon = await const CheckPointMarkerText(
-      locationCheckPointStatus: LocationCheckPointStatus.OTHERDAY,
-      checkPointNumber: "5",
+    otherDayzoomedIcon = await const OtherdayText(
+      extraMoney: false,
+      isAgeLimit: true,
     ).toBitmapDescriptor();
 
-    //Primary
-    primaryIcon = await const CheckPointMarker(
-      locationCheckPointStatus: LocationCheckPointStatus.PRIMARY,
-      checkPointNumber: "2",
+    //TwoHours
+    primaryIcon = await const TwoHoursMarker(
+      extraMoney: true,
+      isageLimit: false,
     ).toBitmapDescriptor();
 
-    primaryzoomedIcon = await const CheckPointMarkerText(
-      locationCheckPointStatus: LocationCheckPointStatus.PRIMARY,
-      checkPointNumber: "2",
+    primaryzoomedIcon = await const TowhoursText(
+      extraMoney: true,
+      isAgeLimit: false,
     ).toBitmapDescriptor();
 
     // Call updateMarkers here to set the initial markers
@@ -158,6 +164,7 @@ class _ScreenRealTimeLocationState extends State<MapView> {
     );
     markers.add(marker5);
 
+//my location
     final Marker marker6 = Marker(
       markerId: const MarkerId("6"),
       position: marker6Position,

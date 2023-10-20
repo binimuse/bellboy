@@ -25,6 +25,7 @@ class OrderListView extends GetView<OrderListController> {
               controller.keyforall.currentState!.openDrawer();
             },
             isOrderpage: true,
+            controller: controller,
             onMapIconPressed: () {
               // Navigate to the MapView screen when the mapview icon is pressed
 
@@ -108,23 +109,31 @@ class OrderListView extends GetView<OrderListController> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            //ASAp
             SizedBox(height: 1.h),
             buildDivider(true),
             SizedBox(height: 1.h),
-            buildOrderList("today"),
+            buildASAPOrderList(),
             buildNormalDivider(),
-            buildOrderList("asap"),
 
+            //today
+
+            buildTodayOrderList(),
+            buildNormalDivider(),
+
+            //2 hour
+            buildTwoHourOrderList(),
+            buildNormalDivider(),
             //other day
             SizedBox(height: 2.h),
             buildDivider(false),
             SizedBox(height: 2.h),
-            buildOrderList("otherday"),
+            buildOtherOrderList(),
             //other day
             SizedBox(height: 2.h),
             buildDivider(false),
             SizedBox(height: 2.h),
-            buildOrderList("otherday"),
+            buildOtherOrderList(),
           ],
         ),
       ),
@@ -195,7 +204,359 @@ class OrderListView extends GetView<OrderListController> {
     );
   }
 
-  buildOrderList(String text) {
+  buildTodayOrderList() {
+    return Container(
+      color: AppColors.whiteOff,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 16.0),
+        child: Column(
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: AppSizes.icon_size_10,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.only(
+                              bottomLeft: Radius.circular(10),
+                              bottomRight: Radius.circular(
+                                  10)), // Adjust the radius as needed
+                          color: AppColors.success),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          "Today",
+                          style: AppTextStyles.captionBold.copyWith(
+                              fontSize: AppSizes.font_12,
+                              color: AppColors.whiteOff),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 2.h),
+                    Text(
+                      '\$9.0',
+                      style: AppTextStyles.captionBold.copyWith(
+                          fontSize: AppSizes.font_14, color: AppColors.black),
+                    ),
+                    Text(
+                      '0.8 km',
+                      style: AppTextStyles.bodySmallBold.copyWith(
+                          fontSize: AppSizes.font_14, color: AppColors.success),
+                    ),
+                  ],
+                ),
+                //
+                SizedBox(width: 15.w),
+                Padding(
+                  padding: const EdgeInsets.only(top: 18.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(
+                              20.0), // Adjust the radius as needed
+                          color: AppColors.grayLighter.withOpacity(0.2),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            'No. Stops : 25',
+                            style: AppTextStyles.captionBold.copyWith(
+                                fontSize: AppSizes.font_14,
+                                color: AppColors.grayDark),
+                          ),
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Column(
+                            children: [
+                              SvgPicture.asset(
+                                Assets.icons.listcircle,
+                                fit: BoxFit.cover,
+                              ),
+                              SizedBox(
+                                height: 5.h,
+                                child: VerticalDivider(
+                                  thickness: 2,
+                                  color: AppColors.grayLighter,
+                                  indent: 0,
+                                  endIndent: 0,
+                                ),
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: AppColors.successLight
+                                          .withOpacity(0.4),
+
+                                      spreadRadius: 2, // spread radius
+                                      blurRadius: 5, // blur radius
+                                      offset: const Offset(0,
+                                          2), // offset in the form of (dx, dy)
+                                    ),
+                                  ],
+                                ),
+                                child: SvgPicture.asset(
+                                  Assets.icons.listcirclesolid,
+                                  color: null,
+                                  fit: BoxFit.cover,
+                                ),
+                              )
+                            ],
+                          ),
+                          const SizedBox(width: 5),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                '24 O\'Connell St',
+                                style: AppTextStyles.captionBold.copyWith(
+                                  fontSize: AppSizes.font_14,
+                                  color: AppColors.black,
+                                ),
+                              ),
+                              SizedBox(height: 3.h),
+                              Text(
+                                '27 Eighth Ave',
+                                style: AppTextStyles.captionBold.copyWith(
+                                  fontSize: AppSizes.font_14,
+                                  color: AppColors.black,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 1.h),
+                      SizedBox(
+                        width: 50.w,
+                        child: Divider(
+                          color: AppColors.backgroundDark,
+                          thickness: 2,
+                          height: 1,
+                        ),
+                      ),
+                      SizedBox(height: 1.h),
+                      Row(
+                        children: [
+                          SvgPicture.asset(
+                            Assets.icons.dangerTriangle,
+                            color: AppColors.warning,
+                            fit: BoxFit.contain,
+                          ),
+                          SizedBox(width: 1.h),
+                          Text(
+                            '2 Items',
+                            style: AppTextStyles.bodyLargeRegular.copyWith(
+                                fontSize: AppSizes.font_14,
+                                color: AppColors.grayDark),
+                          ),
+                          SizedBox(
+                            height: 2.h,
+                            child: VerticalDivider(
+                              color: AppColors.grayLighter,
+                              thickness: 2,
+                            ),
+                          ),
+                          Text(
+                            'Small Size',
+                            style: AppTextStyles.bodyLargeRegular.copyWith(
+                                fontSize: AppSizes.font_14,
+                                color: AppColors.grayDark),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 2.h),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  buildASAPOrderList() {
+    return Container(
+      color: AppColors.whiteOff,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 16.0),
+        child: Column(
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: AppSizes.icon_size_10,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.only(
+                              bottomLeft: Radius.circular(10),
+                              bottomRight: Radius.circular(
+                                  10)), // Adjust the radius as needed
+                          color: AppColors.danger),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          "ASAP",
+                          style: AppTextStyles.captionBold.copyWith(
+                              fontSize: AppSizes.font_12,
+                              color: AppColors.whiteOff),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 2.h),
+                    Text(
+                      '\$9.0',
+                      style: AppTextStyles.captionBold.copyWith(
+                          fontSize: AppSizes.font_14, color: AppColors.black),
+                    ),
+                    Text(
+                      '0.8 km',
+                      style: AppTextStyles.bodySmallBold.copyWith(
+                          fontSize: AppSizes.font_14, color: AppColors.danger),
+                    ),
+                  ],
+                ),
+                //
+                SizedBox(width: 15.w),
+                Padding(
+                  padding: const EdgeInsets.only(top: 18.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Column(
+                            children: [
+                              SvgPicture.asset(
+                                Assets.icons.listcircleasap,
+                                fit: BoxFit.cover,
+                              ),
+                              SizedBox(
+                                height: 5.h,
+                                child: VerticalDivider(
+                                  thickness: 2,
+                                  color: AppColors.grayLighter,
+                                  indent: 0,
+                                  endIndent: 0,
+                                ),
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: AppColors.danger.withOpacity(0.4),
+
+                                      spreadRadius: 2, // spread radius
+                                      blurRadius: 5, // blur radius
+                                      offset: const Offset(0,
+                                          2), // offset in the form of (dx, dy)
+                                    ),
+                                  ],
+                                ),
+                                child: SvgPicture.asset(
+                                  Assets.icons.listcirclesolid,
+                                  color: AppColors.danger,
+                                  fit: BoxFit.cover,
+                                ),
+                              )
+                            ],
+                          ),
+                          const SizedBox(width: 5),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                '24 O\'Connell St',
+                                style: AppTextStyles.captionBold.copyWith(
+                                  fontSize: AppSizes.font_14,
+                                  color: AppColors.black,
+                                ),
+                              ),
+                              SizedBox(height: 3.h),
+                              Text(
+                                '27 Eighth Ave',
+                                style: AppTextStyles.captionBold.copyWith(
+                                  fontSize: AppSizes.font_14,
+                                  color: AppColors.black,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 1.h),
+                      SizedBox(
+                        width: 50.w,
+                        child: Divider(
+                          color: AppColors.backgroundDark,
+                          thickness: 2,
+                          height: 1,
+                        ),
+                      ),
+                      SizedBox(height: 1.h),
+                      Row(
+                        children: [
+                          SvgPicture.asset(
+                            Assets.icons.dangerTriangle,
+                            color: AppColors.warning,
+                            fit: BoxFit.contain,
+                          ),
+                          SizedBox(width: 1.h),
+                          Text(
+                            '2 Items',
+                            style: AppTextStyles.bodyLargeRegular.copyWith(
+                                fontSize: AppSizes.font_14,
+                                color: AppColors.grayDark),
+                          ),
+                          SizedBox(
+                            height: 2.h,
+                            child: VerticalDivider(
+                              color: AppColors.grayLighter,
+                              thickness: 2,
+                            ),
+                          ),
+                          Text(
+                            'Small Size',
+                            style: AppTextStyles.bodyLargeRegular.copyWith(
+                                fontSize: AppSizes.font_14,
+                                color: AppColors.grayDark),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 2.h),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  buildOtherOrderList() {
     return Container(
       color: AppColors.whiteOff,
       child: Padding(
@@ -218,20 +579,12 @@ class OrderListView extends GetView<OrderListController> {
                             bottomLeft: Radius.circular(10),
                             bottomRight: Radius.circular(
                                 10)), // Adjust the radius as needed
-                        color: text.contains("today")
-                            ? AppColors.success
-                            : text.contains("asap")
-                                ? AppColors.danger
-                                : AppColors.accentLight,
+                        color: AppColors.accentLight,
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          text.contains("today")
-                              ? "Today"
-                              : text.contains("asap")
-                                  ? "ASAP"
-                                  : "~ PM 12:30",
+                          "~ PM 12:30",
                           style: AppTextStyles.captionBold.copyWith(
                               fontSize: AppSizes.font_12,
                               color: AppColors.whiteOff),
@@ -248,11 +601,7 @@ class OrderListView extends GetView<OrderListController> {
                       '0.8 km',
                       style: AppTextStyles.bodySmallBold.copyWith(
                         fontSize: AppSizes.font_14,
-                        color: text.contains("today")
-                            ? AppColors.success
-                            : text.contains("asap")
-                                ? AppColors.danger
-                                : AppColors.accentLight,
+                        color: AppColors.accentLight,
                       ),
                     ),
                   ],
@@ -265,43 +614,31 @@ class OrderListView extends GetView<OrderListController> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      text.contains("asap")
-                          ? const SizedBox()
-                          : Container(
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(
-                                    20.0), // Adjust the radius as needed
-                                color: AppColors.grayLighter.withOpacity(0.2),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  'No. Stops : 25',
-                                  style: AppTextStyles.captionBold.copyWith(
-                                      fontSize: AppSizes.font_14,
-                                      color: AppColors.grayDark),
-                                ),
-                              ),
-                            ),
+                      Container(
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(
+                              20.0), // Adjust the radius as needed
+                          color: AppColors.grayLighter.withOpacity(0.2),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            'No. Stops : 25',
+                            style: AppTextStyles.captionBold.copyWith(
+                                fontSize: AppSizes.font_14,
+                                color: AppColors.grayDark),
+                          ),
+                        ),
+                      ),
                       Row(
                         children: [
                           Column(
                             children: [
-                              text.contains("today")
-                                  ? SvgPicture.asset(
-                                      Assets.icons.listcircle,
-                                      fit: BoxFit.cover,
-                                    )
-                                  : text.contains("asap")
-                                      ? SvgPicture.asset(
-                                          Assets.icons.listcircleasap,
-                                          fit: BoxFit.cover,
-                                        )
-                                      : SvgPicture.asset(
-                                          Assets.icons.listcircleother,
-                                          fit: BoxFit.cover,
-                                        ),
+                              SvgPicture.asset(
+                                Assets.icons.listcircleother,
+                                fit: BoxFit.cover,
+                              ),
                               SizedBox(
                                 height: 5.h,
                                 child: VerticalDivider(
@@ -315,14 +652,7 @@ class OrderListView extends GetView<OrderListController> {
                                 decoration: BoxDecoration(
                                   boxShadow: [
                                     BoxShadow(
-                                      color: text.contains("today")
-                                          ? AppColors.successLight
-                                              .withOpacity(0.4) // shadow color
-                                          : text.contains("asap")
-                                              ? AppColors.danger
-                                                  .withOpacity(0.4)
-                                              : AppColors.accent
-                                                  .withOpacity(0.4),
+                                      color: AppColors.accent.withOpacity(0.4),
 
                                       spreadRadius: 2, // spread radius
                                       blurRadius: 5, // blur radius
@@ -333,11 +663,7 @@ class OrderListView extends GetView<OrderListController> {
                                 ),
                                 child: SvgPicture.asset(
                                   Assets.icons.listcirclesolid,
-                                  color: text.contains("today")
-                                      ? null
-                                      : text.contains("asap")
-                                          ? AppColors.danger
-                                          : AppColors.accent,
+                                  color: AppColors.accent,
                                   fit: BoxFit.cover,
                                 ),
                               )
@@ -443,6 +769,194 @@ class OrderListView extends GetView<OrderListController> {
               fontSize: AppSizes.font_14, color: AppColors.grayDefault),
         ),
       ],
+    );
+  }
+
+  buildTwoHourOrderList() {
+    return Container(
+      color: AppColors.whiteOff,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 16.0),
+        child: Column(
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: AppSizes.icon_size_10,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.only(
+                            bottomLeft: Radius.circular(10),
+                            bottomRight: Radius.circular(
+                                10)), // Adjust the radius as needed
+                        color: AppColors.primary,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          "~ PM 12:30",
+                          style: AppTextStyles.captionBold.copyWith(
+                              fontSize: AppSizes.font_12,
+                              color: AppColors.whiteOff),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 2.h),
+                    Text(
+                      '\$9.0',
+                      style: AppTextStyles.captionBold.copyWith(
+                          fontSize: AppSizes.font_14, color: AppColors.black),
+                    ),
+                    Text(
+                      '0.8 km',
+                      style: AppTextStyles.bodySmallBold.copyWith(
+                        fontSize: AppSizes.font_14,
+                        color: AppColors.primary,
+                      ),
+                    ),
+                  ],
+                ),
+                //
+                SizedBox(width: 15.w),
+                Padding(
+                  padding: const EdgeInsets.only(top: 18.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(
+                              20.0), // Adjust the radius as needed
+                          color: AppColors.grayLighter.withOpacity(0.2),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            'No. Stops : 25',
+                            style: AppTextStyles.captionBold.copyWith(
+                                fontSize: AppSizes.font_14,
+                                color: AppColors.grayDark),
+                          ),
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Column(
+                            children: [
+                              SvgPicture.asset(
+                                Assets.icons.listcircletwo,
+                                color: null,
+                                fit: BoxFit.cover,
+                              ),
+                              SizedBox(
+                                height: 5.h,
+                                child: VerticalDivider(
+                                  thickness: 2,
+                                  color: AppColors.grayLighter,
+                                  indent: 0,
+                                  endIndent: 0,
+                                ),
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: AppColors.primary.withOpacity(0.4),
+
+                                      spreadRadius: 2, // spread radius
+                                      blurRadius: 5, // blur radius
+                                      offset: const Offset(0,
+                                          2), // offset in the form of (dx, dy)
+                                    ),
+                                  ],
+                                ),
+                                child: SvgPicture.asset(
+                                  Assets.icons.listcirclesolid,
+                                  color: AppColors.primary,
+                                  fit: BoxFit.cover,
+                                ),
+                              )
+                            ],
+                          ),
+                          const SizedBox(width: 5),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                '24 O\'Connell St',
+                                style: AppTextStyles.captionBold.copyWith(
+                                  fontSize: AppSizes.font_14,
+                                  color: AppColors.black,
+                                ),
+                              ),
+                              SizedBox(height: 3.h),
+                              Text(
+                                '27 Eighth Ave',
+                                style: AppTextStyles.captionBold.copyWith(
+                                  fontSize: AppSizes.font_14,
+                                  color: AppColors.black,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 1.h),
+                      SizedBox(
+                        width: 50.w,
+                        child: Divider(
+                          color: AppColors.backgroundDark,
+                          thickness: 2,
+                          height: 1,
+                        ),
+                      ),
+                      SizedBox(height: 1.h),
+                      Row(
+                        children: [
+                          SvgPicture.asset(
+                            Assets.icons.dangerTriangle,
+                            color: AppColors.warning,
+                            fit: BoxFit.contain,
+                          ),
+                          SizedBox(width: 1.h),
+                          Text(
+                            '2 Items',
+                            style: AppTextStyles.bodyLargeRegular.copyWith(
+                                fontSize: AppSizes.font_14,
+                                color: AppColors.grayDark),
+                          ),
+                          SizedBox(
+                            height: 2.h,
+                            child: VerticalDivider(
+                              color: AppColors.grayLighter,
+                              thickness: 2,
+                            ),
+                          ),
+                          Text(
+                            'Small Size',
+                            style: AppTextStyles.bodyLargeRegular.copyWith(
+                                fontSize: AppSizes.font_14,
+                                color: AppColors.grayDark),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 2.h),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

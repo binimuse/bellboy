@@ -3,25 +3,27 @@ import 'package:bellboy/app/config/theme/app_assets.dart';
 import 'package:bellboy/app/config/theme/app_colors.dart';
 import 'package:bellboy/app/config/theme/app_sizes.dart';
 import 'package:bellboy/app/config/theme/app_text_styles.dart';
+import 'package:bellboy/app/modules/order_list/controllers/order_list_controller.dart';
 import 'package:bellboy/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
-import '../../../modules/order_list/views/map/mapView.dart';
 import '../buttons/button_gray_scale_outline_order.dart';
 
 class CustomAppBars extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback onPressed; // Add a parameter for onPressed function
   final bool isOrderpage; // Add a parameter for onPressed function
   final VoidCallback onMapIconPressed;
+  final OrderListController? controller;
 
   const CustomAppBars({
     Key? key,
     required this.onPressed,
     required this.isOrderpage,
     required this.onMapIconPressed,
+    this.controller,
   }) : super(key: key);
 
   @override
@@ -33,12 +35,11 @@ class CustomAppBars extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: Colors.white,
       elevation: 0,
       leading: Padding(
-        padding: const EdgeInsets.only(left: 9.0),
-        child: IconButton(
-          icon: SvgPicture.asset(Assets.icons.menu),
-          onPressed: onPressed, // Use the onPressed parameter here
-        ),
-      ),
+          padding: const EdgeInsets.only(left: 9.0),
+          child: IconButton(
+            icon: SvgPicture.asset(Assets.icons.menu),
+            onPressed: onPressed, // Use the onPressed parameter here
+          )),
       title: SizedBox(
         width: 25.w,
         height: 26.h,
@@ -53,18 +54,26 @@ class CustomAppBars extends StatelessWidget implements PreferredSizeWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   children: [
-                    IconButton(
-                      icon: SvgPicture.asset(Assets.icons.sort),
-                      color: AppColors.grayDefault,
-                      onPressed: () {
-                        showbottomSheet(context);
-                      },
-                    ),
-                    IconButton(
-                      icon: SvgPicture.asset(Assets.icons.mapoutline),
-                      color: AppColors.grayDefault,
-                      onPressed: onMapIconPressed,
-                    ),
+                    controller!.isMapView.isFalse
+                        ? IconButton(
+                            icon: SvgPicture.asset(Assets.icons.sort),
+                            color: AppColors.grayDefault,
+                            onPressed: () {
+                              showbottomSheet(context);
+                            },
+                          )
+                        : const SizedBox( ),
+                    controller!.isMapView.isFalse
+                        ? IconButton(
+                            icon: SvgPicture.asset(Assets.icons.mapoutline),
+                            color: AppColors.grayDefault,
+                            onPressed: onMapIconPressed,
+                          )
+                        : IconButton(
+                            icon: SvgPicture.asset(Assets.icons.list),
+                            color: AppColors.grayDefault,
+                            onPressed: onMapIconPressed,
+                          ),
                   ],
                 ),
               )
