@@ -18,6 +18,7 @@ abstract class Routes {
   static const MOBILE_VERIFICATION = _Paths.MOBILE_VERIFICATION;
   static const PRE_WORK_CHECKLIST = _Paths.PRE_WORK_CHECKLIST;
   static const ORDER_LIST = _Paths.ORDER_LIST;
+  static const ORDER_DETAIL = _Paths.ORDER_DETAIL;
 }
 
 abstract class _Paths {
@@ -35,4 +36,5 @@ abstract class _Paths {
   static const MOBILE_VERIFICATION = '/mobile-verification';
   static const PRE_WORK_CHECKLIST = '/pre-work-checklist';
   static const ORDER_LIST = '/order-list';
+  static const ORDER_DETAIL = '/order-detail';
 }

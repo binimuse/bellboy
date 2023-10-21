@@ -12,6 +12,7 @@ import '../modules/mobile_verification/bindings/mobile_verification_binding.dart
 import '../modules/mobile_verification/views/mobile_verification_view.dart';
 import '../modules/on_bording/bindings/on_bording_binding.dart';
 import '../modules/on_bording/views/on_bording_view.dart';
+
 import '../modules/order_list/bindings/order_list_binding.dart';
 import '../modules/order_list/views/order_list_view.dart';
 import '../modules/pre_work_checklist/bindings/pre_work_checklist_binding.dart';
@@ -95,5 +96,6 @@ class AppPages {
       page: () => const OrderListView(),
       binding: OrderListBinding(),
     ),
+
   ];
 }

@@ -1,4 +1,4 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, camel_case_types
 
 import 'dart:async';
 
@@ -6,33 +6,32 @@ import 'package:bellboy/app/common/widgets/app_common_annotated_region.dart';
 import 'package:bellboy/app/config/theme/app_colors.dart';
 import 'package:bellboy/app/config/theme/app_sizes.dart';
 import 'package:bellboy/app/config/theme/app_text_styles.dart';
+import 'package:bellboy/app/modules/order_list/views/map/widget/2hours/twohours_marker.dart';
+import 'package:bellboy/app/modules/order_list/views/map/widget/2hours/twohours_text.dart';
+import 'package:bellboy/app/modules/order_list/views/map/widget/asap/asap_marker.dart';
+import 'package:bellboy/app/modules/order_list/views/map/widget/asap/asap_text.dart';
+import 'package:bellboy/app/modules/order_list/views/map/widget/mylocation/current_location_marker.dart';
+import 'package:bellboy/app/modules/order_list/views/map/widget/otherday/otherday_marker.dart';
 import 'package:bellboy/app/modules/order_list/views/map/widget/otherday/otherday_text.dart';
+import 'package:bellboy/app/modules/order_list/views/map/widget/today/today_text.dart';
 import 'package:bellboy/gen/assets.gen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:widget_to_marker/widget_to_marker.dart';
 
-import 'widget/2hours/twohours_marker.dart';
-import 'widget/2hours/twohours_text.dart';
-import 'widget/asap/asap_marker.dart';
+import '../map/widget/today/today_marker.dart';
 
-import 'widget/asap/asap_text.dart';
-
-import 'widget/mylocation/current_location_marker.dart';
-import 'widget/otherday/otherday_marker.dart';
-import 'widget/today/today_marker.dart';
-import 'widget/today/today_text.dart';
-
-class MapView extends StatefulWidget {
-  const MapView({Key? key}) : super(key: key);
+class orderDetailView extends StatefulWidget {
+  const orderDetailView({Key? key}) : super(key: key);
 
   @override
-  State<MapView> createState() => _ScreenRealTimeLocationState();
+  State<orderDetailView> createState() => _ScreenRealTimeLocationState();
 }
 
-class _ScreenRealTimeLocationState extends State<MapView> {
+class _ScreenRealTimeLocationState extends State<orderDetailView> {
   final Completer<GoogleMapController> _controller =
       Completer<GoogleMapController>();
 
@@ -179,6 +178,7 @@ class _ScreenRealTimeLocationState extends State<MapView> {
   Widget build(BuildContext context) {
     return AppCommonAnnotatedRegion(
         child: Scaffold(
+      backgroundColor: Colors.transparent,
       body: Stack(
         children: [
           GoogleMap(
@@ -215,7 +215,32 @@ class _ScreenRealTimeLocationState extends State<MapView> {
             },
           ),
           Positioned(
-            top: 20.0,
+            top: 50.0,
+            left: 10.0,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20.0),
+              child: SizedBox(
+                width: 12.w,
+                height: 12.w,
+                child: FloatingActionButton(
+                  heroTag: 1,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                  ),
+                  backgroundColor: AppColors.whiteOff,
+                  onPressed: () {
+                    Get.back();
+                  },
+                  child: SvgPicture.asset(
+                    Assets.icons.arrowleft,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            top: 50.0,
             left: 120.0,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(50.0),
@@ -223,7 +248,7 @@ class _ScreenRealTimeLocationState extends State<MapView> {
                 width: 35.w,
                 height: 12.w,
                 child: FloatingActionButton(
-                  heroTag: 1,
+                  heroTag: 2,
                   shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(8.0)),
                   ),
@@ -240,10 +265,10 @@ class _ScreenRealTimeLocationState extends State<MapView> {
                           width: 5.0,
                         ),
                         Text(
-                          "Earnings",
+                          "\$15.2",
                           style: AppTextStyles.bodyLargeBold.copyWith(
                               fontSize: AppSizes.font_16,
-                              color: AppColors.grayLight),
+                              color: AppColors.black),
                         ),
                       ]),
                 ),
@@ -259,7 +284,7 @@ class _ScreenRealTimeLocationState extends State<MapView> {
                 width: 12.w,
                 height: 12.w,
                 child: FloatingActionButton(
-                  heroTag: 2,
+                  heroTag: 3,
                   shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(8.0)),
                   ),
