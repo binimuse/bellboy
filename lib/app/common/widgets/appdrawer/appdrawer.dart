@@ -59,7 +59,7 @@ class _AppDrawerState extends State<AppDrawer> {
         borderRadius: BorderRadius.circular(8.0),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(12.0),
         child: Row(
           children: [
             SvgPicture.asset(

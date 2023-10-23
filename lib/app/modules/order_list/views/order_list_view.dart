@@ -157,7 +157,7 @@ class OrderListView extends GetView<OrderListController> {
 
   Widget buildDivider(bool isToday) {
     return Padding(
-      padding: const EdgeInsets.only(left: 12.0, right: 12),
+      padding: const EdgeInsets.only(left: 10.0, right: 10),
       child: SizedBox(
         width: 100.w,
         child: Row(
@@ -400,17 +400,12 @@ class OrderListView extends GetView<OrderListController> {
             MaterialPageRoute(builder: (context) => const LoadingScreen()));
 
         try {
-        
           await Future.delayed(const Duration(seconds: 2));
 
-       
           Navigator.of(context).pushReplacement(
               MaterialPageRoute(builder: (context) => const orderDetailView()));
-       
         } catch (error) {
-       
           print('Error: $error');
-        
         }
       },
       child: Container(

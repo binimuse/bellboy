@@ -16,6 +16,7 @@ import '../../../common/widgets/suspended.dart';
 import '../controllers/pre_work_checklist_controller.dart';
 import '../model/confirmation_model.dart';
 import '../model/vehcle_type.dart';
+import 'widget/dialog_expiration.dart';
 
 class PreWorkChecklistView extends GetView<PreWorkChecklistController> {
   const PreWorkChecklistView({Key? key}) : super(key: key);
@@ -63,7 +64,7 @@ class PreWorkChecklistView extends GetView<PreWorkChecklistController> {
       child: Column(
         children: [
           Obx(() => CustomNormalButton(
-                text: 'Get on',
+                text: 'Select',
                 textStyle: AppTextStyles.bodyLargeBold.copyWith(
                   color: AppColors.whiteOff,
                 ),
@@ -77,13 +78,13 @@ class PreWorkChecklistView extends GetView<PreWorkChecklistController> {
                   horizontal: AppSizes.mp_w_6,
                 ),
                 onPressed: () {
-                  //dilaog
-                  // Get.dialog(
-                  //   const AnnouncementsPopup(),
-                  //   barrierDismissible: true,
-                  // );
+                  //  dilaog
+                  Get.dialog(
+                    const Dialogexpiration(),
+                    barrierDismissible: true,
+                  );
 
-                  Get.to(const SuspendedFrame());
+                  //   Get.to(const SuspendedFrame());
 
                   //dilaog2
                   // Get.dialog(
@@ -299,7 +300,7 @@ class PreWorkChecklistView extends GetView<PreWorkChecklistController> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(12.0),
                                 border: Border.all(
-                                  color: AppColors.grayLight.withOpacity(0.9),
+                                  color: AppColors.primary.withOpacity(0.9),
                                   width: 1.0,
                                 ),
                                 color: !controller.isTermChecked(index)

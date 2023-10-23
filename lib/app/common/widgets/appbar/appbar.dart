@@ -35,7 +35,7 @@ class CustomAppBars extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: Colors.white,
       elevation: 0,
       leading: Padding(
-          padding: const EdgeInsets.only(left: 9.0),
+          padding: const EdgeInsets.only(left: 21.0),
           child: IconButton(
             icon: SvgPicture.asset(Assets.icons.menu),
             onPressed: onPressed, // Use the onPressed parameter here
@@ -62,7 +62,7 @@ class CustomAppBars extends StatelessWidget implements PreferredSizeWidget {
                               showbottomSheet(context);
                             },
                           )
-                        : const SizedBox( ),
+                        : const SizedBox(),
                     controller!.isMapView.isFalse
                         ? IconButton(
                             icon: SvgPicture.asset(Assets.icons.mapoutline),

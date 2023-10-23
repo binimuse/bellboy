@@ -11,7 +11,7 @@ import 'package:sizer/sizer.dart';
 import '../../modules/find_password/controllers/find_password_controller.dart';
 
 class SuspendedFrame extends GetView<FindPasswordController> {
-  const SuspendedFrame({Key? key}) : super(key: key);
+  const           SuspendedFrame({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
