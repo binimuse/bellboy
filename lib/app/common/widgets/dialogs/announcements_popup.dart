@@ -192,31 +192,31 @@ class AnnouncementsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        imagePath != ""
-            ? Container(
-                width: 100.w,
-                height: 15.h,
-                color:
-                    AppColors.primaryLighter, // Replace with your desired color
-                child: Center(
-                    child: Image.asset(
-                  imagePath!,
-                  fit: BoxFit.contain,
-                )),
-              )
-            : const SizedBox(),
-        SizedBox(
-          height: AppSizes.mp_v_1,
-        ),
-        Text(
-          text2,
-          textAlign: TextAlign.start,
-          style: AppTextStyles.bodySmallRegular
-              .copyWith(color: AppColors.grayDark),
-        )
-      ],
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+          imagePath != ""
+              ? Container(
+                  width: 100.w,
+                  height: 13.h,
+                  color: AppColors
+                      .primaryLighter, // Replace with your desired color
+                  child: Center(
+                      child: Image.asset(
+                    imagePath!,
+                    fit: BoxFit.contain,
+                  )),
+                )
+              : const SizedBox(),
+          Text(
+            text2,
+            textAlign: TextAlign.start,
+            style: AppTextStyles.bodySmallRegular
+                .copyWith(color: AppColors.grayDark),
+          )
+        ],
+      ),
     );
   }
 }

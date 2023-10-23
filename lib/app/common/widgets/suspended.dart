@@ -7,11 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 import '../../modules/find_password/controllers/find_password_controller.dart';
 
 class SuspendedFrame extends GetView<FindPasswordController> {
-  const           SuspendedFrame({Key? key}) : super(key: key);
+  const SuspendedFrame({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,10 +90,15 @@ class SuspendedFrame extends GetView<FindPasswordController> {
                   SizedBox(
                     width: AppSizes.mp_w_2,
                   ),
-                  Text(
-                    "0430 027 934",
-                    style: AppTextStyles.bodySmallBold.copyWith(
-                      color: AppColors.grayDefault,
+                  GestureDetector(
+                    onTap: () {
+                      openPhone("0430 027 934");
+                    },
+                    child: Text(
+                      "0430 027 934",
+                      style: AppTextStyles.bodySmallBold.copyWith(
+                        color: AppColors.grayDefault,
+                      ),
                     ),
                   ),
                 ],
@@ -103,5 +108,14 @@ class SuspendedFrame extends GetView<FindPasswordController> {
         ),
       ],
     );
+  }
+
+  void openPhone(String phoneNumber) async {
+    final url = 'tel:$phoneNumber';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }

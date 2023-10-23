@@ -31,54 +31,62 @@ class CustomAppBars extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      backgroundColor: Colors.white,
-      elevation: 0,
-      leading: Padding(
-          padding: const EdgeInsets.only(left: 21.0),
-          child: IconButton(
-            icon: SvgPicture.asset(Assets.icons.menu),
-            onPressed: onPressed, // Use the onPressed parameter here
-          )),
-      title: SizedBox(
-        width: 25.w,
-        height: 26.h,
-        child: Image.asset(
-          AppAssets.logo,
-          fit: BoxFit.contain,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: AppBar(
+        leadingWidth: 40.w,
+        backgroundColor: Colors.white,
+        elevation: 0,
+        leading: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            IconButton(
+              icon: SvgPicture.asset(Assets.icons.menu),
+              onPressed: onPressed, // Use the onPressed parameter here
+            ),
+            SizedBox(
+              width: 25.w,
+              height: 26.w,
+              child: Image.asset(
+                AppAssets.logo,
+                fit: BoxFit.contain,
+              ),
+            ),
+          ],
         ),
+        actions: [
+          isOrderpage == true
+              ? Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      controller!.isMapView.isFalse
+                          ? IconButton(
+                              icon: SvgPicture.asset(Assets.icons.sort),
+                              color: AppColors.grayDefault,
+                              onPressed: () {
+                                showbottomSheet(context);
+                              },
+                            )
+                          : const SizedBox(),
+                      controller!.isMapView.isFalse
+                          ? IconButton(
+                              icon: SvgPicture.asset(Assets.icons.mapoutline),
+                              color: AppColors.grayDefault,
+                              onPressed: onMapIconPressed,
+                            )
+                          : IconButton(
+                              icon: SvgPicture.asset(Assets.icons.list),
+                              color: AppColors.grayDefault,
+                              onPressed: onMapIconPressed,
+                            ),
+                    ],
+                  ),
+                )
+              : const SizedBox(),
+        ],
       ),
-      actions: [
-        isOrderpage == true
-            ? Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: [
-                    controller!.isMapView.isFalse
-                        ? IconButton(
-                            icon: SvgPicture.asset(Assets.icons.sort),
-                            color: AppColors.grayDefault,
-                            onPressed: () {
-                              showbottomSheet(context);
-                            },
-                          )
-                        : const SizedBox(),
-                    controller!.isMapView.isFalse
-                        ? IconButton(
-                            icon: SvgPicture.asset(Assets.icons.mapoutline),
-                            color: AppColors.grayDefault,
-                            onPressed: onMapIconPressed,
-                          )
-                        : IconButton(
-                            icon: SvgPicture.asset(Assets.icons.list),
-                            color: AppColors.grayDefault,
-                            onPressed: onMapIconPressed,
-                          ),
-                  ],
-                ),
-              )
-            : const SizedBox(),
-      ],
     );
   }
 

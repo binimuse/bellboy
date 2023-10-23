@@ -36,8 +36,10 @@ class MyCheckBox extends StatelessWidget {
           Padding(
             padding: getCheckPadding(),
             child: Container(
+              width: 30,
+              height: 30,
               decoration: BoxDecoration(
-                color: isInitSelected ? AppColors.primary : AppColors.whiteOff,
+                color: isInitSelected ? AppColors.primary : Colors.transparent,
                 borderRadius: BorderRadius.circular(AppSizes.radius_12 * 4),
                 border: Border.all(
                   color: isInitSelected

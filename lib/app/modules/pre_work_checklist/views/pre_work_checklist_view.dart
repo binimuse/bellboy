@@ -1,6 +1,7 @@
 import 'package:bellboy/app/common/widgets/appbar/appbar.dart';
 import 'package:bellboy/app/common/widgets/appdrawer/appdrawer.dart';
 import 'package:bellboy/app/common/widgets/buttons/custom_normal_button.dart';
+import 'package:bellboy/app/common/widgets/dialogs/app_update.dart';
 import 'package:bellboy/app/common/widgets/forms/check_box.dart';
 
 import 'package:bellboy/app/config/theme/app_colors.dart';
@@ -16,7 +17,6 @@ import '../../../common/widgets/suspended.dart';
 import '../controllers/pre_work_checklist_controller.dart';
 import '../model/confirmation_model.dart';
 import '../model/vehcle_type.dart';
-import 'widget/dialog_expiration.dart';
 
 class PreWorkChecklistView extends GetView<PreWorkChecklistController> {
   const PreWorkChecklistView({Key? key}) : super(key: key);
@@ -79,12 +79,21 @@ class PreWorkChecklistView extends GetView<PreWorkChecklistController> {
                 ),
                 onPressed: () {
                   //  dilaog
-                  Get.dialog(
-                    const Dialogexpiration(),
-                    barrierDismissible: true,
-                  );
+                  // Get.dialog(
+                  //   const Dialogexpiration(),
+                  //   barrierDismissible: true,
+                  // );
 
-                  //   Get.to(const SuspendedFrame());
+                  // Get.dialog(
+                  //   const AnnouncementsPopup(),
+                  //   barrierDismissible: true,
+                  // );
+
+                  Get.dialog(const AppUpdate(),
+                      barrierDismissible: true,
+                      barrierColor: AppColors.grayDark);
+
+                  //  Get.to(const SuspendedFrame());
 
                   //dilaog2
                   // Get.dialog(
@@ -207,10 +216,10 @@ class PreWorkChecklistView extends GetView<PreWorkChecklistController> {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.all(8.0),
+                                padding: const EdgeInsets.all(16.0),
                                 child: Container(
-                                  width: 24,
-                                  height: 24,
+                                  width: 30,
+                                  height: 30,
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     border: Border.all(
@@ -258,7 +267,7 @@ class PreWorkChecklistView extends GetView<PreWorkChecklistController> {
 
   Widget buildAdditionalCard(String vehicleType) {
     return SizedBox(
-      height: 60.h,
+      height: 70.h,
       child: Padding(
         padding: const EdgeInsets.all(24.0),
         child: Column(
@@ -300,7 +309,9 @@ class PreWorkChecklistView extends GetView<PreWorkChecklistController> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(12.0),
                                 border: Border.all(
-                                  color: AppColors.primary.withOpacity(0.9),
+                                  color: !controller.isTermChecked(index)
+                                      ? AppColors.grayLight
+                                      : AppColors.primary,
                                   width: 1.0,
                                 ),
                                 color: !controller.isTermChecked(index)
@@ -320,12 +331,16 @@ class PreWorkChecklistView extends GetView<PreWorkChecklistController> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        SvgPicture.asset(
-                                          confirmation.image,
-                                          color:
-                                              !controller.isTermChecked(index)
-                                                  ? AppColors.grayLight
-                                                  : AppColors.primary,
+                                        SizedBox(
+                                          width: 30,
+                                          height: 30,
+                                          child: SvgPicture.asset(
+                                            confirmation.image,
+                                            color:
+                                                !controller.isTermChecked(index)
+                                                    ? AppColors.grayLight
+                                                    : AppColors.primary,
+                                          ),
                                         ),
                                         SizedBox(width: 2.w),
                                         Column(

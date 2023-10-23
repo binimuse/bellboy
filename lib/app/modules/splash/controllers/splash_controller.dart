@@ -27,7 +27,7 @@ class SplashController extends GetxController {
 
       if (notificationPermissionStatus == PermissionStatus.granted &&
           locationPermissionStatus == PermissionStatus.granted) {
-        Get.offAllNamed(Routes.ORDER_LIST);
+        Get.offAllNamed(Routes.PRE_WORK_CHECKLIST);
         break;
       } else {
         if (!hasShownToast) {

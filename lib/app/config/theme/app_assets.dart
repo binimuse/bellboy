@@ -10,6 +10,7 @@ class AppAssets {
   static const String suspended = "assets/images/suspended.png";
   //appBar
   static const String logo = "assets/logos/bellboy_logo_default.png";
+  static const String logofornav = "assets/logos/logofornav.png";
   //pre check list
   static const String imageCar = "assets/images/img_Car.png";
   static const String imagebicyle = "assets/images/img_bicyle.png";
